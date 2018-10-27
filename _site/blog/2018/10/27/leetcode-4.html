@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siyu Tan - Leetcode 4 - Median of Two Sorted Arrays</title>
+  <meta name="author" content="Siyu Tan" />
+  <meta name="description" content="The blog of Siyu Tan" />
+  <link rel="canonical" href="http://localhost:4000/blog/2018/10/27/leetcode-4.html" />
+
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="alternate" type="application/atom+xml" title="Siyu Tan" href="http://localhost:4000/atom.xml" />
+
+  <link rel="stylesheet" href="/assets/css/all.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="four columns sidebar">
+      <nav>
+  <h1>Hi.</h1>
+  <a href="/">
+    
+    <img class="avatar" src="/logo.jpeg" id="logo" alt="Blog logo"/>
+    
+  </a>
+  <h2>I'm <a href="/">Siyu Tan</a>.</h2>
+  <div id="bio">
+    <p>Suuuuupppper cuuuuuute!!!</p>
+    <p><a href="/">Blog Posts 文章列表</a></p>
+  </div>
+  
+  <div id="social">
+    Follow me:
+<div id="stalker">
+  
+  <a title="siyuboomboom on Github" href="https://github.com/siyuboomboom">
+    <i class="fa fa-github-square"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a title="Siyu Tan on Facebook" href="https://facebook.com/sherry.tan.92351">
+    <i class="fa fa-facebook-square"></i>
+  </a>
+  
+
+  
+
+  
+  <a title="Siyu Tan on LinkedIn" href="https://www.linkedin.com/in/siyutan">
+    <i class="fa fa-linkedin-square"></i>
+  </a>
+  
+
+  
+
+  
+</div>
+
+  </div>
+</nav>
+
+    </div>
+
+    <div class="eleven columns content">
+      <p class="meta">
+  October 27, 2018 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Leetcode 4 - Median of Two Sorted Arrays</h1>
+
+<div id="post">
+  <h3 id="problem">Problem:</h3>
+<p>There are two sorted arrays nums1 and nums2 of size m and n respectively.
+Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+<h3 id="link">Link:</h3>
+<p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/description/">https://leetcode.com/problems/median-of-two-sorted-arrays/description/</a></p>
+
+<hr />
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">findMedianSortedArrays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        
+        <span class="c1">// odd number</span>
+        <span class="k">if</span> <span class="o">((</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">findKth</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="c1">// even number</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">findKth</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="n">findKth</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">/</span> <span class="mf">2.0</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="c1">// find the kth smallest number in the two arrays</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">findKth</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start1</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">start1</span> <span class="o">&gt;=</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">nums2</span><span class="o">[</span><span class="n">start2</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">start2</span> <span class="o">&gt;=</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">nums1</span><span class="o">[</span><span class="n">start1</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">nums1</span><span class="o">[</span><span class="n">start1</span><span class="o">],</span> <span class="n">nums2</span><span class="o">[</span><span class="n">start2</span><span class="o">]);</span>
+        <span class="o">}</span>
+        
+        <span class="kt">int</span> <span class="n">half1</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">half2</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">start1</span> <span class="o">+</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">half1</span> <span class="o">=</span> <span class="n">nums1</span><span class="o">[</span><span class="n">start1</span> <span class="o">+</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">start2</span> <span class="o">+</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">half2</span> <span class="o">=</span> <span class="n">nums2</span><span class="o">[</span><span class="n">start2</span> <span class="o">+</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">half1</span> <span class="o">&gt;</span> <span class="n">half2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">findKth</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="n">start1</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="n">start2</span> <span class="o">+</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">k</span> <span class="o">-</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="o">}</span> 
+        
+        <span class="k">return</span> <span class="nf">findKth</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="n">start1</span> <span class="o">+</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="n">start2</span><span class="o">,</span> <span class="n">k</span> <span class="o">-</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
+    
+    <li>
+      <span>20 Aug 2013 &raquo;</span> <a href="/blog/2013/08/20/sample-post.html">Sample post</a>
+    </li>
+    
+    <li>
+      <span>12 Aug 2013 &raquo;</span> <a href="/blog/2013/08/12/another-sample.html">Another sample</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <div class="disclaimer">
+  
+  <p>
+    The postings on this site are my own and don't necessarily represent my 
+    employer’s positions, strategies or opinions.
+  </p>
+  
+
+  <p>
+    © Siyu Tan, 2018 &mdash; built with <a href="http://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/swanson/lagom">Lagom theme</a>
+  </p>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-xxxx-x']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
