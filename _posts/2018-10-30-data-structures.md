@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Data Structures for Application Programmers - Note
+title: Data Structures - Arrays
 categories:
 - blog
 ---
