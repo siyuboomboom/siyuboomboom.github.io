@@ -15,6 +15,33 @@ int[] g = {1, 2, 3};
 int h = g.clone() // shallow copy
 int len = h.length; // 3
 {% endhighlight %}
+
+clone() is shallow copy, which means every element's **address** in the original array is copied. If any changes made to the original array's object element, new array will also change.
+
+{% highlight java %}
+List<Integer> aList = new ArrayList<>();
+aList.add(1);
+Object[] a = {aList, 4};
+Object[] b = a.clone();
+
+@SuppressWarnings("unchecked")
+List<Integer> bList = (List) b[0];
+bList.add(2);
+System.out.println(a[0]); // [1, 2]
+{% endhighlight %}
+
+Arrays.equals() will use equals() method to check if elements are equal, not just compare the addresses of the elements
+{% highlight java %}
+String course = new String("DSAP");
+String[] a = {course};
+Object[] b = a.clone();
+
+System.out.println(a[0] == b[0]); // true
+b[0] = "DSAP";
+System.out.println(a[0] == b[0]); // false
+
+System.out.println(Arrays.equals(a, b)); // true
+{% endhighlight %}
 <br>
 ### 2. static methods in java.util.Arrays class
 
