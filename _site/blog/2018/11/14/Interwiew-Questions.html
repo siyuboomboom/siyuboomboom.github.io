@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Another sample</title>
+  <title>Siyu Tan - Inteview Questions</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/blog/2013/08/12/another-sample.html" />
+  <link rel="canonical" href="http://localhost:4000/blog/2018/11/14/Interwiew-Questions.html" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -79,50 +79,38 @@
 
     <div class="eleven columns content">
       <p class="meta">
-  August 12, 2013 
+  November 14, 2018 
   <a href="/">
     <i class="home fa fa-home"></i>
   </a>
 </p>
 
-<h1 class="title">Another sample</h1>
+<h1 class="title">Inteview Questions</h1>
 
 <div id="post">
-  <p>Tattooed roof party <em>vinyl</em> freegan single-origin coffee wayfarers tousled, umami yr 
-meggings hella selvage. Butcher bespoke seitan, cornhole umami gentrify put a bird 
-on it occupy trust fund. Umami whatever kitsch, locavore fingerstache Tumblr pork belly
-<a href="#">keffiyeh</a>. Chia Echo Park Pitchfork, Blue Bottle <a href="#">hashtag</a> stumptown skateboard selvage 
-mixtape. Echo Park retro butcher banjo cardigan, seitan flannel Brooklyn paleo fixie 
-Truffaut. Forage mustache Thundercats next level disrupt. Bicycle rights forage tattooed
-chia, <strong>wayfarers</strong> swag raw denim hashtag biodiesel occupy gastropub!</p>
-
-<hr />
-
-<h1 id="its-all-in-the-game">It’s all in the game.</h1>
-
-<h2 id="you-come-at-the-king-you-best-not-miss">You come at the king, you best not miss.</h2>
-
-<h3 id="be-subtle-with-it-man-you-know-what-subtle-means">Be subtle with it, man. You know what subtle means?</h3>
-
-<p>VHS post-ironic cred <strong>bespoke</strong> banjo. Yr wayfarers literally gentrify, flexitarian fap 
-dreamcatcher plaid cornhole Intelligentsia paleo. Beard try-hard direct trade, shabby chic 
-Helvetica <code class="highlighter-rouge">look ma, I can code</code>. Lo-fi American Apparel tattooed <a href="#">Vice</a> tofu, yr vinyl. 
-Williamsburg butcher hella mumblecore fixie mlkshk, cliche wolf keytar mixtape kitsch banh mi 
-salvia. High Life Odd Future <em>chambray</em> kale chips hoodie, cray pop-up. Helvetica narwhal 
-iPhone try-hard jean shorts.</p>
-
+  <p>Toutiao:<br />
+What are protocol layers?<br />
+Why do we have layers?<br />
+Do live streams all use UDP? UDP examples?</p>
 <blockquote>
-  <p>This is a quote from someone famous about productivity</p>
+  <p>目前行业里直播还是以TCP占绝对份额，rtmp或者hls都是基于TCP，但是从底层UDP和TCP的特性来看，还是UDP适合做实时性通信，比如直播。如果是为了快速出产品，到不必纠结是TCP还是UDP做直播，大佬们已经把协议、客户端、服务器端都准备好了，都是基于TCP，比如nginx，但是如果是想重造轮子，当然UDP好。为了能集TCP和UDP的有点，Google搞了个QUIC（可以看看 <a href="https://zhuanlan.zhihu.com/p/32553477">科普：QUIC协议原理分析</a>），偶然机会看到国内公司大牛正在用QUIC实现直播，卡顿和延迟应该会有非常不错的结果。</p>
 </blockquote>
 
-<p>Syntax highlighting with Solarized theme.</p>
+<blockquote>
+  <p>目前常见的直播方案都是上行采用rtmp；下行采用http-flv或者hls，底层都是tcp。利用rtmp协议可以很快搭建一套直播系统，客户端、服务器都有成熟稳定的开源实现。UDP理论上更适合用于直播系统，但开发效率低，周期长。</p>
+</blockquote>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-  <span class="n">attr_accessible</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:name</span>
+<p>What does sequence number in TCP header do?<br />
+In TCP, how to differentiate client and server?<br />
+How is hash table implemented? What data structure? How to solve collisions in close addressing?<br />
+Concurrency in hash table. Segment the underlying array and synchronize the segments, how to rehash?<br />
+Sort a singly linked list.</p>
 
-  <span class="o">...</span> <span class="n">tons</span> <span class="n">of</span> <span class="n">other</span> <span class="n">crap</span> <span class="o">...</span>
-
-<span class="k">end</span></code></pre></figure>
+<p>Source:</p>
+<ol>
+  <li><a href="https://www.zhihu.com/question/267101516/answer/325732299">https://www.zhihu.com/question/267101516/answer/325732299</a></li>
+  <li><a href="https://www.zhihu.com/question/267101516/answer/319115792">https://www.zhihu.com/question/267101516/answer/319115792</a></li>
+</ol>
 
 </div>
 
@@ -135,11 +123,11 @@ iPhone try-hard jean shorts.</p>
     </li>
     
     <li>
-      <span>14 Nov 2018 &raquo;</span> <a href="/blog/2018/11/14/Interwiew-Questions.html">Inteview Questions</a>
+      <span>02 Nov 2018 &raquo;</span> <a href="/blog/2018/11/02/Iterator-and-Iterable.html">Iterable and Iterator</a>
     </li>
     
     <li>
-      <span>02 Nov 2018 &raquo;</span> <a href="/blog/2018/11/02/Iterator-and-Iterable.html">Iterable and Iterator</a>
+      <span>30 Oct 2018 &raquo;</span> <a href="/blog/2018/10/30/data-structures.html">Data Structures - Arrays</a>
     </li>
     
   </ul>

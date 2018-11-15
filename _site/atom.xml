@@ -4,13 +4,123 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2018-11-06T20:01:49-05:00</updated>
+ <updated>2018-11-14T22:59:19-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
    <email>siyutan@cmu.edu</email>
  </author>
 
+ 
+ <entry>
+   <title>Technical Inteview 101 - Computer Network</title>
+   <link href="http://localhost:4000/blog/2018/11/14/Technical-Interview-101.html"/>
+   <updated>2018-11-14T00:00:00-05:00</updated>
+   <id>http://localhost:4000/blog/2018/11/14/Technical-Interview-101</id>
+   <content type="html">&lt;h2 id=&quot;1-tcp-vs-udp&quot;&gt;1. TCP v.s. UDP&lt;/h2&gt;
+&lt;p&gt;Both send packets to IP address.
+TCP: Connection oriented. Guarantee order of packets, reliable, not missing or duplicate. Guarantee by sending aknowledgement. Resend if incorrect response.
+UDP: Quick but not reliable. No aknowledgement.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-tcp-3-way-handshake&quot;&gt;2. TCP 3-way handshake&lt;/h2&gt;
+&lt;p&gt;TCP Header format:
+&lt;img src=&quot;https://s3.notfalse.net/wp-content/uploads/2016/12/12003643/TCP-Header-Format.png&quot; height=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SYN&lt;/strong&gt; (Synchronize sequence numbers), &lt;strong&gt;ACK&lt;/strong&gt; (Acknowledgment field significant): &lt;strong&gt;control bit&lt;/strong&gt; in TCP packet header (0 or 1)
+&lt;br /&gt;&lt;br /&gt;
+1st way: SYN = 1 &amp;amp;&amp;amp; ACK = 0: a connection request, SYN is to synchronise the ISN of the data the client is going to send (client’s ISN) &lt;br /&gt;
+2nd way: SYN = 1 &amp;amp;&amp;amp; ACK = 1: a connection request acception, SYN is server’s ISN
+3rd way: SYN = 0 &amp;amp;&amp;amp; ACK = 1  &lt;br /&gt;
+After that: SYN = 0 &amp;amp;&amp;amp; ACK = 1
+&lt;br /&gt;&lt;br /&gt;
+&lt;strong&gt;Sequence Number&lt;/strong&gt;&lt;br /&gt;
+32 bit&lt;br /&gt;
+if SYN = 0: sequence number of the first octet (one byte) of data. &lt;br /&gt;
+if SYN = 1: ISN (initial sequence number, unique to each connection and device), first octet’s sequence number is set to ISN + 1.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Acknowledgment Number&lt;/strong&gt;
+If ACK = 1: Ack number = ISN + 1 (first octet’s seq, i.e. the sequence number of the data it’s expecting to receive)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3.notfalse.net/wp-content/uploads/2016/12/24160105/Three-way-Handshake-ex2.png&quot; height=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Why 3-way?&lt;br /&gt;
+1st and 2nd: to ensure the server can receive data and respond correctly.  &lt;br /&gt;
+2nd and 3rd: to ensure the client can receive data and respond correctly.  &lt;br /&gt;
+To prevent a stale (eg. delayed) connection request from establishing connection.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-tcp-4-way-termination&quot;&gt;3. TCP 4-way termination&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Client tells server he wants to close the connection&lt;/li&gt;
+  &lt;li&gt;Server tells client he get the idea but he’s not ready and he needs to ensure data are all sent&lt;/li&gt;
+  &lt;li&gt;Server is ready and tells client he can close the connection&lt;/li&gt;
+  &lt;li&gt;Client tells server he get the idea. After waiting a while without receiving response, client close the connection.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/HIT-Alibaba/interview/master/img/tcp-connection-closed-four-way-handshake.png&quot; height=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Why one more way than 3-way handshake?&lt;br /&gt;
+Because in 3-way handshake, server can send ACK and SYN at the same time. ACK to aknowledge that he gets the info, SYN to synchronize the ISN of the data the server is going to send.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-socket&quot;&gt;4. Socket&lt;/h2&gt;
+&lt;p&gt;Socket contains information about:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Connection protocol&lt;/li&gt;
+  &lt;li&gt;Source IP address&lt;/li&gt;
+  &lt;li&gt;Source process port&lt;/li&gt;
+  &lt;li&gt;Destination IP address&lt;/li&gt;
+  &lt;li&gt;Destination process port&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;5-why-tcp-is-stateful-and-http-is-stateless&quot;&gt;5. Why TCP is stateful and HTTP is stateless?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;TCP&lt;/strong&gt; maintains state in the form of a &lt;strong&gt;window size&lt;/strong&gt; (endpoints tell each other how much data they’re ready to receive) and &lt;strong&gt;packet order&lt;/strong&gt; (endpoints must confirm to each other when they receive a packet from the other). This state (how much bytes the other guy can receive, and whether or not he did receive the last packet) allows TCP to be &lt;strong&gt;reliable&lt;/strong&gt; even over inherently non-reliable protocols.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP&lt;/strong&gt; is stateless to improve performance, intended to minimize the time that’d otherwise be spent reestablishing a connection for each request. The stateless design simplifies the server design because there is no need to dynamically allocate storage to deal with conversations in progress. If a client session dies in mid-transaction, no part of the system needs to be responsible for cleaning up the present state of the server.&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;disadvantage of statelessness&lt;/strong&gt; is that it may be necessary to include additional information in every request, and this extra information will need to be interpreted by the server.&lt;/p&gt;
+
+&lt;p&gt;While HTTP and HTTPS are essentially stateless (each request is a valid standalone request per the protocol), &lt;strong&gt;applications&lt;/strong&gt; built on top of HTTP and HTTPS aren’t necessarily stateless. For instance, a website can require you to visit a login page before sending a message. Even though the request where the client sends a message is a valid standalone request, the application will not accept it unless the client authenticated herself before. This means that the application &lt;em&gt;implements&lt;/em&gt; state over HTTP.&lt;/p&gt;
+
+&lt;h2 id=&quot;source&quot;&gt;Source:&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://notfalse.net/7/three-way-handshake&quot;&gt;https://notfalse.net/7/three-way-handshake&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hit-alibaba.github.io/interview/basic/network/TCP.html&quot;&gt;https://hit-alibaba.github.io/interview/basic/network/TCP.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/19899236/is-tcp-protocol-stateless-or-not&quot;&gt;https://stackoverflow.com/questions/19899236/is-tcp-protocol-stateless-or-not&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/13200152/why-is-it-said-that-http-is-a-stateless-protocol&quot;&gt;https://stackoverflow.com/questions/13200152/why-is-it-said-that-http-is-a-stateless-protocol&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Stateless_protocol&quot;&gt;https://en.wikipedia.org/wiki/Stateless_protocol&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Inteview Questions</title>
+   <link href="http://localhost:4000/blog/2018/11/14/Interwiew-Questions.html"/>
+   <updated>2018-11-14T00:00:00-05:00</updated>
+   <id>http://localhost:4000/blog/2018/11/14/Interwiew-Questions</id>
+   <content type="html">&lt;p&gt;Toutiao:&lt;br /&gt;
+What are protocol layers?&lt;br /&gt;
+Why do we have layers?&lt;br /&gt;
+Do live streams all use UDP? UDP examples?&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;目前行业里直播还是以TCP占绝对份额，rtmp或者hls都是基于TCP，但是从底层UDP和TCP的特性来看，还是UDP适合做实时性通信，比如直播。如果是为了快速出产品，到不必纠结是TCP还是UDP做直播，大佬们已经把协议、客户端、服务器端都准备好了，都是基于TCP，比如nginx，但是如果是想重造轮子，当然UDP好。为了能集TCP和UDP的有点，Google搞了个QUIC（可以看看 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/32553477&quot;&gt;科普：QUIC协议原理分析&lt;/a&gt;），偶然机会看到国内公司大牛正在用QUIC实现直播，卡顿和延迟应该会有非常不错的结果。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;目前常见的直播方案都是上行采用rtmp；下行采用http-flv或者hls，底层都是tcp。利用rtmp协议可以很快搭建一套直播系统，客户端、服务器都有成熟稳定的开源实现。UDP理论上更适合用于直播系统，但开发效率低，周期长。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;What does sequence number in TCP header do?&lt;br /&gt;
+In TCP, how to differentiate client and server?&lt;br /&gt;
+How is hash table implemented? What data structure? How to solve collisions in close addressing?&lt;br /&gt;
+Concurrency in hash table. Segment the underlying array and synchronize the segments, how to rehash?&lt;br /&gt;
+Sort a singly linked list.&lt;/p&gt;
+
+&lt;p&gt;Source:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/267101516/answer/325732299&quot;&gt;https://www.zhihu.com/question/267101516/answer/325732299&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/267101516/answer/319115792&quot;&gt;https://www.zhihu.com/question/267101516/answer/319115792&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Iterable and Iterator</title>
