@@ -9,26 +9,26 @@ categories:
 ## Iterable
 A representation of a group of data that can be iterated.  
 The data structure of this group of data needs to implement the Iterable interface.   
-It has to implement the method iterator().
+Method: **iterator()**  
 
 ## Iterator
-Iterator is to provide an access to a group of data that is private. It is usually a private inner class (non-static nested class) implementing Iterator of the class implementing Iterable.  
-It has to implement the methods next() and hasNext().
+Iterator is to provide an access to a group of data that is private. It is usually a private inner class (non-static nested class) of the class implementing Iterable.  
+Methods: **next(), hasNext()**
 
 ## Example for LinkedList
 {% highlight java %}
-public class LinkedList<AnyType> implements Iterable<AnyType> {
-    private Node<AnyType> head;
+public class LinkedList<T> implements Iterable<T> {
+    private Node<T> head;
 
     @Override
-    public Iterator<AnyType> iterator() {
+    public Iterator<T> iterator() {
         return new LinkedListIterator();
     }
 
     // non-static nested class 
     // because Iterator has to access its parent class's members - head
-    private class LinkedListIterator implements Iterator<AnyType> {
-        private Node<AnyType> nextNode;
+    private class LinkedListIterator implements Iterator<T> {
+        private Node<T> nextNode;
 
         LinkedListIterator() {
             nextNode = head;
@@ -40,12 +40,12 @@ public class LinkedList<AnyType> implements Iterable<AnyType> {
         }
 
         @Override
-        public AnyType next() {
-            if (!hasNode()) {
+        public T next() {
+            if (!hasNext()) {
                 throw new NoSuchElementException();
             }
 
-            AnyType result = nextNode.data;
+            T result = nextNode.data;
             nextNode = nextNode.next;
             return result;
         }
@@ -53,14 +53,28 @@ public class LinkedList<AnyType> implements Iterable<AnyType> {
 
     // static nested class 
     // because Node doesn't have to access its parent class's members
-    private static class Node<AnyType> {
-        ...
-    }
+    private static class Node<T> {
+        T data;
+        Node<T> next;
 
+        Node(T d, Node<T> n) {
+            data = d;
+            next = n;
+        }
+    }
 }
 
 {% endhighlight %}   
 
-  
 
+How to use it?
+{% highlight java %}
+List<Integer> numbers = new LinkedList<>();
+numbers.add(1);
+numbers.add(2);
 
+Iterator<Integer> itr = numbers.iterator();
+while (itr.hasNext()) {
+    System.out.println(itr.next());
+}
+{% endhighlight %}   
