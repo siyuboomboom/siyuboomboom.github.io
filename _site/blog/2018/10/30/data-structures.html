@@ -97,7 +97,7 @@
 <span class="kt">int</span><span class="o">[]</span> <span class="n">h</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="na">clone</span><span class="o">()</span> <span class="c1">// shallow copy</span>
 <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="c1">// 3</span></code></pre></figure>
 
-<p>clone() is shallow copy, which means every element’s <strong>address</strong> in the original array is copied. If any changes made to the original array’s object element, new array will also change.</p>
+<p>clone() is <strong>shallow copy</strong>, which means every element’s <strong>address</strong> in the original array is copied. If any changes made to the original array’s object element, new array will also change.</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">aList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="n">aList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
@@ -108,6 +108,11 @@
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">bList</span> <span class="o">=</span> <span class="o">(</span><span class="n">List</span><span class="o">)</span> <span class="n">b</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
 <span class="n">bList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span> <span class="c1">// [1, 2]</span></code></pre></figure>
+
+<p>If not using <code class="highlighter-rouge">@SuppressWarnings("unchecked")</code>, downcast will cause a warning:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nl">Note:</span> <span class="n">HelloWorld</span><span class="o">.</span><span class="na">java</span> <span class="n">uses</span> <span class="n">unchecked</span> <span class="n">or</span> <span class="n">unsafe</span> <span class="n">operations</span><span class="o">.</span>
+<span class="nl">Note:</span> <span class="n">Recompile</span> <span class="n">with</span> <span class="o">-</span><span class="nl">Xlint:</span><span class="n">unchecked</span> <span class="k">for</span> <span class="n">details</span><span class="o">.</span>  </code></pre></figure>
 
 <p>Arrays.equals() will use equals() method to check if elements are equal, not just compare the addresses of the elements</p>
 
@@ -137,7 +142,9 @@
 
 <p>Copy an array:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">);</span> <span class="c1">// deep copy</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">newArray</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">original</span><span class="o">,</span> <span class="kt">int</span> <span class="n">newLength</span><span class="o">);</span> <span class="c1">// shallow copy</span></code></pre></figure>
+
+<p>newLength can be bigger than original.length. newArray will have length of newLength.</p>
 
 <p>Print an array:</p>
 
@@ -158,7 +165,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">e</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">};</span>
 <span class="kt">int</span><span class="o">[]</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
-<span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="c1">// deep copy, f: {1, 2, 3, 0}</span></code></pre></figure>
+<span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="c1">// shallow copy, f: {1, 2, 3, 0}</span></code></pre></figure>
 
 <p><br /></p>
 
