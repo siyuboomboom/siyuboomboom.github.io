@@ -12,7 +12,7 @@ categories:
 ### 1. one method - `clone()` + one immutable field - `length`
 {% highlight java %}
 int[] g = {1, 2, 3};
-int h = g.clone() // shallow copy
+int[] h = g.clone() // shallow copy
 int len = h.length; // 3
 {% endhighlight %}
 
@@ -48,8 +48,9 @@ System.out.println(Arrays.equals(a, b)); // true
 Compare two arrays:
 {% highlight java %}
 int[] a, b;
-boolean b = Arrays.equals(a, b);
+boolean res = Arrays.equals(a, b);
 {% endhighlight %}
+The two arrays are considered equal if both arrays contain the same number of elements, and all corresponding pairs of elements in the two arrays are equal.Two objects e1 and e2 are considered equal if (e1==null ? e2==null : e1.equals(e2)). Two array references are considered equal if both are null.
 
 Sort an array:
 {% highlight java %}
@@ -85,3 +86,5 @@ System.arraycopy(e, 0, f, 0, 3) // deep copy, f: {1, 2, 3, 0}
 {% endhighlight %}
 <br>
 
+Resource:
+1. https://www.tutorialspoint.com/java/util/arrays_equals_object.htm

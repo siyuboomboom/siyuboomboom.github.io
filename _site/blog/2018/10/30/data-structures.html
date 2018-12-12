@@ -94,7 +94,7 @@
 <h3 id="1-one-method---clone--one-immutable-field---length">1. one method - <code class="highlighter-rouge">clone()</code> + one immutable field - <code class="highlighter-rouge">length</code></h3>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">g</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">};</span>
-<span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="na">clone</span><span class="o">()</span> <span class="c1">// shallow copy</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">h</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="na">clone</span><span class="o">()</span> <span class="c1">// shallow copy</span>
 <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="c1">// 3</span></code></pre></figure>
 
 <p>clone() is shallow copy, which means every element’s <strong>address</strong> in the original array is copied. If any changes made to the original array’s object element, new array will also change.</p>
@@ -127,7 +127,9 @@
 <p>Compare two arrays:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">;</span>
-<span class="kt">boolean</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span></code></pre></figure>
+<span class="kt">boolean</span> <span class="n">res</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span></code></pre></figure>
+
+<p>The two arrays are considered equal if both arrays contain the same number of elements, and all corresponding pairs of elements in the two arrays are equal.Two objects e1 and e2 are considered equal if (e1==null ? e2==null : e1.equals(e2)). Two array references are considered equal if both are null.</p>
 
 <p>Sort an array:</p>
 
@@ -160,6 +162,10 @@
 
 <p><br /></p>
 
+<p>Resource:</p>
+<ol>
+  <li>https://www.tutorialspoint.com/java/util/arrays_equals_object.htm</li>
+</ol>
 
 </div>
 
