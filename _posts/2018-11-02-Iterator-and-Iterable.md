@@ -78,3 +78,10 @@ while (itr.hasNext()) {
     System.out.println(itr.next());
 }
 {% endhighlight %}   
+
+Note:  
+Non-static nested class: have access to all members of enclosing class (including private).  
+Static nested class: have access to static members of enclosing class.  
+Why do wu use nested classes?   
+1. group classes that are only used in one place
+2. increases encapsulation
