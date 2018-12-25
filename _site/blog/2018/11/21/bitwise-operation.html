@@ -88,9 +88,23 @@
 <h1 class="title">Bitwise Operation Tricks</h1>
 
 <div id="post">
-  <h3 id="1-for-any-number-n-with-only-one-bit-of-1-except-0">1. For any number n with only one bit of ‘1’ except 0</h3>
-<p><code class="highlighter-rouge">n &amp; (n - 1) == 0</code><br />
+  <ol>
+  <li>
+    <p>For any number n with only one bit of ‘1’ except 0
+<code class="highlighter-rouge">n &amp; (n - 1) == 0</code><br />
 Can be used to check if a positive number is a power of 2.</p>
+  </li>
+  <li>
+    <p>If n is a power of 2, for any integer i: <code class="highlighter-rouge">i % n = i &amp; (n - 1)</code> <br />
+Therefore, if a number mode a power of 2, it’s just dropping its higher bits.<br />
+eg. <code class="highlighter-rouge">86 % 8 = 6 ==&gt; 86 &amp; (8 - 1) = 6</code>  <br />
+    1 0 1 0 1 1 0  (86)  <br />
+&amp; 0 0 0 0 1 1 1  (7)  <br />
+————————   <br />
+    0 0 0 0 1 1 0  <br />
+That’s why Java HashMap’s underlying array always has a length of a power of 2, that is, to speed up the modulo operation when finding the corresponding index in the array of a hashcode.</p>
+  </li>
+</ol>
 
 </div>
 
