@@ -1,5 +1,17 @@
 [
 
+{"date": "Tue, 25 Dec 2018 00:00:00 -0500",
+"categories": ["blog"],
+"tags": [],
+"title": "Why 31 is chosen as multiplier in hashCode()",
+"url": "/blog/2018/12/25/why-31.html"},
+
+{"date": "Sun, 23 Dec 2018 00:00:00 -0500",
+"categories": ["Database"],
+"tags": [],
+"title": "Database",
+"url": "/database/2018/12/23/Database-Interview.html"},
+
 {"date": "Sat, 08 Dec 2018 00:00:00 -0500",
 "categories": ["blog"],
 "tags": [],
@@ -27,7 +39,7 @@
 {"date": "Wed, 14 Nov 2018 00:00:00 -0500",
 "categories": ["blog"],
 "tags": [],
-"title": "Technical Inteview 101 - Computer Network",
+"title": "Computer Network",
 "url": "/blog/2018/11/14/Technical-Interview-101.html"},
 
 {"date": "Wed, 14 Nov 2018 00:00:00 -0500",
@@ -53,12 +65,6 @@
 "tags": [],
 "title": "Google's Map Reduce Engineer Round Table Discussion",
 "url": "/blog/2018/10/30/MapReduce.html"},
-
-{"date": "Sat, 27 Oct 2018 00:00:00 -0400",
-"categories": ["blog"],
-"tags": [],
-"title": "Leetcode 4 - Median of Two Sorted Arrays",
-"url": "/blog/2018/10/27/leetcode-4.html"},
 
 {"date": "Tue, 20 Aug 2013 00:00:00 -0400",
 "categories": ["blog"],

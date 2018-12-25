@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Technical Inteview 101 - Computer Network
+title: Computer Network
 categories:
 - blog
 ---
 
 ## 1. TCP v.s. UDP
-Both send packets to IP address.
-TCP: Connection oriented. Guarantee order of packets, reliable, not missing or duplicate. Guarantee by sending aknowledgement. Resend if incorrect response.
-UDP: Quick but not reliable. No aknowledgement. 
+Both send packets to IP address.  
+TCP: Connection oriented. Guarantee order of packets, reliable, not missing or duplicate. Guarantee by sending aknowledgement. Resend if incorrect response.  
+UDP: Quick but not reliable. No aknowledgement.   
 
 ## 2. TCP 3-way handshake
 TCP Header format:
