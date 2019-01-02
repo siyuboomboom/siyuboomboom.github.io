@@ -88,7 +88,39 @@
 <h1 class="title">Leetcode</h1>
 
 <div id="post">
-  <h3 id="4-median-of-two-sorted-arrays">4. Median of Two Sorted Arrays</h3>
+  <h3 id="380-insert-delete-getrandom-o1">380. Insert Delete GetRandom O(1)</h3>
+<p>Design a data structure that supports all following operations in average O(1) time.</p>
+<ol>
+  <li>insert(val)</li>
+  <li>remove(val)</li>
+  <li>getRandom</li>
+</ol>
+
+<p>Consider 3 possible data structure:</p>
+<ol>
+  <li>LinkedList: insert and remove are O(1), but for getRandom, we have to iterate to a random node which takes O(n)</li>
+  <li>HashMap: insert and remove are O(1), but can’t get a random number from it.</li>
+  <li>ArrayList: insert and getRandom are O(1), but remove takes O(n) because of shifting.</li>
+</ol>
+
+<p>We can consider a combination of ArrayList and HashMap. To find the index of the value to be removed in O(1), we can use a HashMap to store the value and its corresponding index. To avoid shifting caused by remove(), we can just move the last element to replace the removed one, since we don’t care the order.</p>
+
+<h3 id="146-lru-cache">146. LRU Cache</h3>
+<p>Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations:</p>
+<ol>
+  <li>get(key)</li>
+  <li>put(key, value)</li>
+</ol>
+
+<p>It’s natural to think of LinkedList which is fast to insert and delete a node.<br />
+For get(), we need to find the node and move it to the front.<br />
+For put(), we also need to find the node and update it or create a new node and move it to the front. If it reaches the capacity, we need to delete the oldest node at the end.<br />
+LinkedList takes O(1) to delete and insert a node. But it takes O(n) to find the node. To improve the performance to O(1), a HashMap can store the mapping between the key and the node.<br />
+However, to delete a node, we have to know the previous node. Doubly linked list can solve the problem, but a more concise way is to store the mapping between the key and the previous node. <br />
+Therefore, a <strong>LinkedList and a HashMap</strong> can implement the get and put operation in <strong>O(1)</strong>.<br />
+LinkedHashMap can help.</p>
+
+<h3 id="4-median-of-two-sorted-arrays">4. Median of Two Sorted Arrays</h3>
 <p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/description/">https://leetcode.com/problems/median-of-two-sorted-arrays/description/</a></p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">double</span> <span class="nf">findMedianSortedArrays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="o">)</span> <span class="o">{</span>
@@ -305,7 +337,7 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
   
 
   <p>
-    © Siyu Tan, 2018 &mdash; built with <a href="http://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/swanson/lagom">Lagom theme</a>
+    © Siyu Tan, 2019 &mdash; built with <a href="http://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/swanson/lagom">Lagom theme</a>
   </p>
 </div>
       </div>

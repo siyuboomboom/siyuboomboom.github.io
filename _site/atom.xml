@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2018-12-25T00:32:36-05:00</updated>
+ <updated>2019-01-01T22:12:20-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -185,7 +185,39 @@ That’s why Java HashMap’s underlying array always has a length of a power of
    <link href="http://localhost:4000/blog/2018/11/19/leetcode.html"/>
    <updated>2018-11-19T00:00:00-05:00</updated>
    <id>http://localhost:4000/blog/2018/11/19/leetcode</id>
-   <content type="html">&lt;h3 id=&quot;4-median-of-two-sorted-arrays&quot;&gt;4. Median of Two Sorted Arrays&lt;/h3&gt;
+   <content type="html">&lt;h3 id=&quot;380-insert-delete-getrandom-o1&quot;&gt;380. Insert Delete GetRandom O(1)&lt;/h3&gt;
+&lt;p&gt;Design a data structure that supports all following operations in average O(1) time.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;insert(val)&lt;/li&gt;
+  &lt;li&gt;remove(val)&lt;/li&gt;
+  &lt;li&gt;getRandom&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Consider 3 possible data structure:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;LinkedList: insert and remove are O(1), but for getRandom, we have to iterate to a random node which takes O(n)&lt;/li&gt;
+  &lt;li&gt;HashMap: insert and remove are O(1), but can’t get a random number from it.&lt;/li&gt;
+  &lt;li&gt;ArrayList: insert and getRandom are O(1), but remove takes O(n) because of shifting.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We can consider a combination of ArrayList and HashMap. To find the index of the value to be removed in O(1), we can use a HashMap to store the value and its corresponding index. To avoid shifting caused by remove(), we can just move the last element to replace the removed one, since we don’t care the order.&lt;/p&gt;
+
+&lt;h3 id=&quot;146-lru-cache&quot;&gt;146. LRU Cache&lt;/h3&gt;
+&lt;p&gt;Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;get(key)&lt;/li&gt;
+  &lt;li&gt;put(key, value)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;It’s natural to think of LinkedList which is fast to insert and delete a node.&lt;br /&gt;
+For get(), we need to find the node and move it to the front.&lt;br /&gt;
+For put(), we also need to find the node and update it or create a new node and move it to the front. If it reaches the capacity, we need to delete the oldest node at the end.&lt;br /&gt;
+LinkedList takes O(1) to delete and insert a node. But it takes O(n) to find the node. To improve the performance to O(1), a HashMap can store the mapping between the key and the node.&lt;br /&gt;
+However, to delete a node, we have to know the previous node. Doubly linked list can solve the problem, but a more concise way is to store the mapping between the key and the previous node. &lt;br /&gt;
+Therefore, a &lt;strong&gt;LinkedList and a HashMap&lt;/strong&gt; can implement the get and put operation in &lt;strong&gt;O(1)&lt;/strong&gt;.&lt;br /&gt;
+LinkedHashMap can help.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-median-of-two-sorted-arrays&quot;&gt;4. Median of Two Sorted Arrays&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://leetcode.com/problems/median-of-two-sorted-arrays/description/&quot;&gt;https://leetcode.com/problems/median-of-two-sorted-arrays/description/&lt;/a&gt;&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findMedianSortedArrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
