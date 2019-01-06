@@ -4,13 +4,22 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-01T22:12:20-05:00</updated>
+ <updated>2019-01-06T15:12:17-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
    <email>siyutan@cmu.edu</email>
  </author>
 
+ 
+ <entry>
+   <title>CDN</title>
+   <link href="http://localhost:4000/blog/2019/01/06/CDN.html"/>
+   <updated>2019-01-06T00:00:00-05:00</updated>
+   <id>http://localhost:4000/blog/2019/01/06/CDN</id>
+   <content type="html">
+</content>
+ </entry>
  
  <entry>
    <title>Why 31 is chosen as multiplier in hashCode()</title>
@@ -185,7 +194,183 @@ That’s why Java HashMap’s underlying array always has a length of a power of
    <link href="http://localhost:4000/blog/2018/11/19/leetcode.html"/>
    <updated>2018-11-19T00:00:00-05:00</updated>
    <id>http://localhost:4000/blog/2018/11/19/leetcode</id>
-   <content type="html">&lt;h3 id=&quot;380-insert-delete-getrandom-o1&quot;&gt;380. Insert Delete GetRandom O(1)&lt;/h3&gt;
+   <content type="html">&lt;h3 id=&quot;88-merge-sorted-array&quot;&gt;88. Merge Sorted Array&lt;/h3&gt;
+&lt;p&gt;Array A length: n, B length: m&lt;br /&gt;
+Brute Force: &lt;strong&gt;O(n * m)&lt;/strong&gt;, compare from left, insert one by one at the front, shift to the right.&lt;br /&gt;
+Since the empty spots are at right side, how about comparing from right?&lt;br /&gt;
+Time complexity: &lt;strong&gt;O(n + m)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;4-median-of-two-sorted-arrays&quot;&gt;4. Median of Two Sorted Arrays&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Approach 1: Find kth: O(log(m + n))&lt;/strong&gt;&lt;br /&gt;
+Find median problem can be generalized to find kth smallest number.
+Let’s say array A has n numbers, B has m numbers.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Compare (k/2)th numbers in both arrays.&lt;/li&gt;
+  &lt;li&gt;Drop the left part of the smaller number, since we are sure the kth number is not in that part.&lt;/li&gt;
+  &lt;li&gt;k = k - k / 2 (careful: not k = k / 2), continue 1 and 2 until k = 1.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/i2.png&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the step 1, if A is short of k / 2 numbers:
+&lt;img src=&quot;/assets/images/i3.png&quot; width=&quot;600&quot; /&gt;
+One thing we are sure about is that the kth number is not in the first k / 2 numbers of B. So drop that part of B.&lt;br /&gt;
+Imagine both arrays extended to infinite length, followed by infinite numbers of Integer.MAX_VALUE. This doesn’t affect the result of finding kth smallest number. So if the startIndex + k / 2 is out of bound, just assume the element is Integer.MAX_VALUE.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;139-subarray-sum-closest&quot;&gt;139. Subarray Sum Closest&lt;/h3&gt;
+&lt;p&gt;To find the subarray sum closest to 0 instead of 0, brute force is O(n^2) which is to find all subarrays. It’s impossible to achieve O(n). We can consider calculating all prefix sums and sort them so that the adjacent prefix sums produce the minimum difference. Minimum difference between two prefix sums means closest subarray sum. Then we need to get the corresponding index to those two prefix sums. To do this, we can write a wrapper class to wrap the prefix sum and its index. &lt;br /&gt;
+Time Complexity: &lt;strong&gt;O(nlogn)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;325-maximum-size-subarray-sum-equals-k&quot;&gt;325. Maximum Size Subarray Sum Equals k&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Prfix Sum&lt;/strong&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Sum of a subarray[i : j] = prefixSum[j + 1] - prefixSum[i]&lt;/code&gt;&lt;br /&gt;
+To find a subarray sum equals k, it means &lt;code class=&quot;highlighter-rouge&quot;&gt;prefixSum[j + 1] = prefixSum[i] + k&lt;/code&gt; &lt;br /&gt;
+We can use a HashMap to store each prefixSum and its index. If there’s a duplicate prefixSum, just ignore it because we need to find the maximum length.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;53-maximum-subarray&quot;&gt;53. Maximum Subarray&lt;/h3&gt;
+&lt;p&gt;Brute force is O(n^2) because there are n ^ 2 subarrays.&lt;br /&gt;
+&lt;strong&gt;Approach 1: dynamic programming O(n)&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;int[] dp = new dp[nums.length];&lt;/code&gt; &lt;br /&gt;
+dp[i] denotes the max sum of subarray ends with nums[i]. So we have:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;dp[i + 1] = dp[i] &amp;gt; 0 ? dp[i] + nums[i + 1] : nums[i + 1];&lt;/code&gt;&lt;br /&gt;
+Maximum subarray sum is maximum of dp array. Since we don’t need the previous dp elements, we can optimize the space by using &lt;code class=&quot;highlighter-rouge&quot;&gt;int dp&lt;/code&gt; instead of an array.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 2: prefix sum O(n)&lt;/strong&gt; &lt;br /&gt;
+prefixSum[i + 1] denotes the sum of the first i + 1 elements, i.e. subarray[0 : i]. &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Sum of a subarray[i : j] = prefixSum[j + 1] - prefixSum[i]&lt;/code&gt;&lt;br /&gt;
+For each subarray ending with nums[j], the maximum subarray sum depends on finding the minimum prefixSum[i].&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;215-kth-largest-element-in-an-array&quot;&gt;215. Kth Largest Element in an Array&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Quick Select&lt;/strong&gt;&lt;br /&gt;
+Use the thought in quick sort, where we partition the array by two parts based on comparison with a pivot. In quick sort, we continue sorting in two parts, while in this problem, we don’t care about another part if it doesn’t consist of the kth largest element. So after partition, we can drop half of the array on average.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;lintcoe-545-top-k-largest-numbers-ii&quot;&gt;LintCoe 545. Top k Largest Numbers II&lt;/h3&gt;
+
+&lt;p&gt;Complexity Analysis:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Approach&lt;/th&gt;
+      &lt;th&gt;add() Time&lt;/th&gt;
+      &lt;th&gt;topk() Time&lt;/th&gt;
+      &lt;th&gt;Space Complexity&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;quick select&lt;/td&gt;
+      &lt;td&gt;O(1)&lt;/td&gt;
+      &lt;td&gt;O(n)&lt;/td&gt;
+      &lt;td&gt;O(n)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;min heap&lt;/td&gt;
+      &lt;td&gt;O(logk)&lt;/td&gt;
+      &lt;td&gt;O(klogk)&lt;/td&gt;
+      &lt;td&gt;O(k)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;max heap&lt;/td&gt;
+      &lt;td&gt;O(logn)&lt;/td&gt;
+      &lt;td&gt;O(klogn)&lt;/td&gt;
+      &lt;td&gt;O(n)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sort&lt;/td&gt;
+      &lt;td&gt;O(1)&lt;/td&gt;
+      &lt;td&gt;O(nlogn)&lt;/td&gt;
+      &lt;td&gt;O(n)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Obviously, max heap and sort approaches are worse than the other two. There’s no need to keep all numbers in heap.&lt;br /&gt;
+It depends on how big the k is to decide which one of quick select and min heap is better. If n » k, min heap is better, vice versa.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;lintcode-612-k-closest-points&quot;&gt;LintCode 612. K Closest Points&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Approach 1: Brute Force&lt;/strong&gt;&lt;br /&gt;
+Calculate distance and sort by distance.&lt;br /&gt;
+Time Complexity: &lt;strong&gt;O(nlogn)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 2: Quick Select&lt;/strong&gt;&lt;br /&gt;
+Time Complexity:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 3: Heap&lt;/strong&gt;&lt;br /&gt;
+Write a comparator to make the least closest point be root of the heap. Add each point to the heap, once the size is greater than k, poll the least closest point. &lt;br /&gt;
+Time Complexity: &lt;strong&gt;O(nlogk + klogk)&lt;/strong&gt;&lt;br /&gt;
+At most k points be in heap, and we offer n points to heap. After that, poll all k closest points into results.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 4: Heapify&lt;/strong&gt;&lt;br /&gt;
+Time Complexity: &lt;strong&gt;O(n + klogn)&lt;/strong&gt;&lt;br /&gt;
+When n » k, it’s very fast.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;23-merge-k-sorted-lists&quot;&gt;23. Merge k Sorted Lists&lt;/h3&gt;
+&lt;p&gt;Signature of the method:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;public ListNode mergeKLists(ListNode[] lists)&lt;/code&gt;&lt;br /&gt;
+Intuitive thinking is to compare each head node in the lists, add the smallest one to result, and make the next node of the smallest one to be the new head. &lt;br /&gt;
+So the brute force method costs &lt;strong&gt;O(nk)&lt;/strong&gt;, n is the total number of nodes in all lists, k is the number of lists.  &lt;br /&gt;
+When k is very large, accurately if bigger than logn, it’s even worse than merging all lists at the first place and sort the whole list, which costs O(nlogn).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 1: PriorityQueue&lt;/strong&gt;&lt;br /&gt;
+Add each node in the array into the heap, everytime we poll, we get the min value node of the k nodes. Then we add the next node of that min node to heap unless it’s null.&lt;br /&gt;
+KEY: Since the elements in PriorityQueue are ListNode, we have to pass in a comparator to the PQ.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;PriorityQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ListNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PriorityQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lists&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; 
+                                                    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NodeComparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NodeComparator&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ListNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ListNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ListNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Also, the maximum number of elements will be k which is the number of the sorted lists.&lt;br /&gt;
+Time Complexity: &lt;strong&gt;O(nlogk)&lt;/strong&gt; &lt;br /&gt;
+n is total number of elements, k is number of sorted lists. &lt;br /&gt;
+There will be at most k nodes in the heap, so the hight of the heap is logk, and add and poll a node into and from it costs O(logk), and we do that for n times.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 2: Bottom-up pair by pair merge&lt;/strong&gt;&lt;br /&gt;
+As in the following picture, starting from the bottom, we merge each pair of lists, and merge the merged lists in pairs, and do that recursively. In this way, every level up, it costs O(n), and there are logk levels, so the time complexity is &lt;strong&gt;O(nlogk)&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/i1.png&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 3: Divide and Conquer (like Merge Sort)&lt;/strong&gt;&lt;br /&gt;
+It’s actually quite like approach 2, only implement the top-down process with a recursion (divide). Approach 2 starts from the bottom, using an iteration to go through the array of ListNode pair by pair. Approach 3 starts from the top, viewing the array as a whole and divide it by 2 recursively until only one node is left. And then merge like in the approach 2.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;264-ugly-number-ii&quot;&gt;264. Ugly Number II&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Approach 1&lt;/strong&gt;&lt;br /&gt;
+Use a PriorityQueue as a min heap. The heap starts with 1 in it. Get a min value from the heap and multiply it with 2, 3, 5 and add the results to the heap. Every time poll() we can get a min value which ensures the order. &lt;br /&gt;
+However, this process generates duplicates, eg. 2 * 3 = 3 * 2.&lt;br /&gt;
+PriorityQueue allows duplicates so HashSet can be used to ensure there’s no duplicates in the heap.&lt;/p&gt;
+
+&lt;p&gt;Note: be aware of integer overflow!! &lt;br /&gt;
+Imagine in the final round, min value is supposed to be say 536,870,912, but the heap still contains many numbers that are greater than this min, which may exceeds the upper bound of integer. This will cause negative numbers in the heap and these negative numbers will become the min value.&lt;/p&gt;
+
+&lt;p&gt;Time complexity: &lt;strong&gt;O(nlogn)&lt;/strong&gt;&lt;br /&gt;
+Everytime we poll a number, we add it multiplied by 2, 3, 5 into the heap. Add operation for heap is O(logn). And we need to poll n times to find the nth ugly number.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 2&lt;/strong&gt;&lt;br /&gt;
+Imagin a list of ugly numbers 1, 2, 3, 4, 5, 6, 8, 9, … &lt;br /&gt;
+And 3 pointers for multipliers 2, 3, 5, corresponding p2, p3, p5, all pointing at 1. After we multiply 1 by 2, 3, 5, we add the min value to the list which is 2, and we move the p2 to the next element which is 2, since we already multiplied the 1 with 2. Later, we compare 2 * 2, 1 * 3, 1 * 5, and we add 3, and move p3 to next… &lt;br /&gt;
+Time complexity: &lt;strong&gt;O(n)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;380-insert-delete-getrandom-o1&quot;&gt;380. Insert Delete GetRandom O(1)&lt;/h3&gt;
 &lt;p&gt;Design a data structure that supports all following operations in average O(1) time.&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;insert(val)&lt;/li&gt;
@@ -202,6 +387,7 @@ That’s why Java HashMap’s underlying array always has a length of a power of
 
 &lt;p&gt;We can consider a combination of ArrayList and HashMap. To find the index of the value to be removed in O(1), we can use a HashMap to store the value and its corresponding index. To avoid shifting caused by remove(), we can just move the last element to replace the removed one, since we don’t care the order.&lt;/p&gt;
 
+&lt;hr /&gt;
 &lt;h3 id=&quot;146-lru-cache&quot;&gt;146. LRU Cache&lt;/h3&gt;
 &lt;p&gt;Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations:&lt;/p&gt;
 &lt;ol&gt;
@@ -209,7 +395,7 @@ That’s why Java HashMap’s underlying array always has a length of a power of
   &lt;li&gt;put(key, value)&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;It’s natural to think of LinkedList which is fast to insert and delete a node.&lt;br /&gt;
+&lt;p&gt;It’s natural to think of LinkedList which is fast to insert and delete a node, whereas an array takes O(n) to delete a element in the middle and maintain the order at the same time.&lt;br /&gt;
 For get(), we need to find the node and move it to the front.&lt;br /&gt;
 For put(), we also need to find the node and update it or create a new node and move it to the front. If it reaches the capacity, we need to delete the oldest node at the end.&lt;br /&gt;
 LinkedList takes O(1) to delete and insert a node. But it takes O(n) to find the node. To improve the performance to O(1), a HashMap can store the mapping between the key and the node.&lt;br /&gt;
@@ -217,7 +403,16 @@ However, to delete a node, we have to know the previous node. Doubly linked list
 Therefore, a &lt;strong&gt;LinkedList and a HashMap&lt;/strong&gt; can implement the get and put operation in &lt;strong&gt;O(1)&lt;/strong&gt;.&lt;br /&gt;
 LinkedHashMap can help.&lt;/p&gt;
 
-&lt;h3 id=&quot;4-median-of-two-sorted-arrays&quot;&gt;4. Median of Two Sorted Arrays&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;h3 id=&quot;387-first-unique-character-in-a-string&quot;&gt;387. First Unique Character in a String&lt;/h3&gt;
+&lt;p&gt;It’s easy to solve the problem in O(n) using HashMap or an array of size 26. &lt;br /&gt;
+Let’s consider its follow-up question: iterate through the string for only once. Like to get the first unique character in a stream, where add and getFirstUnique operation both take O(1).&lt;/p&gt;
+
+&lt;p&gt;We can use the same thought in LRU cache with a combination of HashMap and LinkedList.&lt;br /&gt;
+Let’s maintain a LinkedList of characters that are unique, and the head of the list is the first unique char. HashMap stores the information about which node the char is in. Once a new char comes in which is already in the HashMap, we just delete the node.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;4-median-of-two-sorted-arrays-1&quot;&gt;4. Median of Two Sorted Arrays&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://leetcode.com/problems/median-of-two-sorted-arrays/description/&quot;&gt;https://leetcode.com/problems/median-of-two-sorted-arrays/description/&lt;/a&gt;&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findMedianSortedArrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
