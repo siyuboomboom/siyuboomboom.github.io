@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Google's Map Reduce Engineer Round Table Discussion</title>
+  <title>Siyu Tan - Consistent Hashing</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/blog/2018/10/30/MapReduce.html" />
+  <link rel="canonical" href="http://localhost:4000/blog/2019/01/06/consistent-hashing.html" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -79,24 +79,46 @@
 
     <div class="eleven columns content">
       <p class="meta">
-  October 30, 2018 
+  January 06, 2019 
   <a href="/">
     <i class="home fa fa-home"></i>
   </a>
 </p>
 
-<h1 class="title">Google's Map Reduce Engineer Round Table Discussion</h1>
+<h1 class="title">Consistent Hashing</h1>
 
 <div id="post">
-  <p>Map: Applicational function to every single item</p>
+  <h2 id="problem-of-using-hash">Problem of using hash</h2>
+<p>In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate <code class="highlighter-rouge">hash(key) % node_number</code>, so that we don’t iterate through all nodes to the find the key.<br />
+But what if the node_number change, say adding a new node or remove an old node? Now every cache object needs to move, and in that period of data transfering, application can’t get data from cache. Here comes in the consistent hashing.</p>
 
-<p>Reduce: Aggregation of those results of the applicational function</p>
+<h2 id="how-consistent-hashing-works">How consistent hashing works?</h2>
+<ol>
+  <li>assume hash value is an unsigned 32-bit integer, i.e. hash value is between 0 and 2^31 - 1. Imagine this circle starts from 0 to 2^31 - 1 and then comes back to 0.</li>
+  <li>hash each server (or node), either using its IP or name, now we know each node’s position on the circle.</li>
+</ol>
 
-<h3 id="main-point-of-implementing-mapreduce-library">Main point of implementing MapReduce library:</h3>
-<p>Most complicated part in parallel computing is failure handling. MapReduce solves this problem and hide the detail in the library.<br />
-Handling failure without MapReduce is like:<br />
-Write checkpoints like load descriptors about how far I’ve got in processing each input and generating output. If there’s a failure, try to find the right checkpoint to restart.</p>
+<p><img src="/assets/images/i6.jpg" width="400" /></p>
 
+<ol>
+  <li>hash the key of data, so that we get the position of each data object.</li>
+</ol>
+
+<p><img src="/assets/images/i7.jpg" width="400" /></p>
+
+<p>Now if we add a new node, only part of data on node C is moved to node X, other nodes unaffected.</p>
+
+<p><img src="/assets/images/i8.jpg" width="400" /></p>
+
+<h2 id="problem-of-consistent-hashing">Problem of consistent hashing</h2>
+<p>If nodes are few, it’s easy to form this situation where imbalance occurs between nodes. Large amount of data are on node A while very few are on B.<br />
+<img src="/assets/images/i9.jpg" width="300" /></p>
+
+<p>Virtual nodes solve the problem. For each node, we calculate multiple hash values by for example appending numbers to IP, to generate virtual nodes. Data objects that are mapped to the virtual nodes are mapped to the corresponding real nodes. By increasing node number, nodes are more evenly distributed on the circle. 
+<img src="/assets/images/i10.jpg" width="400" /></p>
+
+<h3 id="source">Source:</h3>
+<p>https://zhuanlan.zhihu.com/p/34985026</p>
 
 </div>
 
@@ -113,7 +135,7 @@ Write checkpoints like load descriptors about how far I’ve got in processing e
     </li>
     
     <li>
-      <span>06 Jan 2019 &raquo;</span> <a href="/blog/2019/01/06/consistent-hashing.html">Consistent Hashing</a>
+      <span>06 Jan 2019 &raquo;</span> <a href="/blog/2019/01/06/CDN.html">Scaling Static Web Content&#58; Content Delivery Networks</a>
     </li>
     
   </ul>

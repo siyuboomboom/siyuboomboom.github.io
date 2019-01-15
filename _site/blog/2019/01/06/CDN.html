@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - CDN</title>
+  <title>Siyu Tan - Scaling Static Web Content&#58; Content Delivery Networks</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
   <link rel="canonical" href="http://localhost:4000/blog/2019/01/06/CDN.html" />
@@ -85,10 +85,24 @@
   </a>
 </p>
 
-<h1 class="title">CDN</h1>
+<h1 class="title">Scaling Static Web Content&#58; Content Delivery Networks</h1>
 
 <div id="post">
-  
+  <p>Actively distribute static content to edge servers throughout the Internet.<br />
+–  e.g. Akamai.<br />
+<img src="/assets/images/i4.png" width="600" /></p>
+
+<p>How Akamai request routing with DNS: <br />
+<img src="/assets/images/i5.png" width="600" />
+In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global load balancer, and then:</p>
+<ol>
+  <li>user send request to the global CDN load balancer</li>
+  <li>Global CDN load balancer selects a local load balancer that’s near the user’s area according to user’s IP</li>
+  <li>Local load balancer selects a CDN cache server according to 1) user’s IP, 2) which server stores the content requested, 3) load of the server</li>
+  <li>Local load balancer sends the IP of cache server back to global load balancer</li>
+  <li>Global load balancer sends the IP to client</li>
+  <li>User sends request to that cache server</li>
+</ol>
 
 </div>
 
@@ -97,15 +111,15 @@
   <ul class="posts">
     
     <li>
-      <span>25 Dec 2018 &raquo;</span> <a href="/blog/2018/12/25/why-31.html">Why 31 is chosen as multiplier in hashCode()</a>
+      <span>06 Jan 2019 &raquo;</span> <a href="/blog/2019/01/06/multithread.html">Multithread</a>
     </li>
     
     <li>
-      <span>23 Dec 2018 &raquo;</span> <a href="/database/2018/12/23/Database-Interview.html">Database</a>
+      <span>06 Jan 2019 &raquo;</span> <a href="/blog/2019/01/06/linux-command.html">Linux Common Command</a>
     </li>
     
     <li>
-      <span>08 Dec 2018 &raquo;</span> <a href="/blog/2018/12/08/Comparable-and-Comparator.html">Camparable and Comparator</a>
+      <span>06 Jan 2019 &raquo;</span> <a href="/blog/2019/01/06/consistent-hashing.html">Consistent Hashing</a>
     </li>
     
   </ul>

@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-06T15:12:17-05:00</updated>
+ <updated>2019-01-06T21:09:34-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -13,11 +13,85 @@
 
  
  <entry>
-   <title>CDN</title>
+   <title>Multithread</title>
+   <link href="http://localhost:4000/blog/2019/01/06/multithread.html"/>
+   <updated>2019-01-06T00:00:00-05:00</updated>
+   <id>http://localhost:4000/blog/2019/01/06/multithread</id>
+   <content type="html">
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Linux Common Command</title>
+   <link href="http://localhost:4000/blog/2019/01/06/linux-command.html"/>
+   <updated>2019-01-06T00:00:00-05:00</updated>
+   <id>http://localhost:4000/blog/2019/01/06/linux-command</id>
+   <content type="html">&lt;h2 id=&quot;1-nohup&quot;&gt;1. nohup&lt;/h2&gt;
+&lt;p&gt;a POSIX command to ignore the HUP (hangup) signal.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nohup command &amp;amp;&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Consistent Hashing</title>
+   <link href="http://localhost:4000/blog/2019/01/06/consistent-hashing.html"/>
+   <updated>2019-01-06T00:00:00-05:00</updated>
+   <id>http://localhost:4000/blog/2019/01/06/consistent-hashing</id>
+   <content type="html">&lt;h2 id=&quot;problem-of-using-hash&quot;&gt;Problem of using hash&lt;/h2&gt;
+&lt;p&gt;In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate &lt;code class=&quot;highlighter-rouge&quot;&gt;hash(key) % node_number&lt;/code&gt;, so that we don’t iterate through all nodes to the find the key.&lt;br /&gt;
+But what if the node_number change, say adding a new node or remove an old node? Now every cache object needs to move, and in that period of data transfering, application can’t get data from cache. Here comes in the consistent hashing.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-consistent-hashing-works&quot;&gt;How consistent hashing works?&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;assume hash value is an unsigned 32-bit integer, i.e. hash value is between 0 and 2^31 - 1. Imagine this circle starts from 0 to 2^31 - 1 and then comes back to 0.&lt;/li&gt;
+  &lt;li&gt;hash each server (or node), either using its IP or name, now we know each node’s position on the circle.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/i6.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;hash the key of data, so that we get the position of each data object.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/i7.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now if we add a new node, only part of data on node C is moved to node X, other nodes unaffected.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/i8.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;problem-of-consistent-hashing&quot;&gt;Problem of consistent hashing&lt;/h2&gt;
+&lt;p&gt;If nodes are few, it’s easy to form this situation where imbalance occurs between nodes. Large amount of data are on node A while very few are on B.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/i9.jpg&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Virtual nodes solve the problem. For each node, we calculate multiple hash values by for example appending numbers to IP, to generate virtual nodes. Data objects that are mapped to the virtual nodes are mapped to the corresponding real nodes. By increasing node number, nodes are more evenly distributed on the circle. 
+&lt;img src=&quot;/assets/images/i10.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;source&quot;&gt;Source:&lt;/h3&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/34985026&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Scaling Static Web Content&#58; Content Delivery Networks</title>
    <link href="http://localhost:4000/blog/2019/01/06/CDN.html"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
    <id>http://localhost:4000/blog/2019/01/06/CDN</id>
-   <content type="html">
+   <content type="html">&lt;p&gt;Actively distribute static content to edge servers throughout the Internet.&lt;br /&gt;
+–  e.g. Akamai.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/i4.png&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;How Akamai request routing with DNS: &lt;br /&gt;
+&lt;img src=&quot;/assets/images/i5.png&quot; width=&quot;600&quot; /&gt;
+In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global load balancer, and then:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;user send request to the global CDN load balancer&lt;/li&gt;
+  &lt;li&gt;Global CDN load balancer selects a local load balancer that’s near the user’s area according to user’s IP&lt;/li&gt;
+  &lt;li&gt;Local load balancer selects a CDN cache server according to 1) user’s IP, 2) which server stores the content requested, 3) load of the server&lt;/li&gt;
+  &lt;li&gt;Local load balancer sends the IP of cache server back to global load balancer&lt;/li&gt;
+  &lt;li&gt;Global load balancer sends the IP to client&lt;/li&gt;
+  &lt;li&gt;User sends request to that cache server&lt;/li&gt;
+&lt;/ol&gt;
 </content>
  </entry>
  
@@ -55,6 +129,17 @@ We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;
   &lt;li&gt;Tables with only few records, as database will search index table first and then data table.&lt;/li&gt;
   &lt;li&gt;Columns with lots of common data which distribute evenly&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h2 id=&quot;4-range-query&quot;&gt;4. Range query&lt;/h2&gt;
+&lt;p&gt;For composite index (A, B):&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;where A &amp;gt; xx;   useful&lt;/li&gt;
+  &lt;li&gt;where A = xx and B &amp;gt; yy;   useful&lt;/li&gt;
+  &lt;li&gt;where A &amp;gt; xx and B = yy;   partially useful on A&lt;/li&gt;
+  &lt;li&gt;where A &amp;gt; xx and B &amp;gt; yy;   partially useful on A&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;When the query looks like 4 where two columns are all range search, it’s better to only add index on A.&lt;/p&gt;
 </content>
  </entry>
  
@@ -900,50 +985,6 @@ Why do wu use nested classes?&lt;/p&gt;
 &lt;p&gt;Most complicated part in parallel computing is failure handling. MapReduce solves this problem and hide the detail in the library.&lt;br /&gt;
 Handling failure without MapReduce is like:&lt;br /&gt;
 Write checkpoints like load descriptors about how far I’ve got in processing each input and generating output. If there’s a failure, try to find the right checkpoint to restart.&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>Sample post</title>
-   <link href="http://localhost:4000/blog/2013/08/20/sample-post.html"/>
-   <updated>2013-08-20T00:00:00-04:00</updated>
-   <id>http://localhost:4000/blog/2013/08/20/sample-post</id>
-   <content type="html">&lt;p&gt;Tattooed roof party &lt;em&gt;vinyl&lt;/em&gt; freegan single-origin coffee wayfarers tousled, umami yr 
-meggings hella selvage. Butcher bespoke seitan, cornhole umami gentrify put a bird 
-on it occupy trust fund. Umami whatever kitsch, locavore fingerstache Tumblr pork belly
-&lt;a href=&quot;#&quot;&gt;keffiyeh&lt;/a&gt;. Chia Echo Park Pitchfork, Blue Bottle &lt;a href=&quot;#&quot;&gt;hashtag&lt;/a&gt; stumptown skateboard selvage 
-mixtape. Echo Park retro butcher banjo cardigan, seitan flannel Brooklyn paleo fixie 
-Truffaut. Forage mustache Thundercats next level disrupt. Bicycle rights forage tattooed
-chia, &lt;strong&gt;wayfarers&lt;/strong&gt; swag raw denim hashtag biodiesel occupy gastropub!&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;its-all-in-the-game&quot;&gt;It’s all in the game.&lt;/h1&gt;
-
-&lt;h2 id=&quot;you-come-at-the-king-you-best-not-miss&quot;&gt;You come at the king, you best not miss.&lt;/h2&gt;
-
-&lt;h3 id=&quot;be-subtle-with-it-man-you-know-what-subtle-means&quot;&gt;Be subtle with it, man. You know what subtle means?&lt;/h3&gt;
-
-&lt;p&gt;VHS post-ironic cred &lt;strong&gt;bespoke&lt;/strong&gt; banjo. Yr wayfarers literally gentrify, flexitarian fap 
-dreamcatcher plaid cornhole Intelligentsia paleo. Beard try-hard direct trade, shabby chic 
-Helvetica &lt;code class=&quot;highlighter-rouge&quot;&gt;look ma, I can code&lt;/code&gt;. Lo-fi American Apparel tattooed &lt;a href=&quot;#&quot;&gt;Vice&lt;/a&gt; tofu, yr vinyl. 
-Williamsburg butcher hella mumblecore fixie mlkshk, cliche wolf keytar mixtape kitsch banh mi 
-salvia. High Life Odd Future &lt;em&gt;chambray&lt;/em&gt; kale chips hoodie, cray pop-up. Helvetica narwhal 
-iPhone try-hard jean shorts.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This is a quote from someone famous about productivity&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Syntax highlighting with Solarized theme.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;attr_accessible&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;
-
-  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tons&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </content>
  </entry>

@@ -17,3 +17,12 @@ We can add EXPLAIN before SELECT to see which index the db choose.
 1. Indexes slow down inserts and updates, so you want to use them carefully on columns that are FREQUENTLY updated.
 2. Tables with only few records, as database will search index table first and then data table.
 3. Columns with lots of common data which distribute evenly
+
+## 4. Range query
+For composite index (A, B):  
+1. where A > xx;   useful
+2. where A = xx and B > yy;   useful
+3. where A > xx and B = yy;   partially useful on A
+4. where A > xx and B > yy;   partially useful on A
+  
+When the query looks like 4 where two columns are all range search, it's better to only add index on A.
