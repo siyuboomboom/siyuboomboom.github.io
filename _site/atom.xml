@@ -4,13 +4,69 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-14T22:19:40-05:00</updated>
+ <updated>2019-01-18T16:33:07-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
    <email>siyutan@cmu.edu</email>
  </author>
 
+ 
+ <entry>
+   <title>Real Time HTTP Strategies</title>
+   <link href="http://localhost:4000/blog/2019/01/18/real-time-http.html"/>
+   <updated>2019-01-18T00:00:00-05:00</updated>
+   <id>http://localhost:4000/blog/2019/01/18/real-time-http</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-polling&quot;&gt;1. Polling&lt;/h3&gt;
+&lt;p&gt;Client polls server for new information once in a while.&lt;/p&gt;
+
+&lt;p&gt;Pros:&lt;br /&gt;
+Easy to program server.&lt;/p&gt;
+
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;it might be too frequent causing unnecessary network traffic&lt;/li&gt;
+  &lt;li&gt;it might be too infrequent causing missing information&lt;/li&gt;
+  &lt;li&gt;requests and responses contain exactly same header data causing unnecessary data transmission&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Application:&lt;br /&gt;
+Small applications&lt;/p&gt;
+
+&lt;h3 id=&quot;2-long-polling&quot;&gt;2. Long polling&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Pros:&lt;br /&gt;
+Reduces a large amount of useless pollings when new information are infrequent.&lt;/p&gt;
+
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Hard to program&lt;/li&gt;
+  &lt;li&gt;Connections are hold by server when no new information causing resources waste.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Application:&lt;br /&gt;
+WebQQ, Facebook IM&lt;/p&gt;
+
+&lt;h3 id=&quot;3-streaming&quot;&gt;3. Streaming&lt;/h3&gt;
+&lt;p&gt;Browser only sends one request.
+Drawbacks:
+Proxy servers buffer long responses likely causing missing information.&lt;/p&gt;
+
+&lt;h3 id=&quot;sources&quot;&gt;Sources:&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://www.pubnub.com/blog/2014-12-01-http-long-polling/&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Common Linux Command</title>
@@ -32,6 +88,11 @@
 &lt;p&gt;a POSIX command to ignore the HUP (hangup) signal.&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nohup command &amp;amp;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-ls&quot;&gt;4. ls&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -a&lt;/code&gt; list files including hidden ones starting with ‘.’ &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -l&lt;/code&gt; list files with long format including permission, owner, size, date updated &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -lh&lt;/code&gt; like the previous one but with readable size in B, K, M, ..&lt;/p&gt;
 </content>
  </entry>
  
@@ -281,7 +342,29 @@ That’s why Java HashMap’s underlying array always has a length of a power of
    <link href="http://localhost:4000/blog/2018/11/19/leetcode.html"/>
    <updated>2018-11-19T00:00:00-05:00</updated>
    <id>http://localhost:4000/blog/2018/11/19/leetcode</id>
-   <content type="html">&lt;h3 id=&quot;88-merge-sorted-array&quot;&gt;88. Merge Sorted Array&lt;/h3&gt;
+   <content type="html">&lt;h3 id=&quot;322-coin-change&quot;&gt;322. Coin Change&lt;/h3&gt;
+&lt;p&gt;Key is to adopt an auxiliary array count[amount + 1].&lt;br /&gt;
+count[i] denotes the minimum coin count to get target value i.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 1: Recursive DP - Top down&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;start from the target amount&lt;/li&gt;
+  &lt;li&gt;substract it by each of the coins&lt;/li&gt;
+  &lt;li&gt;call helper method itself to get the minimum count for that substracted amount&lt;/li&gt;
+  &lt;li&gt;iterate through each coin to find the minimum count&lt;/li&gt;
+  &lt;li&gt;add the minimum coin number by 1 to get the answer&lt;/li&gt;
+  &lt;li&gt;remember this answer for this particular target amount to save time&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 2: Iterative DP - Bottom up&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;start from amount 0 which needs 0 coins and add up the amount by 1 in each iteration&lt;/li&gt;
+  &lt;li&gt;iterate through each coin&lt;/li&gt;
+  &lt;li&gt;find the minimum count for each amount - coin in the count array before the target amount&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;88-merge-sorted-array&quot;&gt;88. Merge Sorted Array&lt;/h3&gt;
 &lt;p&gt;Array A length: n, B length: m&lt;br /&gt;
 Brute Force: &lt;strong&gt;O(n * m)&lt;/strong&gt;, compare from left, insert one by one at the front, shift to the right.&lt;br /&gt;
 Since the empty spots are at right side, how about comparing from right?&lt;br /&gt;

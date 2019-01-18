@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Quick Select</title>
+  <title>Siyu Tan - Real Time HTTP Strategies</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/blog/2018/11/30/Quick-Select.html" />
+  <link rel="canonical" href="http://localhost:4000/blog/2019/01/18/real-time-http.html" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -79,21 +79,63 @@
 
     <div class="eleven columns content">
       <p class="meta">
-  November 30, 2018 
+  January 18, 2019 
   <a href="/">
     <i class="home fa fa-home"></i>
   </a>
 </p>
 
-<h1 class="title">Quick Select</h1>
+<h1 class="title">Real Time HTTP Strategies</h1>
 
 <div id="post">
-  <p>Average time complexity:
-<code class="highlighter-rouge">T(n) = O(n) + T(n / 2) = O(n) + O(n / 2) + O(n / 4) + ... + O(1)</code>
-<code class="highlighter-rouge">T(n) = O(n)</code></p>
+  <blockquote>
+  <p>Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.</p>
+</blockquote>
 
-<p>Worst case:
-<code class="highlighter-rouge">T(n) = O(n ^ 2)</code></p>
+<p>Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.</p>
+
+<h3 id="1-polling">1. Polling</h3>
+<p>Client polls server for new information once in a while.</p>
+
+<p>Pros:<br />
+Easy to program server.</p>
+
+<p>Cons:</p>
+<ol>
+  <li>it might be too frequent causing unnecessary network traffic</li>
+  <li>it might be too infrequent causing missing information</li>
+  <li>requests and responses contain exactly same header data causing unnecessary data transmission</li>
+</ol>
+
+<p>Application:<br />
+Small applications</p>
+
+<h3 id="2-long-polling">2. Long polling</h3>
+<blockquote>
+  <p>When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.</p>
+</blockquote>
+
+<p>Pros:<br />
+Reduces a large amount of useless pollings when new information are infrequent.</p>
+
+<p>Cons:</p>
+<ol>
+  <li>Hard to program</li>
+  <li>Connections are hold by server when no new information causing resources waste.</li>
+</ol>
+
+<p>Application:<br />
+WebQQ, Facebook IM</p>
+
+<h3 id="3-streaming">3. Streaming</h3>
+<p>Browser only sends one request.
+Drawbacks:
+Proxy servers buffer long responses likely causing missing information.</p>
+
+<h3 id="sources">Sources:</h3>
+<ol>
+  <li>https://www.pubnub.com/blog/2014-12-01-http-long-polling/</li>
+</ol>
 
 </div>
 
@@ -102,15 +144,15 @@
   <ul class="posts">
     
     <li>
-      <span>18 Jan 2019 &raquo;</span> <a href="/blog/2019/01/18/real-time-http.html">Real Time HTTP Strategies</a>
-    </li>
-    
-    <li>
       <span>06 Jan 2019 &raquo;</span> <a href="/blog/2019/01/06/linux-command.html">Common Linux Command</a>
     </li>
     
     <li>
       <span>06 Jan 2019 &raquo;</span> <a href="/blog/2019/01/06/consistent-hashing.html">Consistent Hashing</a>
+    </li>
+    
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/blog/2019/01/06/CDN.html">Scaling Static Web Content&#58; Content Delivery Networks</a>
     </li>
     
   </ul>
