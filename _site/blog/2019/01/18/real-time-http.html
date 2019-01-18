@@ -88,9 +88,7 @@
 <h1 class="title">Real Time HTTP Strategies</h1>
 
 <div id="post">
-  <blockquote>
   <p>Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.</p>
-</blockquote>
 
 <p>Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.</p>
 
@@ -111,9 +109,7 @@ Easy to program server.</p>
 Small applications</p>
 
 <h3 id="2-long-polling">2. Long polling</h3>
-<blockquote>
-  <p>When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.</p>
-</blockquote>
+<p>When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.</p>
 
 <p>Pros:<br />
 Reduces a large amount of useless pollings when new information are infrequent.</p>
@@ -134,7 +130,7 @@ Proxy servers buffer long responses likely causing missing information.</p>
 
 <h3 id="sources">Sources:</h3>
 <ol>
-  <li>https://www.pubnub.com/blog/2014-12-01-http-long-polling/</li>
+  <li><a href="https://www.pubnub.com/blog/2014-12-01-http-long-polling/">https://www.pubnub.com/blog/2014-12-01-http-long-polling/</a></li>
 </ol>
 
 </div>

@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-18T16:33:07-05:00</updated>
+ <updated>2019-01-18T18:03:11-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -17,9 +17,7 @@
    <link href="http://localhost:4000/blog/2019/01/18/real-time-http.html"/>
    <updated>2019-01-18T00:00:00-05:00</updated>
    <id>http://localhost:4000/blog/2019/01/18/real-time-http</id>
-   <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.&lt;/p&gt;
-&lt;/blockquote&gt;
+   <content type="html">&lt;p&gt;Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.&lt;/p&gt;
 
 &lt;p&gt;Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.&lt;/p&gt;
 
@@ -40,9 +38,7 @@ Easy to program server.&lt;/p&gt;
 Small applications&lt;/p&gt;
 
 &lt;h3 id=&quot;2-long-polling&quot;&gt;2. Long polling&lt;/h3&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.&lt;/p&gt;
 
 &lt;p&gt;Pros:&lt;br /&gt;
 Reduces a large amount of useless pollings when new information are infrequent.&lt;/p&gt;
@@ -63,7 +59,7 @@ Proxy servers buffer long responses likely causing missing information.&lt;/p&gt
 
 &lt;h3 id=&quot;sources&quot;&gt;Sources:&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;https://www.pubnub.com/blog/2014-12-01-http-long-polling/&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.pubnub.com/blog/2014-12-01-http-long-polling/&quot;&gt;https://www.pubnub.com/blog/2014-12-01-http-long-polling/&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
  </entry>
@@ -131,7 +127,7 @@ But what if the node_number change, say adding a new node or remove an old node?
 &lt;img src=&quot;/assets/images/i10.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;source&quot;&gt;Source:&lt;/h3&gt;
-&lt;p&gt;https://zhuanlan.zhihu.com/p/34985026&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/34985026&quot;&gt;https://zhuanlan.zhihu.com/p/34985026&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -771,9 +767,9 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
  
  <entry>
    <title>Computer Network</title>
-   <link href="http://localhost:4000/blog/2018/11/14/Technical-Interview-101.html"/>
+   <link href="http://localhost:4000/blog/2018/11/14/computer-network.html"/>
    <updated>2018-11-14T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2018/11/14/Technical-Interview-101</id>
+   <id>http://localhost:4000/blog/2018/11/14/computer-network</id>
    <content type="html">&lt;h2 id=&quot;1-tcp-vs-udp&quot;&gt;1. TCP v.s. UDP&lt;/h2&gt;
 &lt;p&gt;Both send packets to IP address.&lt;br /&gt;
 TCP: Connection oriented. Guarantee order of packets, reliable, not missing or duplicate. Guarantee by sending aknowledgement. Resend if incorrect response.&lt;br /&gt;
@@ -844,37 +840,6 @@ Because in 3-way handshake, server can send ACK and SYN at the same time. ACK to
   &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/19899236/is-tcp-protocol-stateless-or-not&quot;&gt;https://stackoverflow.com/questions/19899236/is-tcp-protocol-stateless-or-not&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/13200152/why-is-it-said-that-http-is-a-stateless-protocol&quot;&gt;https://stackoverflow.com/questions/13200152/why-is-it-said-that-http-is-a-stateless-protocol&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Stateless_protocol&quot;&gt;https://en.wikipedia.org/wiki/Stateless_protocol&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Inteview Questions</title>
-   <link href="http://localhost:4000/blog/2018/11/14/Interwiew-Questions.html"/>
-   <updated>2018-11-14T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2018/11/14/Interwiew-Questions</id>
-   <content type="html">&lt;p&gt;Toutiao:&lt;br /&gt;
-What are protocol layers?&lt;br /&gt;
-Why do we have layers?&lt;br /&gt;
-Do live streams all use UDP? UDP examples?&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;目前行业里直播还是以TCP占绝对份额，rtmp或者hls都是基于TCP，但是从底层UDP和TCP的特性来看，还是UDP适合做实时性通信，比如直播。如果是为了快速出产品，到不必纠结是TCP还是UDP做直播，大佬们已经把协议、客户端、服务器端都准备好了，都是基于TCP，比如nginx，但是如果是想重造轮子，当然UDP好。为了能集TCP和UDP的有点，Google搞了个QUIC（可以看看 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/32553477&quot;&gt;科普：QUIC协议原理分析&lt;/a&gt;），偶然机会看到国内公司大牛正在用QUIC实现直播，卡顿和延迟应该会有非常不错的结果。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;目前常见的直播方案都是上行采用rtmp；下行采用http-flv或者hls，底层都是tcp。利用rtmp协议可以很快搭建一套直播系统，客户端、服务器都有成熟稳定的开源实现。UDP理论上更适合用于直播系统，但开发效率低，周期长。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;What does sequence number in TCP header do?&lt;br /&gt;
-In TCP, how to differentiate client and server?&lt;br /&gt;
-How is hash table implemented? What data structure? How to solve collisions in close addressing?&lt;br /&gt;
-Concurrency in hash table. Segment the underlying array and synchronize the segments, how to rehash?&lt;br /&gt;
-Sort a singly linked list.&lt;/p&gt;
-
-&lt;p&gt;Source:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/267101516/answer/325732299&quot;&gt;https://www.zhihu.com/question/267101516/answer/325732299&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/267101516/answer/319115792&quot;&gt;https://www.zhihu.com/question/267101516/answer/319115792&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
  </entry>
@@ -1052,7 +1017,7 @@ Why do wu use nested classes?&lt;/p&gt;
 
 &lt;p&gt;Resource:&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;https://www.tutorialspoint.com/java/util/arrays_equals_object.htm&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.tutorialspoint.com/java/util/arrays_equals_object.htm&quot;&gt;https://www.tutorialspoint.com/java/util/arrays_equals_object.htm&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
  </entry>
