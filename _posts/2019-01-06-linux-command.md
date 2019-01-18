@@ -18,3 +18,8 @@ categories:
 a POSIX command to ignore the HUP (hangup) signal.  
 
 `nohup command &`
+
+## 4. ls
+`ls -a` list files including hidden ones starting with '.'   
+`ls -l` list files with long format including permission, owner, size, date updated   
+`ls -lh` like the previous one but with readable size in B, K, M, ..  
