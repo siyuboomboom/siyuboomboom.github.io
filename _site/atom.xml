@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-06T21:09:34-05:00</updated>
+ <updated>2019-01-14T22:19:40-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -13,20 +13,22 @@
 
  
  <entry>
-   <title>Multithread</title>
-   <link href="http://localhost:4000/blog/2019/01/06/multithread.html"/>
-   <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2019/01/06/multithread</id>
-   <content type="html">
-</content>
- </entry>
- 
- <entry>
-   <title>Linux Common Command</title>
+   <title>Common Linux Command</title>
    <link href="http://localhost:4000/blog/2019/01/06/linux-command.html"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
    <id>http://localhost:4000/blog/2019/01/06/linux-command</id>
-   <content type="html">&lt;h2 id=&quot;1-nohup&quot;&gt;1. nohup&lt;/h2&gt;
+   <content type="html">&lt;h3 id=&quot;1-check-what-processes-are-using-a-certain-port-number&quot;&gt;1. Check what processes are using a certain port number&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-check-what-port-number-is-being-used-by-a-process&quot;&gt;2. Check what port number is being used by a process&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Get pid
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ps -aux | grep &amp;lt;process name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Get port number using pid
+&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;pid&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;3-nohup&quot;&gt;3. nohup&lt;/h2&gt;
 &lt;p&gt;a POSIX command to ignore the HUP (hangup) signal.&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nohup command &amp;amp;&lt;/code&gt;&lt;/p&gt;
