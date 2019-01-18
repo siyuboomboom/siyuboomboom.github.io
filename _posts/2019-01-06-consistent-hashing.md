@@ -36,4 +36,4 @@ Virtual nodes solve the problem. For each node, we calculate multiple hash value
 
 
 ### Source:
-https://zhuanlan.zhihu.com/p/34985026
+<https://zhuanlan.zhihu.com/p/34985026>

@@ -95,4 +95,4 @@ System.arraycopy(e, 0, f, 0, 3) // shallow copy, f: {1, 2, 3, 0}
 <br>
 
 Resource:
-1. https://www.tutorialspoint.com/java/util/arrays_equals_object.htm
+1. <https://www.tutorialspoint.com/java/util/arrays_equals_object.htm>

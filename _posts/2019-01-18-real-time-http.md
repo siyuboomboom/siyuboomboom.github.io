@@ -43,4 +43,4 @@ Proxy servers buffer long responses likely causing missing information.
 
 
 ### Sources:
-1. https://www.pubnub.com/blog/2014-12-01-http-long-polling/
+1. <https://www.pubnub.com/blog/2014-12-01-http-long-polling/>
