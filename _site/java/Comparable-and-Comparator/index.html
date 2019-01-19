@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siyu Tan - Camparable and Comparator</title>
+  <meta name="author" content="Siyu Tan" />
+  <meta name="description" content="The blog of Siyu Tan" />
+  <link rel="canonical" href="http://localhost:4000/java/Comparable-and-Comparator/" />
+
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="alternate" type="application/atom+xml" title="Siyu Tan" href="http://localhost:4000/atom.xml" />
+
+  <link rel="stylesheet" href="/assets/css/all.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="four columns sidebar">
+      <nav>
+  <h1>Hi.</h1>
+  <a href="/">
+    
+    <img class="avatar" src="/logo.jpeg" id="logo" alt="Blog logo"/>
+    
+  </a>
+  <h2>I'm <a href="/">Siyu Tan</a>.</h2>
+  <div id="bio">
+    <p><a href="/">Blog Posts</a></p>
+    
+        
+        <a href="/">Big Data</a><br>
+    
+        
+        <a href="/">Data Structures and Algorithms</a><br>
+    
+        
+        <a href="/">Java</a><br>
+    
+        
+        <a href="/">Computer Systems</a><br>
+    
+        
+        <a href="/">Database</a><br>
+    
+        
+        <a href="/">Web Applications</a><br>
+    
+        
+        <a href="/">Distributed Systems</a><br>
+    
+  </div>
+  
+  <div id="social">
+    Follow me:
+<div id="stalker">
+  
+  <a title="siyuboomboom on Github" href="https://github.com/siyuboomboom">
+    <i class="fa fa-github-square"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a title="Siyu Tan on Facebook" href="https://facebook.com/sherry.tan.92351">
+    <i class="fa fa-facebook-square"></i>
+  </a>
+  
+
+  
+
+  
+  <a title="Siyu Tan on LinkedIn" href="https://www.linkedin.com/in/siyutan">
+    <i class="fa fa-linkedin-square"></i>
+  </a>
+  
+
+  
+
+  
+</div>
+
+  </div>
+</nav>
+
+    </div>
+
+    <div class="eleven columns content">
+      <p class="meta">
+  December 08, 2018 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Camparable and Comparator</h1>
+
+<div class="post-categories">
+  
+  Categories: 
+  
+  <a href="/categories/#Java">Java</a>
+  
+  
+</div>
+
+<br>
+<div id="post">
+  <p>To sort an array of <strong>primitives</strong>, we can simply use Arrays.sort method.<br />
+To sort an array of <strong>objects</strong>, the objects have to be <strong>Comparable</strong>.</p>
+
+<h2 id="comparable">Comparable</h2>
+<p>Method: <code class="highlighter-rouge">compareTo()</code></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Card</span> <span class="kd">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">suit</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">rank</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">Card</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">suit</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSuit</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">suit</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getRank</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">rank</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** 
+    * returns negative if this rank &lt; other's rank
+    * returns 0 if this rank == other's rank
+    * returns positive if this rank &gt; other's rank
+    */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">Card</span> <span class="n">other</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">rank</span><span class="o">,</span> <span class="n">other</span><span class="o">.</span><span class="na">rank</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Note:</p>
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">compareTo()</code> should be consistent to <code class="highlighter-rouge">equals()</code> and <code class="highlighter-rouge">hashCode()</code> such that <br />
+<code class="highlighter-rouge">x.equals(y) == true &lt;===&gt; x.compareTo(y) == 0</code>  <br />
+<code class="highlighter-rouge">===&gt; x.hashCode() == y.hashCode()</code> <br />
+Therefore, we need to implement <code class="highlighter-rouge">compareTo()</code>, <code class="highlighter-rouge">equals()</code> and <code class="highlighter-rouge">hashCode()</code> at the same time.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">compareTo()</code> method defines the <strong>NATURAL ORDER</strong> of the type</p>
+  </li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span> <span class="n">cards</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">cards</span><span class="o">);</span></code></pre></figure>
+
+<h2 id="comparator">Comparator</h2>
+<p>Method: <code class="highlighter-rouge">compare()</code></p>
+
+<p>Compare by suit:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CompareBySuit</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Card</span> <span class="n">x</span><span class="o">,</span> <span class="n">Card</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="na">getSuit</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">y</span><span class="o">.</span><span class="na">getSuit</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Compare by suit first and break the tie by rank:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CompareBySuitRank</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Card</span> <span class="n">x</span><span class="o">,</span> <span class="n">Card</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">suitResult</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">getSuit</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">y</span><span class="o">.</span><span class="na">getSuit</span><span class="o">());</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">suitResult</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">suitResult</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="na">getRank</span><span class="o">(),</span> <span class="n">y</span><span class="o">.</span><span class="na">getRank</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Note:</p>
+<ol>
+  <li><code class="highlighter-rouge">compare()</code> method defines different custom orders of the type</li>
+  <li>How to sort cards using this Comparator instead of its natural ordering (provided by the Comparable interface)?</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span> <span class="n">cards</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">cards</span><span class="o">,</span> <span class="k">new</span> <span class="n">CompareBySuit</span><span class="o">());</span></code></pre></figure>
+
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
+    
+    <li>
+      <span>18 Jan 2019 &raquo;</span> <a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a>
+    </li>
+    
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/computer%20systems/linux-command/">Common Linux Command</a>
+    </li>
+    
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/distributed%20systems/web%20applications/consistent-hashing/">Consistent Hashing</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <div class="disclaimer">
+  
+  <p>
+    The postings on this site are my own and don't necessarily represent my 
+    employer’s positions, strategies or opinions.
+  </p>
+  
+
+  <p>
+    © Siyu Tan, 2019 &mdash; built with <a href="http://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/swanson/lagom">Lagom theme</a>
+  </p>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-xxxx-x']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

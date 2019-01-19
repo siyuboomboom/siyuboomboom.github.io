@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Blog Posts</title>
+  <title>Siyu Tan - Consistent Hashing</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/" />
+  <link rel="canonical" href="http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing/" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -99,40 +99,82 @@
     </div>
 
     <div class="eleven columns content">
-      <div id="home">
-  <h2><i class="fa fa-bookmark"></i> Blog Posts</h2>
-  <ul id="blog-posts" class="posts">
+      <p class="meta">
+  January 06, 2019 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Consistent Hashing</h1>
+
+<div class="post-categories">
+  
+  Categories: 
+  
+  <a href="/categories/#Distributed Systems">Distributed Systems</a>
+  , 
+  
+  <a href="/categories/#Web Applications">Web Applications</a>
+  
+  
+</div>
+
+<br>
+<div id="post">
+  <h2 id="problem-of-using-hash">Problem of using hash</h2>
+<p>In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate <code class="highlighter-rouge">hash(key) % node_number</code>, so that we don’t iterate through all nodes to the find the key.<br />
+But what if the node_number change, say adding a new node or remove an old node? Now every cache object needs to move, and in that period of data transfering, application can’t get data from cache. Here comes in the consistent hashing.</p>
+
+<h2 id="how-consistent-hashing-works">How consistent hashing works?</h2>
+<ol>
+  <li>assume hash value is an unsigned 32-bit integer, i.e. hash value is between 0 and 2^31 - 1. Imagine this circle starts from 0 to 2^31 - 1 and then comes back to 0.</li>
+  <li>hash each server (or node), either using its IP or name, now we know each node’s position on the circle.</li>
+</ol>
+
+<p><img src="/assets/images/i6.jpg" width="400" /></p>
+
+<ol>
+  <li>hash the key of data, so that we get the position of each data object.</li>
+</ol>
+
+<p><img src="/assets/images/i7.jpg" width="400" /></p>
+
+<p>Now if we add a new node, only part of data on node C is moved to node X, other nodes unaffected.</p>
+
+<p><img src="/assets/images/i8.jpg" width="400" /></p>
+
+<h2 id="problem-of-consistent-hashing">Problem of consistent hashing</h2>
+<p>If nodes are few, it’s easy to form this situation where imbalance occurs between nodes. Large amount of data are on node A while very few are on B.<br />
+<img src="/assets/images/i9.jpg" width="300" /></p>
+
+<p>Virtual nodes solve the problem. For each node, we calculate multiple hash values by for example appending numbers to IP, to generate virtual nodes. Data objects that are mapped to the virtual nodes are mapped to the corresponding real nodes. By increasing node number, nodes are more evenly distributed on the circle. 
+<img src="/assets/images/i10.jpg" width="400" /></p>
+
+<h3 id="source">Source:</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/34985026">https://zhuanlan.zhihu.com/p/34985026</a></p>
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
     
-      <li><span>18 Jan 2019 &raquo;</span><a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a></li>
+    <li>
+      <span>18 Jan 2019 &raquo;</span> <a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a>
+    </li>
     
-      <li><span>06 Jan 2019 &raquo;</span><a href="/computer%20systems/linux-command/">Common Linux Command</a></li>
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/computer%20systems/linux-command/">Common Linux Command</a>
+    </li>
     
-      <li><span>06 Jan 2019 &raquo;</span><a href="/distributed%20systems/web%20applications/consistent-hashing/">Consistent Hashing</a></li>
-    
-      <li><span>06 Jan 2019 &raquo;</span><a href="/web%20applications/CDN/">Scaling Static Web Content&#58; Content Delivery Networks</a></li>
-    
-      <li><span>25 Dec 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/why-31/">Why 31 is chosen as multiplier in hashCode()</a></li>
-    
-      <li><span>23 Dec 2018 &raquo;</span><a href="/database/Database-Interview/">Database</a></li>
-    
-      <li><span>08 Dec 2018 &raquo;</span><a href="/java/Comparable-and-Comparator/">Camparable and Comparator</a></li>
-    
-      <li><span>30 Nov 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/Quick-Select/">Quick Select</a></li>
-    
-      <li><span>21 Nov 2018 &raquo;</span><a href="/computer%20systems/bitwise-operation/">Bitwise Operation Tricks</a></li>
-    
-      <li><span>19 Nov 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/leetcode/">Leetcode</a></li>
-    
-      <li><span>14 Nov 2018 &raquo;</span><a href="/computer%20systems/computer-network/">Computer Network</a></li>
-    
-      <li><span>02 Nov 2018 &raquo;</span><a href="/java/Iterator-and-Iterable/">Iterable and Iterator</a></li>
-    
-      <li><span>30 Oct 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/data-structures/">Data Structures - Arrays</a></li>
-    
-      <li><span>30 Oct 2018 &raquo;</span><a href="/big%20data/MapReduce/">Google's Map Reduce Engineer Round Table Discussion</a></li>
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/web%20applications/CDN/">Scaling Static Web Content&#58; Content Delivery Networks</a>
+    </li>
     
   </ul>
 </div>
+
 
       <div class="footer">
         <div class="disclaimer">

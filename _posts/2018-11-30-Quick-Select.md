@@ -2,7 +2,7 @@
 layout: post
 title: Quick Select
 categories:
-- blog
+- Data Structures and Algorithms
 ---
 Average time complexity:
 `T(n) = O(n) + T(n / 2) = O(n) + O(n / 2) + O(n / 4) + ... + O(1)`

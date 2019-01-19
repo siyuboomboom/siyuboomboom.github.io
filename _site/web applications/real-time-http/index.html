@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Blog Posts</title>
+  <title>Siyu Tan - Real Time HTTP Strategies</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/" />
+  <link rel="canonical" href="http://localhost:4000/web%20applications/real-time-http/" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -99,40 +99,92 @@
     </div>
 
     <div class="eleven columns content">
-      <div id="home">
-  <h2><i class="fa fa-bookmark"></i> Blog Posts</h2>
-  <ul id="blog-posts" class="posts">
+      <p class="meta">
+  January 18, 2019 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Real Time HTTP Strategies</h1>
+
+<div class="post-categories">
+  
+  Categories: 
+  
+  <a href="/categories/#Web Applications">Web Applications</a>
+  
+  
+</div>
+
+<br>
+<div id="post">
+  <p>Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.</p>
+
+<p>Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.</p>
+
+<h3 id="1-polling">1. Polling</h3>
+<p>Client polls server for new information once in a while.</p>
+
+<p>Pros:<br />
+Easy to program server.</p>
+
+<p>Cons:</p>
+<ol>
+  <li>it might be too frequent causing unnecessary network traffic</li>
+  <li>it might be too infrequent causing missing information</li>
+  <li>requests and responses contain exactly same header data causing unnecessary data transmission</li>
+</ol>
+
+<p>Application:<br />
+Small applications</p>
+
+<h3 id="2-long-polling">2. Long polling</h3>
+<p>When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.</p>
+
+<p>Pros:<br />
+Reduces a large amount of useless pollings when new information are infrequent.</p>
+
+<p>Cons:</p>
+<ol>
+  <li>Hard to program</li>
+  <li>Connections are hold by server when no new information causing resources waste.</li>
+</ol>
+
+<p>Application:<br />
+WebQQ, Facebook IM</p>
+
+<h3 id="3-streaming">3. Streaming</h3>
+<p>Browser only sends one request.
+Drawbacks:
+Proxy servers buffer long responses likely causing missing information.</p>
+
+<h3 id="sources">Sources:</h3>
+<ol>
+  <li><a href="https://www.pubnub.com/blog/2014-12-01-http-long-polling/">https://www.pubnub.com/blog/2014-12-01-http-long-polling/</a></li>
+</ol>
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
     
-      <li><span>18 Jan 2019 &raquo;</span><a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a></li>
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/computer%20systems/linux-command/">Common Linux Command</a>
+    </li>
     
-      <li><span>06 Jan 2019 &raquo;</span><a href="/computer%20systems/linux-command/">Common Linux Command</a></li>
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/distributed%20systems/web%20applications/consistent-hashing/">Consistent Hashing</a>
+    </li>
     
-      <li><span>06 Jan 2019 &raquo;</span><a href="/distributed%20systems/web%20applications/consistent-hashing/">Consistent Hashing</a></li>
-    
-      <li><span>06 Jan 2019 &raquo;</span><a href="/web%20applications/CDN/">Scaling Static Web Content&#58; Content Delivery Networks</a></li>
-    
-      <li><span>25 Dec 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/why-31/">Why 31 is chosen as multiplier in hashCode()</a></li>
-    
-      <li><span>23 Dec 2018 &raquo;</span><a href="/database/Database-Interview/">Database</a></li>
-    
-      <li><span>08 Dec 2018 &raquo;</span><a href="/java/Comparable-and-Comparator/">Camparable and Comparator</a></li>
-    
-      <li><span>30 Nov 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/Quick-Select/">Quick Select</a></li>
-    
-      <li><span>21 Nov 2018 &raquo;</span><a href="/computer%20systems/bitwise-operation/">Bitwise Operation Tricks</a></li>
-    
-      <li><span>19 Nov 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/leetcode/">Leetcode</a></li>
-    
-      <li><span>14 Nov 2018 &raquo;</span><a href="/computer%20systems/computer-network/">Computer Network</a></li>
-    
-      <li><span>02 Nov 2018 &raquo;</span><a href="/java/Iterator-and-Iterable/">Iterable and Iterator</a></li>
-    
-      <li><span>30 Oct 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/data-structures/">Data Structures - Arrays</a></li>
-    
-      <li><span>30 Oct 2018 &raquo;</span><a href="/big%20data/MapReduce/">Google's Map Reduce Engineer Round Table Discussion</a></li>
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/web%20applications/CDN/">Scaling Static Web Content&#58; Content Delivery Networks</a>
+    </li>
     
   </ul>
 </div>
+
 
       <div class="footer">
         <div class="disclaimer">

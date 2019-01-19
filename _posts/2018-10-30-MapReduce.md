@@ -2,7 +2,7 @@
 layout: post
 title: Google's Map Reduce Engineer Round Table Discussion
 categories:
-- blog
+- Big Data
 ---
 
 Map: Applicational function to every single item

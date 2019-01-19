@@ -2,7 +2,8 @@
 layout: post
 title: Consistent Hashing
 categories:
-- blog
+- Distributed Systems
+- Web Applications
 ---
 
 ## Problem of using hash

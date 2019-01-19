@@ -9,8 +9,11 @@
   </a>
   <h2>I'm <a href="/">{{ site.data.theme.name }}</a>.</h2>
   <div id="bio">
-    <p>web backend, cloud computing, harry potter</p>
     <p><a href="/">Blog Posts</a></p>
+    {% for category in site.categories %}
+        {% capture category_name %}{{ category | first }}{% endcapture %}
+        <a href="/">{{ category_name }}</a><br>
+    {% endfor %}
   </div>
   
   <div id="social">

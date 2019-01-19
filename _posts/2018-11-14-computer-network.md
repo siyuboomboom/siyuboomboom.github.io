@@ -2,7 +2,7 @@
 layout: post
 title: Computer Network
 categories:
-- blog
+- Computer Systems
 ---
 
 ## 1. TCP v.s. UDP

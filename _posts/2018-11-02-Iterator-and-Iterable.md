@@ -2,7 +2,7 @@
 layout: post
 title: Iterable and Iterator
 categories:
-- blog
+- Java
 ---
 
 

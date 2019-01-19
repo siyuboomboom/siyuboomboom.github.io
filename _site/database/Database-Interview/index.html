@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Blog Posts</title>
+  <title>Siyu Tan - Database</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/" />
+  <link rel="canonical" href="http://localhost:4000/database/Database-Interview/" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -99,40 +99,75 @@
     </div>
 
     <div class="eleven columns content">
-      <div id="home">
-  <h2><i class="fa fa-bookmark"></i> Blog Posts</h2>
-  <ul id="blog-posts" class="posts">
+      <p class="meta">
+  December 23, 2018 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Database</h1>
+
+<div class="post-categories">
+  
+  Categories: 
+  
+  <a href="/categories/#Database">Database</a>
+  
+  
+</div>
+
+<br>
+<div id="post">
+  <h2 id="1-composite-index">1. Composite index</h2>
+<p>MySQL can only use one index in one query. If multiple columns appear in the search condition, MySQL will pick the most strict index, that is, the one that will retrive the least records. <br />
+We can add EXPLAIN before SELECT to see which index the db choose.<br />
+<strong>Leftmost prefix rule</strong>: a composite index on columns (a, b, c) is like three indexes on (a, b, c), (a, b) and (a). If we search based on (a, c), only the index on a in the composite will be used. For OR clause between conditions on a, b, c, composite index will not be used.</p>
+
+<h2 id="2-when-to-use-index">2. When to use index?</h2>
+<ol>
+  <li>Indexes speed up where clauses, order by, group by, so add index on columns that will frequently appear in the where, order by and group by clause in select query.</li>
+</ol>
+
+<h2 id="3-when-not-to-use-index">3. When not to use index?</h2>
+<ol>
+  <li>Indexes slow down inserts and updates, so you want to use them carefully on columns that are FREQUENTLY updated.</li>
+  <li>Tables with only few records, as database will search index table first and then data table.</li>
+  <li>Columns with lots of common data which distribute evenly</li>
+</ol>
+
+<h2 id="4-range-query">4. Range query</h2>
+<p>For composite index (A, B):</p>
+<ol>
+  <li>where A &gt; xx;   useful</li>
+  <li>where A = xx and B &gt; yy;   useful</li>
+  <li>where A &gt; xx and B = yy;   partially useful on A</li>
+  <li>where A &gt; xx and B &gt; yy;   partially useful on A</li>
+</ol>
+
+<p>When the query looks like 4 where two columns are all range search, it’s better to only add index on A.</p>
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
     
-      <li><span>18 Jan 2019 &raquo;</span><a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a></li>
+    <li>
+      <span>18 Jan 2019 &raquo;</span> <a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a>
+    </li>
     
-      <li><span>06 Jan 2019 &raquo;</span><a href="/computer%20systems/linux-command/">Common Linux Command</a></li>
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/computer%20systems/linux-command/">Common Linux Command</a>
+    </li>
     
-      <li><span>06 Jan 2019 &raquo;</span><a href="/distributed%20systems/web%20applications/consistent-hashing/">Consistent Hashing</a></li>
-    
-      <li><span>06 Jan 2019 &raquo;</span><a href="/web%20applications/CDN/">Scaling Static Web Content&#58; Content Delivery Networks</a></li>
-    
-      <li><span>25 Dec 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/why-31/">Why 31 is chosen as multiplier in hashCode()</a></li>
-    
-      <li><span>23 Dec 2018 &raquo;</span><a href="/database/Database-Interview/">Database</a></li>
-    
-      <li><span>08 Dec 2018 &raquo;</span><a href="/java/Comparable-and-Comparator/">Camparable and Comparator</a></li>
-    
-      <li><span>30 Nov 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/Quick-Select/">Quick Select</a></li>
-    
-      <li><span>21 Nov 2018 &raquo;</span><a href="/computer%20systems/bitwise-operation/">Bitwise Operation Tricks</a></li>
-    
-      <li><span>19 Nov 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/leetcode/">Leetcode</a></li>
-    
-      <li><span>14 Nov 2018 &raquo;</span><a href="/computer%20systems/computer-network/">Computer Network</a></li>
-    
-      <li><span>02 Nov 2018 &raquo;</span><a href="/java/Iterator-and-Iterable/">Iterable and Iterator</a></li>
-    
-      <li><span>30 Oct 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/data-structures/">Data Structures - Arrays</a></li>
-    
-      <li><span>30 Oct 2018 &raquo;</span><a href="/big%20data/MapReduce/">Google's Map Reduce Engineer Round Table Discussion</a></li>
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/distributed%20systems/web%20applications/consistent-hashing/">Consistent Hashing</a>
+    </li>
     
   </ul>
 </div>
+
 
       <div class="footer">
         <div class="disclaimer">

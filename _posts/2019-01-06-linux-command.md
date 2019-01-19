@@ -2,7 +2,7 @@
 layout: post
 title: Common Linux Command
 categories:
-- blog
+- Computer Systems
 ---
 
 ### 1. Check what processes are using a certain port number

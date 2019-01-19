@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-18T18:03:11-05:00</updated>
+ <updated>2019-01-18T19:11:33-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Real Time HTTP Strategies</title>
-   <link href="http://localhost:4000/blog/2019/01/18/real-time-http.html"/>
+   <link href="http://localhost:4000/web%20applications/real-time-http/"/>
    <updated>2019-01-18T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2019/01/18/real-time-http</id>
+   <id>http://localhost:4000/web%20applications/real-time-http</id>
    <content type="html">&lt;p&gt;Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.&lt;/p&gt;
 
 &lt;p&gt;Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.&lt;/p&gt;
@@ -66,9 +66,9 @@ Proxy servers buffer long responses likely causing missing information.&lt;/p&gt
  
  <entry>
    <title>Common Linux Command</title>
-   <link href="http://localhost:4000/blog/2019/01/06/linux-command.html"/>
+   <link href="http://localhost:4000/computer%20systems/linux-command/"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2019/01/06/linux-command</id>
+   <id>http://localhost:4000/computer%20systems/linux-command</id>
    <content type="html">&lt;h3 id=&quot;1-check-what-processes-are-using-a-certain-port-number&quot;&gt;1. Check what processes are using a certain port number&lt;/h3&gt;
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
 
@@ -94,9 +94,9 @@ Proxy servers buffer long responses likely causing missing information.&lt;/p&gt
  
  <entry>
    <title>Consistent Hashing</title>
-   <link href="http://localhost:4000/blog/2019/01/06/consistent-hashing.html"/>
+   <link href="http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing/"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2019/01/06/consistent-hashing</id>
+   <id>http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing</id>
    <content type="html">&lt;h2 id=&quot;problem-of-using-hash&quot;&gt;Problem of using hash&lt;/h2&gt;
 &lt;p&gt;In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate &lt;code class=&quot;highlighter-rouge&quot;&gt;hash(key) % node_number&lt;/code&gt;, so that we don’t iterate through all nodes to the find the key.&lt;br /&gt;
 But what if the node_number change, say adding a new node or remove an old node? Now every cache object needs to move, and in that period of data transfering, application can’t get data from cache. Here comes in the consistent hashing.&lt;/p&gt;
@@ -133,9 +133,9 @@ But what if the node_number change, say adding a new node or remove an old node?
  
  <entry>
    <title>Scaling Static Web Content&#58; Content Delivery Networks</title>
-   <link href="http://localhost:4000/blog/2019/01/06/CDN.html"/>
+   <link href="http://localhost:4000/web%20applications/CDN/"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2019/01/06/CDN</id>
+   <id>http://localhost:4000/web%20applications/CDN</id>
    <content type="html">&lt;p&gt;Actively distribute static content to edge servers throughout the Internet.&lt;br /&gt;
 –  e.g. Akamai.&lt;br /&gt;
 &lt;img src=&quot;/assets/images/i4.png&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
@@ -156,9 +156,9 @@ In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global 
  
  <entry>
    <title>Why 31 is chosen as multiplier in hashCode()</title>
-   <link href="http://localhost:4000/blog/2018/12/25/why-31.html"/>
+   <link href="http://localhost:4000/data%20structures%20and%20algorithms/why-31/"/>
    <updated>2018-12-25T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2018/12/25/why-31</id>
+   <id>http://localhost:4000/data%20structures%20and%20algorithms/why-31</id>
    <content type="html">&lt;ol&gt;
   &lt;li&gt;It’s a prime number. Prime number reduces collision. Even number causes information loss, as multiplication by 2 is equivalent to shifting.&lt;/li&gt;
   &lt;li&gt;31 can be optimized by JVM: 31 * i = (i « 5) - i&lt;/li&gt;
@@ -169,9 +169,9 @@ In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global 
  
  <entry>
    <title>Database</title>
-   <link href="http://localhost:4000/database/2018/12/23/Database-Interview.html"/>
+   <link href="http://localhost:4000/database/Database-Interview/"/>
    <updated>2018-12-23T00:00:00-05:00</updated>
-   <id>http://localhost:4000/database/2018/12/23/Database-Interview</id>
+   <id>http://localhost:4000/database/Database-Interview</id>
    <content type="html">&lt;h2 id=&quot;1-composite-index&quot;&gt;1. Composite index&lt;/h2&gt;
 &lt;p&gt;MySQL can only use one index in one query. If multiple columns appear in the search condition, MySQL will pick the most strict index, that is, the one that will retrive the least records. &lt;br /&gt;
 We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;
@@ -204,9 +204,9 @@ We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;
  
  <entry>
    <title>Camparable and Comparator</title>
-   <link href="http://localhost:4000/blog/2018/12/08/Comparable-and-Comparator.html"/>
+   <link href="http://localhost:4000/java/Comparable-and-Comparator/"/>
    <updated>2018-12-08T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2018/12/08/Comparable-and-Comparator</id>
+   <id>http://localhost:4000/java/Comparable-and-Comparator</id>
    <content type="html">&lt;p&gt;To sort an array of &lt;strong&gt;primitives&lt;/strong&gt;, we can simply use Arrays.sort method.&lt;br /&gt;
 To sort an array of &lt;strong&gt;objects&lt;/strong&gt;, the objects have to be &lt;strong&gt;Comparable&lt;/strong&gt;.&lt;/p&gt;
 
@@ -296,9 +296,9 @@ Therefore, we need to implement &lt;code class=&quot;highlighter-rouge&quot;&gt;
  
  <entry>
    <title>Quick Select</title>
-   <link href="http://localhost:4000/blog/2018/11/30/Quick-Select.html"/>
+   <link href="http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select/"/>
    <updated>2018-11-30T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2018/11/30/Quick-Select</id>
+   <id>http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select</id>
    <content type="html">&lt;p&gt;Average time complexity:
 &lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n) + T(n / 2) = O(n) + O(n / 2) + O(n / 4) + ... + O(1)&lt;/code&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n)&lt;/code&gt;&lt;/p&gt;
@@ -310,9 +310,9 @@ Therefore, we need to implement &lt;code class=&quot;highlighter-rouge&quot;&gt;
  
  <entry>
    <title>Bitwise Operation Tricks</title>
-   <link href="http://localhost:4000/blog/2018/11/21/bitwise-operation.html"/>
+   <link href="http://localhost:4000/computer%20systems/bitwise-operation/"/>
    <updated>2018-11-21T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2018/11/21/bitwise-operation</id>
+   <id>http://localhost:4000/computer%20systems/bitwise-operation</id>
    <content type="html">&lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;For any number n with only one bit of ‘1’ except 0
@@ -335,9 +335,9 @@ That’s why Java HashMap’s underlying array always has a length of a power of
  
  <entry>
    <title>Leetcode</title>
-   <link href="http://localhost:4000/blog/2018/11/19/leetcode.html"/>
+   <link href="http://localhost:4000/data%20structures%20and%20algorithms/leetcode/"/>
    <updated>2018-11-19T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2018/11/19/leetcode</id>
+   <id>http://localhost:4000/data%20structures%20and%20algorithms/leetcode</id>
    <content type="html">&lt;h3 id=&quot;322-coin-change&quot;&gt;322. Coin Change&lt;/h3&gt;
 &lt;p&gt;Key is to adopt an auxiliary array count[amount + 1].&lt;br /&gt;
 count[i] denotes the minimum coin count to get target value i.&lt;/p&gt;
@@ -767,9 +767,9 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
  
  <entry>
    <title>Computer Network</title>
-   <link href="http://localhost:4000/blog/2018/11/14/computer-network.html"/>
+   <link href="http://localhost:4000/computer%20systems/computer-network/"/>
    <updated>2018-11-14T00:00:00-05:00</updated>
-   <id>http://localhost:4000/blog/2018/11/14/computer-network</id>
+   <id>http://localhost:4000/computer%20systems/computer-network</id>
    <content type="html">&lt;h2 id=&quot;1-tcp-vs-udp&quot;&gt;1. TCP v.s. UDP&lt;/h2&gt;
 &lt;p&gt;Both send packets to IP address.&lt;br /&gt;
 TCP: Connection oriented. Guarantee order of packets, reliable, not missing or duplicate. Guarantee by sending aknowledgement. Resend if incorrect response.&lt;br /&gt;
@@ -846,9 +846,9 @@ Because in 3-way handshake, server can send ACK and SYN at the same time. ACK to
  
  <entry>
    <title>Iterable and Iterator</title>
-   <link href="http://localhost:4000/blog/2018/11/02/Iterator-and-Iterable.html"/>
+   <link href="http://localhost:4000/java/Iterator-and-Iterable/"/>
    <updated>2018-11-02T00:00:00-04:00</updated>
-   <id>http://localhost:4000/blog/2018/11/02/Iterator-and-Iterable</id>
+   <id>http://localhost:4000/java/Iterator-and-Iterable</id>
    <content type="html">&lt;h2 id=&quot;iterable&quot;&gt;Iterable&lt;/h2&gt;
 &lt;p&gt;A representation of a group of data that can be iterated.&lt;br /&gt;
 The data structure of this group of data needs to implement the Iterable interface. &lt;br /&gt;
@@ -931,9 +931,9 @@ Why do wu use nested classes?&lt;/p&gt;
  
  <entry>
    <title>Data Structures - Arrays</title>
-   <link href="http://localhost:4000/blog/2018/10/30/data-structures.html"/>
+   <link href="http://localhost:4000/data%20structures%20and%20algorithms/data-structures/"/>
    <updated>2018-10-30T00:00:00-04:00</updated>
-   <id>http://localhost:4000/blog/2018/10/30/data-structures</id>
+   <id>http://localhost:4000/data%20structures%20and%20algorithms/data-structures</id>
    <content type="html">&lt;hr /&gt;
 &lt;h2 id=&quot;manipulating-arrays&quot;&gt;Manipulating arrays&lt;/h2&gt;
 
@@ -1024,9 +1024,9 @@ Why do wu use nested classes?&lt;/p&gt;
  
  <entry>
    <title>Google's Map Reduce Engineer Round Table Discussion</title>
-   <link href="http://localhost:4000/blog/2018/10/30/MapReduce.html"/>
+   <link href="http://localhost:4000/big%20data/MapReduce/"/>
    <updated>2018-10-30T00:00:00-04:00</updated>
-   <id>http://localhost:4000/blog/2018/10/30/MapReduce</id>
+   <id>http://localhost:4000/big%20data/MapReduce</id>
    <content type="html">&lt;p&gt;Map: Applicational function to every single item&lt;/p&gt;
 
 &lt;p&gt;Reduce: Aggregation of those results of the applicational function&lt;/p&gt;

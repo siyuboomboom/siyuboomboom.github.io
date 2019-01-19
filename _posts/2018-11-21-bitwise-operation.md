@@ -2,7 +2,7 @@
 layout: post
 title: Bitwise Operation Tricks
 categories:
-- blog
+- Computer Systems
 ---
 
 1. For any number n with only one bit of '1' except 0

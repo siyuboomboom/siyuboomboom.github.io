@@ -2,7 +2,7 @@
 layout: post
 title: Data Structures - Arrays
 categories:
-- blog
+- Data Structures and Algorithms
 ---
 
 

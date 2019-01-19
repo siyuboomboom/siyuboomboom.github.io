@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siyu Tan - Data Structures - Arrays</title>
+  <meta name="author" content="Siyu Tan" />
+  <meta name="description" content="The blog of Siyu Tan" />
+  <link rel="canonical" href="http://localhost:4000/data%20structures%20and%20algorithms/data-structures/" />
+
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="alternate" type="application/atom+xml" title="Siyu Tan" href="http://localhost:4000/atom.xml" />
+
+  <link rel="stylesheet" href="/assets/css/all.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="four columns sidebar">
+      <nav>
+  <h1>Hi.</h1>
+  <a href="/">
+    
+    <img class="avatar" src="/logo.jpeg" id="logo" alt="Blog logo"/>
+    
+  </a>
+  <h2>I'm <a href="/">Siyu Tan</a>.</h2>
+  <div id="bio">
+    <p><a href="/">Blog Posts</a></p>
+    
+        
+        <a href="/">Big Data</a><br>
+    
+        
+        <a href="/">Data Structures and Algorithms</a><br>
+    
+        
+        <a href="/">Java</a><br>
+    
+        
+        <a href="/">Computer Systems</a><br>
+    
+        
+        <a href="/">Database</a><br>
+    
+        
+        <a href="/">Web Applications</a><br>
+    
+        
+        <a href="/">Distributed Systems</a><br>
+    
+  </div>
+  
+  <div id="social">
+    Follow me:
+<div id="stalker">
+  
+  <a title="siyuboomboom on Github" href="https://github.com/siyuboomboom">
+    <i class="fa fa-github-square"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a title="Siyu Tan on Facebook" href="https://facebook.com/sherry.tan.92351">
+    <i class="fa fa-facebook-square"></i>
+  </a>
+  
+
+  
+
+  
+  <a title="Siyu Tan on LinkedIn" href="https://www.linkedin.com/in/siyutan">
+    <i class="fa fa-linkedin-square"></i>
+  </a>
+  
+
+  
+
+  
+</div>
+
+  </div>
+</nav>
+
+    </div>
+
+    <div class="eleven columns content">
+      <p class="meta">
+  October 30, 2018 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Data Structures - Arrays</h1>
+
+<div class="post-categories">
+  
+  Categories: 
+  
+  <a href="/categories/#Data Structures and Algorithms">Data Structures and Algorithms</a>
+  
+  
+</div>
+
+<br>
+<div id="post">
+  <hr />
+<h2 id="manipulating-arrays">Manipulating arrays</h2>
+
+<h3 id="1-one-method---clone--one-immutable-field---length">1. one method - <code class="highlighter-rouge">clone()</code> + one immutable field - <code class="highlighter-rouge">length</code></h3>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">g</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">};</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">h</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="na">clone</span><span class="o">()</span> <span class="c1">// shallow copy</span>
+<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="c1">// 3</span></code></pre></figure>
+
+<p>clone() is <strong>shallow copy</strong>, which means every element’s <strong>address</strong> in the original array is copied. If any changes made to the original array’s object element, new array will also change.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">aList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">aList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="n">Object</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="n">aList</span><span class="o">,</span> <span class="mi">4</span><span class="o">};</span>
+<span class="n">Object</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+
+<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">bList</span> <span class="o">=</span> <span class="o">(</span><span class="n">List</span><span class="o">)</span> <span class="n">b</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+<span class="n">bList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span> <span class="c1">// [1, 2]</span></code></pre></figure>
+
+<p>If not using <code class="highlighter-rouge">@SuppressWarnings("unchecked")</code>, downcast will cause a warning:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nl">Note:</span> <span class="n">HelloWorld</span><span class="o">.</span><span class="na">java</span> <span class="n">uses</span> <span class="n">unchecked</span> <span class="n">or</span> <span class="n">unsafe</span> <span class="n">operations</span><span class="o">.</span>
+<span class="nl">Note:</span> <span class="n">Recompile</span> <span class="n">with</span> <span class="o">-</span><span class="nl">Xlint:</span><span class="n">unchecked</span> <span class="k">for</span> <span class="n">details</span><span class="o">.</span>  </code></pre></figure>
+
+<p>Arrays.equals() will use equals() method to check if elements are equal, not just compare the addresses of the elements</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">course</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"DSAP"</span><span class="o">);</span>
+<span class="n">String</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="n">course</span><span class="o">};</span>
+<span class="n">Object</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="n">b</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span> <span class="c1">// true</span>
+<span class="n">b</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s">"DSAP"</span><span class="o">;</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="n">b</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span> <span class="c1">// false</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">));</span> <span class="c1">// true</span></code></pre></figure>
+
+<p><br /></p>
+<h3 id="2-static-methods-in-javautilarrays-class">2. static methods in java.util.Arrays class</h3>
+
+<p>Compare two arrays:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">;</span>
+<span class="kt">boolean</span> <span class="n">res</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span></code></pre></figure>
+
+<p>The two arrays are considered equal if both arrays contain the same number of elements, and all corresponding pairs of elements in the two arrays are equal.Two objects e1 and e2 are considered equal if (e1==null ? e2==null : e1.equals(e2)). Two array references are considered equal if both are null.</p>
+
+<p>Sort an array:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span></code></pre></figure>
+
+<p>Copy an array:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">newArray</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">original</span><span class="o">,</span> <span class="kt">int</span> <span class="n">newLength</span><span class="o">);</span> <span class="c1">// shallow copy</span></code></pre></figure>
+
+<p>newLength can be bigger than original.length. newArray will have length of newLength.</p>
+
+<p>Print an array:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">};</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">array</span><span class="o">));</span> <span class="c1">// [1, 2]</span></code></pre></figure>
+
+<p>A comparison: ArrayList and LinkedList can be printed directly:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="n">List</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span> <span class="c1">// [1, 2]</span></code></pre></figure>
+
+<p><br /></p>
+<h3 id="3-systemarraycopy">3. System.arraycopy()</h3>
+
+<p>Another more flexible way to copy an array:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span><span class="o">[]</span> <span class="n">e</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">};</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+<span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="c1">// shallow copy, f: {1, 2, 3, 0}</span></code></pre></figure>
+
+<p><br /></p>
+
+<p>Resource:</p>
+<ol>
+  <li><a href="https://www.tutorialspoint.com/java/util/arrays_equals_object.htm">https://www.tutorialspoint.com/java/util/arrays_equals_object.htm</a></li>
+</ol>
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
+    
+    <li>
+      <span>18 Jan 2019 &raquo;</span> <a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a>
+    </li>
+    
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/computer%20systems/linux-command/">Common Linux Command</a>
+    </li>
+    
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/distributed%20systems/web%20applications/consistent-hashing/">Consistent Hashing</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <div class="disclaimer">
+  
+  <p>
+    The postings on this site are my own and don't necessarily represent my 
+    employer’s positions, strategies or opinions.
+  </p>
+  
+
+  <p>
+    © Siyu Tan, 2019 &mdash; built with <a href="http://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/swanson/lagom">Lagom theme</a>
+  </p>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-xxxx-x']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

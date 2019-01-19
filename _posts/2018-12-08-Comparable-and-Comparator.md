@@ -2,7 +2,7 @@
 layout: post
 title: Camparable and Comparator
 categories:
-- blog
+- Java
 ---
 
 To sort an array of **primitives**, we can simply use Arrays.sort method.  

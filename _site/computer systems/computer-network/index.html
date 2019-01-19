@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siyu Tan - Computer Network</title>
+  <meta name="author" content="Siyu Tan" />
+  <meta name="description" content="The blog of Siyu Tan" />
+  <link rel="canonical" href="http://localhost:4000/computer%20systems/computer-network/" />
+
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="alternate" type="application/atom+xml" title="Siyu Tan" href="http://localhost:4000/atom.xml" />
+
+  <link rel="stylesheet" href="/assets/css/all.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="four columns sidebar">
+      <nav>
+  <h1>Hi.</h1>
+  <a href="/">
+    
+    <img class="avatar" src="/logo.jpeg" id="logo" alt="Blog logo"/>
+    
+  </a>
+  <h2>I'm <a href="/">Siyu Tan</a>.</h2>
+  <div id="bio">
+    <p><a href="/">Blog Posts</a></p>
+    
+        
+        <a href="/">Big Data</a><br>
+    
+        
+        <a href="/">Data Structures and Algorithms</a><br>
+    
+        
+        <a href="/">Java</a><br>
+    
+        
+        <a href="/">Computer Systems</a><br>
+    
+        
+        <a href="/">Database</a><br>
+    
+        
+        <a href="/">Web Applications</a><br>
+    
+        
+        <a href="/">Distributed Systems</a><br>
+    
+  </div>
+  
+  <div id="social">
+    Follow me:
+<div id="stalker">
+  
+  <a title="siyuboomboom on Github" href="https://github.com/siyuboomboom">
+    <i class="fa fa-github-square"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a title="Siyu Tan on Facebook" href="https://facebook.com/sherry.tan.92351">
+    <i class="fa fa-facebook-square"></i>
+  </a>
+  
+
+  
+
+  
+  <a title="Siyu Tan on LinkedIn" href="https://www.linkedin.com/in/siyutan">
+    <i class="fa fa-linkedin-square"></i>
+  </a>
+  
+
+  
+
+  
+</div>
+
+  </div>
+</nav>
+
+    </div>
+
+    <div class="eleven columns content">
+      <p class="meta">
+  November 14, 2018 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Computer Network</h1>
+
+<div class="post-categories">
+  
+  Categories: 
+  
+  <a href="/categories/#Computer Systems">Computer Systems</a>
+  
+  
+</div>
+
+<br>
+<div id="post">
+  <h2 id="1-tcp-vs-udp">1. TCP v.s. UDP</h2>
+<p>Both send packets to IP address.<br />
+TCP: Connection oriented. Guarantee order of packets, reliable, not missing or duplicate. Guarantee by sending aknowledgement. Resend if incorrect response.<br />
+UDP: Quick but not reliable. No aknowledgement.</p>
+
+<h2 id="2-tcp-3-way-handshake">2. TCP 3-way handshake</h2>
+<p>TCP Header format:
+<img src="https://s3.notfalse.net/wp-content/uploads/2016/12/12003643/TCP-Header-Format.png" height="400" /></p>
+
+<p><strong>SYN</strong> (Synchronize sequence numbers), <strong>ACK</strong> (Acknowledgment field significant): <strong>control bit</strong> in TCP packet header (0 or 1)
+<br /><br />
+1st way: SYN = 1 &amp;&amp; ACK = 0: a connection request, SYN is to synchronise the ISN of the data the client is going to send (client’s ISN) <br />
+2nd way: SYN = 1 &amp;&amp; ACK = 1: a connection request acception, SYN is server’s ISN
+3rd way: SYN = 0 &amp;&amp; ACK = 1  <br />
+After that: SYN = 0 &amp;&amp; ACK = 1
+<br /><br />
+<strong>Sequence Number</strong><br />
+32 bit<br />
+if SYN = 0: sequence number of the first octet (one byte) of data. <br />
+if SYN = 1: ISN (initial sequence number, unique to each connection and device), first octet’s sequence number is set to ISN + 1.</p>
+
+<p><strong>Acknowledgment Number</strong>
+If ACK = 1: Ack number = ISN + 1 (first octet’s seq, i.e. the sequence number of the data it’s expecting to receive)</p>
+
+<p><img src="https://s3.notfalse.net/wp-content/uploads/2016/12/24160105/Three-way-Handshake-ex2.png" height="400" /></p>
+
+<p>Why 3-way?<br />
+1st and 2nd: to ensure the server can receive data and respond correctly.  <br />
+2nd and 3rd: to ensure the client can receive data and respond correctly.  <br />
+To prevent a stale (eg. delayed) connection request from establishing connection.</p>
+
+<h2 id="3-tcp-4-way-termination">3. TCP 4-way termination</h2>
+<ol>
+  <li>Client tells server he wants to close the connection</li>
+  <li>Server tells client he get the idea but he’s not ready and he needs to ensure data are all sent</li>
+  <li>Server is ready and tells client he can close the connection</li>
+  <li>Client tells server he get the idea. After waiting a while without receiving response, client close the connection.</li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/HIT-Alibaba/interview/master/img/tcp-connection-closed-four-way-handshake.png" height="400" /></p>
+
+<p>Why one more way than 3-way handshake?<br />
+Because in 3-way handshake, server can send ACK and SYN at the same time. ACK to aknowledge that he gets the info, SYN to synchronize the ISN of the data the server is going to send.</p>
+
+<h2 id="4-socket">4. Socket</h2>
+<p>Socket contains information about:</p>
+<ol>
+  <li>Connection protocol</li>
+  <li>Source IP address</li>
+  <li>Source process port</li>
+  <li>Destination IP address</li>
+  <li>Destination process port</li>
+</ol>
+
+<h2 id="5-why-tcp-is-stateful-and-http-is-stateless">5. Why TCP is stateful and HTTP is stateless?</h2>
+<p><strong>TCP</strong> maintains state in the form of a <strong>window size</strong> (endpoints tell each other how much data they’re ready to receive) and <strong>packet order</strong> (endpoints must confirm to each other when they receive a packet from the other). This state (how much bytes the other guy can receive, and whether or not he did receive the last packet) allows TCP to be <strong>reliable</strong> even over inherently non-reliable protocols.</p>
+
+<p><strong>HTTP</strong> is stateless to improve performance, intended to minimize the time that’d otherwise be spent reestablishing a connection for each request. The stateless design simplifies the server design because there is no need to dynamically allocate storage to deal with conversations in progress. If a client session dies in mid-transaction, no part of the system needs to be responsible for cleaning up the present state of the server.</p>
+
+<p>A <strong>disadvantage of statelessness</strong> is that it may be necessary to include additional information in every request, and this extra information will need to be interpreted by the server.</p>
+
+<p>While HTTP and HTTPS are essentially stateless (each request is a valid standalone request per the protocol), <strong>applications</strong> built on top of HTTP and HTTPS aren’t necessarily stateless. For instance, a website can require you to visit a login page before sending a message. Even though the request where the client sends a message is a valid standalone request, the application will not accept it unless the client authenticated herself before. This means that the application <em>implements</em> state over HTTP.</p>
+
+<h2 id="source">Source:</h2>
+<ol>
+  <li><a href="https://notfalse.net/7/three-way-handshake">https://notfalse.net/7/three-way-handshake</a></li>
+  <li><a href="https://hit-alibaba.github.io/interview/basic/network/TCP.html">https://hit-alibaba.github.io/interview/basic/network/TCP.html</a></li>
+  <li><a href="https://stackoverflow.com/questions/19899236/is-tcp-protocol-stateless-or-not">https://stackoverflow.com/questions/19899236/is-tcp-protocol-stateless-or-not</a></li>
+  <li><a href="https://stackoverflow.com/questions/13200152/why-is-it-said-that-http-is-a-stateless-protocol">https://stackoverflow.com/questions/13200152/why-is-it-said-that-http-is-a-stateless-protocol</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Stateless_protocol">https://en.wikipedia.org/wiki/Stateless_protocol</a></li>
+</ol>
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
+    
+    <li>
+      <span>18 Jan 2019 &raquo;</span> <a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a>
+    </li>
+    
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/computer%20systems/linux-command/">Common Linux Command</a>
+    </li>
+    
+    <li>
+      <span>06 Jan 2019 &raquo;</span> <a href="/distributed%20systems/web%20applications/consistent-hashing/">Consistent Hashing</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <div class="disclaimer">
+  
+  <p>
+    The postings on this site are my own and don't necessarily represent my 
+    employer’s positions, strategies or opinions.
+  </p>
+  
+
+  <p>
+    © Siyu Tan, 2019 &mdash; built with <a href="http://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/swanson/lagom">Lagom theme</a>
+  </p>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-xxxx-x']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

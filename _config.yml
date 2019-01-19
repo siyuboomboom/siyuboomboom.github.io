@@ -1,6 +1,7 @@
 # General Jekyll Config
 highlighter: rouge
-url: http://example.com
+url: http://www.siyutan.com
 lsi: false
 exclude: [LICENSE, CNAME, README.md, .gitignore, Gemfile, Gemfile.lock]
 encoding: utf-8
+permalink: /:categories/:title/

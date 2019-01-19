@@ -2,7 +2,7 @@
 layout: post
 title: Real Time HTTP Strategies
 categories:
-- blog
+- Web Applications
 ---
 
 Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.
