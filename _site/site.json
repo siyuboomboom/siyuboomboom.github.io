@@ -25,10 +25,10 @@
 "url": "/web%20applications/CDN/"},
 
 {"date": "Tue, 25 Dec 2018 00:00:00 -0500",
-"categories": ["Data Structures and Algorithms"],
+"categories": ["Java"],
 "tags": [],
 "title": "Why 31 is chosen as multiplier in hashCode()",
-"url": "/data%20structures%20and%20algorithms/why-31/"},
+"url": "/java/why-31/"},
 
 {"date": "Sun, 23 Dec 2018 00:00:00 -0500",
 "categories": ["Database"],
@@ -75,8 +75,8 @@
 {"date": "Tue, 30 Oct 2018 00:00:00 -0400",
 "categories": ["Data Structures and Algorithms"],
 "tags": [],
-"title": "Data Structures - Arrays",
-"url": "/data%20structures%20and%20algorithms/data-structures/"},
+"title": "Arrays",
+"url": "/data%20structures%20and%20algorithms/array/"},
 
 {"date": "Tue, 30 Oct 2018 00:00:00 -0400",
 "categories": ["Big Data"],

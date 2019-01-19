@@ -12,7 +12,7 @@
     <p><a href="/">Blog Posts</a></p>
     {% for category in site.categories %}
         {% capture category_name %}{{ category | first }}{% endcapture %}
-        <a href="/">{{ category_name }}</a><br>
+        <a href="/">{{ category_name }} ({{site.categories[category_name].size}})</a><br>
     {% endfor %}
   </div>
   
