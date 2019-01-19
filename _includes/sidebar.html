@@ -9,11 +9,13 @@
   </a>
   <h2>I'm <a href="/">{{ site.data.theme.name }}</a>.</h2>
   <div id="bio">
-    <p><a href="/">Blog Posts</a></p>
-    {% for category in site.categories %}
-        {% capture category_name %}{{ category | first }}{% endcapture %}
-        <a href="/">{{ category_name }} ({{site.categories[category_name].size}})</a><br>
-    {% endfor %}
+    <p>Oops! You found my secret website.. Have fun!!!</p>
+    <p>
+    <a href="/chronological">All Posts</a><br>
+    <a href="/">Categories</a>
+    </p>
+    <p></p>
+    <p><a href="/about">About Me</a></p>
   </div>
   
   <div id="social">

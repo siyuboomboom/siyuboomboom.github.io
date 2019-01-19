@@ -4,11 +4,11 @@ title: Blog Posts
 ---
 
 <div id="home">
-  <h2><i class="fa fa-bookmark"></i> Blog Posts</h2>
+  <h2><i class="fa fa-bookmark"></i> Categories</h2>
 
   {% for category in site.categories %}
     {% capture category_name %}{{ category | first }}{% endcapture %}
-    <h4 class="category-head">{{ category_name }}</h4>
+    <h3 class="category-head">{{ category_name }}</h3>
 
     <ul id="blog-posts" class="posts">
         {% for post in site.categories[category_name] %}
