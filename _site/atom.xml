@@ -4,13 +4,35 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-18T20:24:39-05:00</updated>
+ <updated>2019-01-20T21:12:55-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
    <email>siyutan@cmu.edu</email>
  </author>
 
+ 
+ <entry>
+   <title>Encapsulate and Reuse Query Logic</title>
+   <link href="http://localhost:4000/database/reuse-query/"/>
+   <updated>2019-01-20T00:00:00-05:00</updated>
+   <id>http://localhost:4000/database/reuse-query</id>
+   <content type="html">&lt;h3 id=&quot;1-views&quot;&gt;1. Views&lt;/h3&gt;
+&lt;h3 id=&quot;2-user-defined-function&quot;&gt;2. User Defined Function&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Scalar Function&lt;/li&gt;
+  &lt;li&gt;Inline Table Valued Function
+Parameterized views.&lt;/li&gt;
+  &lt;li&gt;Multi-statement Table Valued Function&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;3-temporary-tables&quot;&gt;3. Temporary Tables&lt;/h3&gt;
+&lt;h3 id=&quot;4-table-variables&quot;&gt;4. Table Variables&lt;/h3&gt;
+
+&lt;h3 id=&quot;resource&quot;&gt;Resource:&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.quora.com/What-is-difference-between-inline-table-valued-and-multi-statement-functions-in-SQL&quot;&gt;https://www.quora.com/What-is-difference-between-inline-table-valued-and-multi-statement-functions-in-SQL&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Real Time HTTP Strategies</title>
@@ -168,10 +190,10 @@ In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global 
  </entry>
  
  <entry>
-   <title>Database</title>
-   <link href="http://localhost:4000/database/Database-Interview/"/>
+   <title>Index</title>
+   <link href="http://localhost:4000/database/index/"/>
    <updated>2018-12-23T00:00:00-05:00</updated>
-   <id>http://localhost:4000/database/Database-Interview</id>
+   <id>http://localhost:4000/database/index</id>
    <content type="html">&lt;h2 id=&quot;1-composite-index&quot;&gt;1. Composite index&lt;/h2&gt;
 &lt;p&gt;MySQL can only use one index in one query. If multiple columns appear in the search condition, MySQL will pick the most strict index, that is, the one that will retrive the least records. &lt;br /&gt;
 We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;

@@ -5,10 +5,18 @@ permalink: /chronological/
 ---
 
 <div id="home">
-  <h2><i class="fa fa-bookmark"></i> Blog Posts</h2>
-  <ul id="blog-posts" class="posts">
+    <h2><i class="fa fa-bookmark"></i> Blog Posts</h2>
+
     {% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }} &raquo;</span><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% assign currentdate = post.date | date: "%Y" %}
+      {% if currentdate != date %}
+        {% unless forloop.first %}</ul>{% endunless %}
+        <h3 id="y{{post.date | date: "%Y"}}">{{ currentdate }}</h3>
+        <ul id="blog-posts" class="posts">
+        {% assign date = currentdate %}
+      {% endif %}
+        <li><span>{{ post.date | date_to_string }} &raquo;</span><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% if forloop.last %}</ul>{% endif %}
     {% endfor %}
-  </ul>
+
 </div>

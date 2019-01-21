@@ -1,5 +1,11 @@
 [
 
+{"date": "Sun, 20 Jan 2019 00:00:00 -0500",
+"categories": ["Database"],
+"tags": [],
+"title": "Encapsulate and Reuse Query Logic",
+"url": "/database/reuse-query/"},
+
 {"date": "Fri, 18 Jan 2019 00:00:00 -0500",
 "categories": ["Web Applications"],
 "tags": [],
@@ -33,8 +39,8 @@
 {"date": "Sun, 23 Dec 2018 00:00:00 -0500",
 "categories": ["Database"],
 "tags": [],
-"title": "Database",
-"url": "/database/Database-Interview/"},
+"title": "Index",
+"url": "/database/index/"},
 
 {"date": "Sat, 08 Dec 2018 00:00:00 -0500",
 "categories": ["Java"],
