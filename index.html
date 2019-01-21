@@ -6,7 +6,7 @@ title: Blog Posts
 <div id="home">
   <h2><i class="fa fa-bookmark"></i> Categories</h2>
 
-  {% for category in site.categories %}
+  {% for category in site.categories reversed %}
     {% capture category_name %}{{ category | first }}{% endcapture %}
     <h3 class="category-head">{{ category_name }}</h3>
 
