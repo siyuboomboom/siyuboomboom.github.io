@@ -12,7 +12,8 @@ categories:
 Parameterized views. 
 3. Multi-statement Table Valued Function
 
+### 3. Temporary Tables
+### 4. Table Variables
 
-### 3. Multi-Statement Table Valued Functions
-### 4. Temporary Tables
-### 5. Table Variables
+### Resource:
+<https://www.quora.com/What-is-difference-between-inline-table-valued-and-multi-statement-functions-in-SQL>
