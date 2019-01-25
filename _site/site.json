@@ -1,5 +1,17 @@
 [
 
+{"date": "Fri, 25 Jan 2019 00:00:00 -0500",
+"categories": ["Search Engines"],
+"tags": [],
+"title": "Information Retrieval Study Notes",
+"url": "/search%20engines/search-engines-note/"},
+
+{"date": "Tue, 22 Jan 2019 00:00:00 -0500",
+"categories": ["Data Structures and Algorithms"],
+"tags": [],
+"title": "Leetcode",
+"url": "/data%20structures%20and%20algorithms/leetcode/"},
+
 {"date": "Sun, 20 Jan 2019 00:00:00 -0500",
 "categories": ["Database"],
 "tags": [],
@@ -59,12 +71,6 @@
 "tags": [],
 "title": "Bitwise Operation Tricks",
 "url": "/computer%20systems/bitwise-operation/"},
-
-{"date": "Mon, 19 Nov 2018 00:00:00 -0500",
-"categories": ["Data Structures and Algorithms"],
-"tags": [],
-"title": "Leetcode",
-"url": "/data%20structures%20and%20algorithms/leetcode/"},
 
 {"date": "Wed, 14 Nov 2018 00:00:00 -0500",
 "categories": ["Computer Systems"],

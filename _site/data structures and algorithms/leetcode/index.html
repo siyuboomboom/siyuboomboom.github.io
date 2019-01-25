@@ -84,7 +84,7 @@
 
     <div class="eleven columns content">
       <p class="meta">
-  November 19, 2018 
+  January 22, 2019 
   <a href="/">
     <i class="home fa fa-home"></i>
   </a>
@@ -123,6 +123,27 @@ count[i] denotes the minimum coin count to get target value i.</p>
   <li>iterate through each coin</li>
   <li>find the minimum count for each amount - coin in the count array before the target amount</li>
 </ol>
+
+<hr />
+<h3 id="349-intersection-of-two-arrays">349. Intersection of Two Arrays</h3>
+<p>array N length: n <br />
+array M length: m <br />
+n &lt; m <br />
+<strong>Approach 1: HashSet</strong><br />
+Add the smaller array into HashSet so that the space occupied is smaller.<br />
+Time Complexity: <strong>O(n + m)</strong><br />
+Space Complexity: <strong>O(n)</strong></p>
+
+<p><strong>Approach 2: sort + binary search</strong><br />
+sort the smaller array and use binary search in it to find each element of the larger array.<br />
+Better than approach 1 if array is too big to fit in memory
+Time Complexity: <strong>O(nlogn + mlogn)</strong><br />
+Space Complexity: <strong>O(1)</strong></p>
+
+<p><strong>Approach 3: sort + merge sorted arrays</strong><br />
+Time Complexity: <strong>O(nlogn + mlogm)</strong><br />
+Space Complexity: <strong>O(1)</strong><br />
+Not as good as approach 2.</p>
 
 <hr />
 <h3 id="88-merge-sorted-array">88. Merge Sorted Array</h3>
@@ -535,15 +556,15 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
   <ul class="posts">
     
     <li>
+      <span>25 Jan 2019 &raquo;</span> <a href="/search%20engines/search-engines-note/">Information Retrieval Study Notes</a>
+    </li>
+    
+    <li>
       <span>20 Jan 2019 &raquo;</span> <a href="/database/reuse-query/">Encapsulate and Reuse Query Logic</a>
     </li>
     
     <li>
       <span>18 Jan 2019 &raquo;</span> <a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a>
-    </li>
-    
-    <li>
-      <span>06 Jan 2019 &raquo;</span> <a href="/computer%20systems/linux-command/">Common Linux Command</a>
     </li>
     
   </ul>

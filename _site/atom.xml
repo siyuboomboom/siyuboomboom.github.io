@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-20T21:19:52-05:00</updated>
+ <updated>2019-01-25T14:33:14-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -13,352 +13,45 @@
 
  
  <entry>
-   <title>Encapsulate and Reuse Query Logic</title>
-   <link href="http://localhost:4000/database/reuse-query/"/>
-   <updated>2019-01-20T00:00:00-05:00</updated>
-   <id>http://localhost:4000/database/reuse-query</id>
-   <content type="html">&lt;h3 id=&quot;1-views&quot;&gt;1. Views&lt;/h3&gt;
-&lt;h3 id=&quot;2-user-defined-function&quot;&gt;2. User Defined Function&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Scalar Function&lt;/li&gt;
-  &lt;li&gt;Inline Table Valued Function
-Parameterized views.&lt;/li&gt;
-  &lt;li&gt;Multi-statement Table Valued Function&lt;/li&gt;
-&lt;/ol&gt;
+   <title>Information Retrieval Study Notes</title>
+   <link href="http://localhost:4000/search%20engines/search-engines-note/"/>
+   <updated>2019-01-25T00:00:00-05:00</updated>
+   <id>http://localhost:4000/search%20engines/search-engines-note</id>
+   <content type="html">&lt;h2 id=&quot;1-boolean-retrieval&quot;&gt;1 Boolean Retrieval&lt;/h2&gt;
 
-&lt;h3 id=&quot;3-temporary-tables&quot;&gt;3. Temporary Tables&lt;/h3&gt;
-&lt;h3 id=&quot;4-table-variables&quot;&gt;4. Table Variables&lt;/h3&gt;
+&lt;p&gt;To search for words in a number of documents, a most intuitive way is to scan through the documents and check if the words being searched exist. However, if the number of documents is very big, or if we want to do more flexible search, this is not very efficient.&lt;/p&gt;
 
-&lt;h3 id=&quot;resource&quot;&gt;Resource:&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.quora.com/What-is-difference-between-inline-table-valued-and-multi-statement-functions-in-SQL&quot;&gt;https://www.quora.com/What-is-difference-between-inline-table-valued-and-multi-statement-functions-in-SQL&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Real Time HTTP Strategies</title>
-   <link href="http://localhost:4000/web%20applications/real-time-http/"/>
-   <updated>2019-01-18T00:00:00-05:00</updated>
-   <id>http://localhost:4000/web%20applications/real-time-http</id>
-   <content type="html">&lt;p&gt;Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.&lt;/p&gt;
+&lt;p&gt;One way to speed up the process is to make changes to the documents themselves, i.e. indexing. We can extract words from all the documents to form a set of words. A table can be used to describe the relationship between these words and all the documents, where rows are words, columns are documents, entries denote whether the word appears in the document.&lt;/p&gt;
 
-&lt;p&gt;Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.&lt;/p&gt;
+&lt;p&gt;However, this table will be too sparse since the collection of words is very large, most words don’t appear in a certain document. An alternative way is to store the relationship in a more unstructured way than a table. Each word can be mapped to a list in which elements denote the ID of the document that the word appears. After all, there’s no need to store both kinds of documents that whether or not contain the word. One kind is stored while the other is implicitly suggested as it’s a Boolean relationship.&lt;/p&gt;
 
-&lt;h3 id=&quot;1-polling&quot;&gt;1. Polling&lt;/h3&gt;
-&lt;p&gt;Client polls server for new information once in a while.&lt;/p&gt;
+&lt;p&gt;These two approaches suit well on Boolean queries where terms are organized by operators OR, AND, NOT. Take AND as an example. If a list of query terms is organized by AND operators, the most efficient way to get the result documents is to make the intermediate result as small as possible. The intermediate result is calculated as the intersection of two lists of two words. To make the intersection small, we need to pick two shortest lists.&lt;/p&gt;
 
-&lt;p&gt;Pros:&lt;br /&gt;
-Easy to program server.&lt;/p&gt;
+&lt;h2 id=&quot;2-statistical-properties-of-terms&quot;&gt;2 Statistical properties of terms&lt;/h2&gt;
+&lt;p&gt;Heap’s Law states that the relationship between log of distinct terms and log of all terms is linear. It indicates that as the size of collection grows, the size of dictionary can grow to a very large size instead of to an upper limit.&lt;/p&gt;
 
-&lt;p&gt;Cons:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;it might be too frequent causing unnecessary network traffic&lt;/li&gt;
-  &lt;li&gt;it might be too infrequent causing missing information&lt;/li&gt;
-  &lt;li&gt;requests and responses contain exactly same header data causing unnecessary data transmission&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Zipf’s Law states the relationship between frequency of a term and its frequency rank.&lt;/p&gt;
 
-&lt;p&gt;Application:&lt;br /&gt;
-Small applications&lt;/p&gt;
+&lt;h2 id=&quot;3-positional-postings-and-phrase-queries&quot;&gt;3 Positional postings and phrase queries&lt;/h2&gt;
+&lt;p&gt;Considering only single words in queries is not enough. It’s more likely for people to search for a phrase or a combination of words.&lt;/p&gt;
 
-&lt;h3 id=&quot;2-long-polling&quot;&gt;2. Long polling&lt;/h3&gt;
-&lt;p&gt;When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.&lt;/p&gt;
+&lt;p&gt;To take such phrase queries into consideration, one intuitive thought is to expand the dictionary and add phrases into it.  We can consider each pair of consecutive words in the document as a phrase and add it into the dictionary. This is biword indexing. Of course, the phrase length can be greater than 2, so we can add those phrases of variable length as well. Sometimes there are function words in phrases such as “of”, “on”, “for”, like “votes for the treaty”. We can classify words as function words and nonfunctional words. When extracting phrases from a document, just skip over the nonfunction words.&lt;/p&gt;
 
-&lt;p&gt;Pros:&lt;br /&gt;
-Reduces a large amount of useless pollings when new information are infrequent.&lt;/p&gt;
+&lt;p&gt;Obviously, this approach expands the dictionary to a very large extent. Here’s where positioning index comes in. Keeping the dictionary containing only single words, instead of just recording document ID for each appearance of the word, we can also record the positions and frequency of the word in each document. In this way, by calculating the offset of the words in a query phrase and comparing it with the offset between positions of the words in dictionary, we get to know whether this phrase appears in the document or not. To optimize the merge process, we should start with merging two least frequent words so that the intermediate result is small.&lt;/p&gt;
 
-&lt;p&gt;Cons:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Hard to program&lt;/li&gt;
-  &lt;li&gt;Connections are hold by server when no new information causing resources waste.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Positioning index also expands the size of the index. Instead of recording appearances of the word in documents, we also record each appearance of the word within one document. Hence, the size of the index is proportional to the size of the total number of words in all documents instead of total number of documents.&lt;/p&gt;
 
-&lt;p&gt;Application:&lt;br /&gt;
-WebQQ, Facebook IM&lt;/p&gt;
-
-&lt;h3 id=&quot;3-streaming&quot;&gt;3. Streaming&lt;/h3&gt;
-&lt;p&gt;Browser only sends one request.
-Drawbacks:
-Proxy servers buffer long responses likely causing missing information.&lt;/p&gt;
+&lt;p&gt;A combination can be utilized of positioning index and phrase index. Merging two words in a commonly used phrase is expensive since we need to find the intersection of the posting lists of the two words and compare the offset of the positions of the two words in the intersection documents with the offset in the query. If each word in a phrase is highly frequent, this process can be extremely slow since the posting list of each word is quite long. If each single word in a phrase is frequent while the phrase itself is less frequent, like Michael Jackson, it’s more efficient to include the phrase in dictionary. In contrast, it’s less efficient to include a phrase with infrequent single word, like Barack Obama, since the appearance of either Barack or Obama highly likely suggests the appearance of the phrase Barack Obama.&lt;/p&gt;
 
 &lt;h3 id=&quot;sources&quot;&gt;Sources:&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.pubnub.com/blog/2014-12-01-http-long-polling/&quot;&gt;https://www.pubnub.com/blog/2014-12-01-http-long-polling/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Common Linux Command</title>
-   <link href="http://localhost:4000/computer%20systems/linux-command/"/>
-   <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/computer%20systems/linux-command</id>
-   <content type="html">&lt;h3 id=&quot;1-check-what-processes-are-using-a-certain-port-number&quot;&gt;1. Check what processes are using a certain port number&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-check-what-port-number-is-being-used-by-a-process&quot;&gt;2. Check what port number is being used by a process&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Get pid
-&lt;code class=&quot;highlighter-rouge&quot;&gt;ps -aux | grep &amp;lt;process name&amp;gt;&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Get port number using pid
-&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;pid&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;3-nohup&quot;&gt;3. nohup&lt;/h2&gt;
-&lt;p&gt;a POSIX command to ignore the HUP (hangup) signal.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nohup command &amp;amp;&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;4-ls&quot;&gt;4. ls&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -a&lt;/code&gt; list files including hidden ones starting with ‘.’ &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -l&lt;/code&gt; list files with long format including permission, owner, size, date updated &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -lh&lt;/code&gt; like the previous one but with readable size in B, K, M, ..&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Consistent Hashing</title>
-   <link href="http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing/"/>
-   <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing</id>
-   <content type="html">&lt;h2 id=&quot;problem-of-using-hash&quot;&gt;Problem of using hash&lt;/h2&gt;
-&lt;p&gt;In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate &lt;code class=&quot;highlighter-rouge&quot;&gt;hash(key) % node_number&lt;/code&gt;, so that we don’t iterate through all nodes to the find the key.&lt;br /&gt;
-But what if the node_number change, say adding a new node or remove an old node? Now every cache object needs to move, and in that period of data transfering, application can’t get data from cache. Here comes in the consistent hashing.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-consistent-hashing-works&quot;&gt;How consistent hashing works?&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;assume hash value is an unsigned 32-bit integer, i.e. hash value is between 0 and 2^31 - 1. Imagine this circle starts from 0 to 2^31 - 1 and then comes back to 0.&lt;/li&gt;
-  &lt;li&gt;hash each server (or node), either using its IP or name, now we know each node’s position on the circle.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/i6.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;hash the key of data, so that we get the position of each data object.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/i7.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now if we add a new node, only part of data on node C is moved to node X, other nodes unaffected.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/i8.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;problem-of-consistent-hashing&quot;&gt;Problem of consistent hashing&lt;/h2&gt;
-&lt;p&gt;If nodes are few, it’s easy to form this situation where imbalance occurs between nodes. Large amount of data are on node A while very few are on B.&lt;br /&gt;
-&lt;img src=&quot;/assets/images/i9.jpg&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Virtual nodes solve the problem. For each node, we calculate multiple hash values by for example appending numbers to IP, to generate virtual nodes. Data objects that are mapped to the virtual nodes are mapped to the corresponding real nodes. By increasing node number, nodes are more evenly distributed on the circle. 
-&lt;img src=&quot;/assets/images/i10.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;source&quot;&gt;Source:&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/34985026&quot;&gt;https://zhuanlan.zhihu.com/p/34985026&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Scaling Static Web Content&#58; Content Delivery Networks</title>
-   <link href="http://localhost:4000/web%20applications/CDN/"/>
-   <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/web%20applications/CDN</id>
-   <content type="html">&lt;p&gt;Actively distribute static content to edge servers throughout the Internet.&lt;br /&gt;
-–  e.g. Akamai.&lt;br /&gt;
-&lt;img src=&quot;/assets/images/i4.png&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;How Akamai request routing with DNS: &lt;br /&gt;
-&lt;img src=&quot;/assets/images/i5.png&quot; width=&quot;600&quot; /&gt;
-In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global load balancer, and then:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;user send request to the global CDN load balancer&lt;/li&gt;
-  &lt;li&gt;Global CDN load balancer selects a local load balancer that’s near the user’s area according to user’s IP&lt;/li&gt;
-  &lt;li&gt;Local load balancer selects a CDN cache server according to 1) user’s IP, 2) which server stores the content requested, 3) load of the server&lt;/li&gt;
-  &lt;li&gt;Local load balancer sends the IP of cache server back to global load balancer&lt;/li&gt;
-  &lt;li&gt;Global load balancer sends the IP to client&lt;/li&gt;
-  &lt;li&gt;User sends request to that cache server&lt;/li&gt;
-&lt;/ol&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Why 31 is chosen as multiplier in hashCode()</title>
-   <link href="http://localhost:4000/java/why-31/"/>
-   <updated>2018-12-25T00:00:00-05:00</updated>
-   <id>http://localhost:4000/java/why-31</id>
-   <content type="html">&lt;ol&gt;
-  &lt;li&gt;It’s a prime number. Prime number reduces collision. Even number causes information loss, as multiplication by 2 is equivalent to shifting.&lt;/li&gt;
-  &lt;li&gt;31 can be optimized by JVM: 31 * i = (i « 5) - i&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Index</title>
-   <link href="http://localhost:4000/database/index/"/>
-   <updated>2018-12-23T00:00:00-05:00</updated>
-   <id>http://localhost:4000/database/index</id>
-   <content type="html">&lt;h2 id=&quot;1-composite-index&quot;&gt;1. Composite index&lt;/h2&gt;
-&lt;p&gt;MySQL can only use one index in one query. If multiple columns appear in the search condition, MySQL will pick the most strict index, that is, the one that will retrive the least records. &lt;br /&gt;
-We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;
-&lt;strong&gt;Leftmost prefix rule&lt;/strong&gt;: a composite index on columns (a, b, c) is like three indexes on (a, b, c), (a, b) and (a). If we search based on (a, c), only the index on a in the composite will be used. For OR clause between conditions on a, b, c, composite index will not be used.&lt;/p&gt;
-
-&lt;h2 id=&quot;2-when-to-use-index&quot;&gt;2. When to use index?&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Indexes speed up where clauses, order by, group by, so add index on columns that will frequently appear in the where, order by and group by clause in select query.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;3-when-not-to-use-index&quot;&gt;3. When not to use index?&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Indexes slow down inserts and updates, so you want to use them carefully on columns that are FREQUENTLY updated.&lt;/li&gt;
-  &lt;li&gt;Tables with only few records, as database will search index table first and then data table.&lt;/li&gt;
-  &lt;li&gt;Columns with lots of common data which distribute evenly&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;4-range-query&quot;&gt;4. Range query&lt;/h2&gt;
-&lt;p&gt;For composite index (A, B):&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;where A &amp;gt; xx;   useful&lt;/li&gt;
-  &lt;li&gt;where A = xx and B &amp;gt; yy;   useful&lt;/li&gt;
-  &lt;li&gt;where A &amp;gt; xx and B = yy;   partially useful on A&lt;/li&gt;
-  &lt;li&gt;where A &amp;gt; xx and B &amp;gt; yy;   partially useful on A&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;When the query looks like 4 where two columns are all range search, it’s better to only add index on A.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Camparable and Comparator</title>
-   <link href="http://localhost:4000/java/Comparable-and-Comparator/"/>
-   <updated>2018-12-08T00:00:00-05:00</updated>
-   <id>http://localhost:4000/java/Comparable-and-Comparator</id>
-   <content type="html">&lt;p&gt;To sort an array of &lt;strong&gt;primitives&lt;/strong&gt;, we can simply use Arrays.sort method.&lt;br /&gt;
-To sort an array of &lt;strong&gt;objects&lt;/strong&gt;, the objects have to be &lt;strong&gt;Comparable&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;comparable&quot;&gt;Comparable&lt;/h2&gt;
-&lt;p&gt;Method: &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo()&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getRank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;cm&quot;&gt;/** 
-    * returns negative if this rank &amp;lt; other's rank
-    * returns 0 if this rank == other's rank
-    * returns positive if this rank &amp;gt; other's rank
-    */&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Note:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo()&lt;/code&gt; should be consistent to &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode()&lt;/code&gt; such that &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;x.equals(y) == true &amp;lt;===&amp;gt; x.compareTo(y) == 0&lt;/code&gt;  &lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;===&amp;gt; x.hashCode() == y.hashCode()&lt;/code&gt; &lt;br /&gt;
-Therefore, we need to implement &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode()&lt;/code&gt; at the same time.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo()&lt;/code&gt; method defines the &lt;strong&gt;NATURAL ORDER&lt;/strong&gt; of the type&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cards&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cards&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;comparator&quot;&gt;Comparator&lt;/h2&gt;
-&lt;p&gt;Method: &lt;code class=&quot;highlighter-rouge&quot;&gt;compare()&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Compare by suit:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CompareBySuit&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Compare by suit first and break the tie by rank:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CompareBySuitRank&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suitResult&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;suitResult&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suitResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Note:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare()&lt;/code&gt; method defines different custom orders of the type&lt;/li&gt;
-  &lt;li&gt;How to sort cards using this Comparator instead of its natural ordering (provided by the Comparable interface)?&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cards&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cards&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CompareBySuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>Quick Select</title>
-   <link href="http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select/"/>
-   <updated>2018-11-30T00:00:00-05:00</updated>
-   <id>http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select</id>
-   <content type="html">&lt;p&gt;Average time complexity:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n) + T(n / 2) = O(n) + O(n / 2) + O(n / 4) + ... + O(1)&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Worst case:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n ^ 2)&lt;/code&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Bitwise Operation Tricks</title>
-   <link href="http://localhost:4000/computer%20systems/bitwise-operation/"/>
-   <updated>2018-11-21T00:00:00-05:00</updated>
-   <id>http://localhost:4000/computer%20systems/bitwise-operation</id>
-   <content type="html">&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;For any number n with only one bit of ‘1’ except 0
-&lt;code class=&quot;highlighter-rouge&quot;&gt;n &amp;amp; (n - 1) == 0&lt;/code&gt;&lt;br /&gt;
-Can be used to check if a positive number is a power of 2.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;If n is a power of 2, for any integer i: &lt;code class=&quot;highlighter-rouge&quot;&gt;i % n = i &amp;amp; (n - 1)&lt;/code&gt; &lt;br /&gt;
-Therefore, if a number mode a power of 2, it’s just dropping its higher bits.&lt;br /&gt;
-eg. &lt;code class=&quot;highlighter-rouge&quot;&gt;86 % 8 = 6 ==&amp;gt; 86 &amp;amp; (8 - 1) = 6&lt;/code&gt;  &lt;br /&gt;
-    1 0 1 0 1 1 0  (86)  &lt;br /&gt;
-&amp;amp; 0 0 0 0 1 1 1  (7)  &lt;br /&gt;
-————————   &lt;br /&gt;
-    0 0 0 0 1 1 0  &lt;br /&gt;
-That’s why Java HashMap’s underlying array always has a length of a power of 2, that is, to speed up the modulo operation when finding the corresponding index in the array of a hashcode.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;Introduction to Information Retrieval&lt;/em&gt;, Christopher D. Manning, Prabhakar Raghavan, and Hinrich Schutze, Cambridge University Press. 2008. &lt;a href=&quot;https://nlp.stanford.edu/IR-book/&quot;&gt;https://nlp.stanford.edu/IR-book/&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>Leetcode</title>
    <link href="http://localhost:4000/data%20structures%20and%20algorithms/leetcode/"/>
-   <updated>2018-11-19T00:00:00-05:00</updated>
+   <updated>2019-01-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/data%20structures%20and%20algorithms/leetcode</id>
    <content type="html">&lt;h3 id=&quot;322-coin-change&quot;&gt;322. Coin Change&lt;/h3&gt;
 &lt;p&gt;Key is to adopt an auxiliary array count[amount + 1].&lt;br /&gt;
@@ -380,6 +73,27 @@ count[i] denotes the minimum coin count to get target value i.&lt;/p&gt;
   &lt;li&gt;iterate through each coin&lt;/li&gt;
   &lt;li&gt;find the minimum count for each amount - coin in the count array before the target amount&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;349-intersection-of-two-arrays&quot;&gt;349. Intersection of Two Arrays&lt;/h3&gt;
+&lt;p&gt;array N length: n &lt;br /&gt;
+array M length: m &lt;br /&gt;
+n &amp;lt; m &lt;br /&gt;
+&lt;strong&gt;Approach 1: HashSet&lt;/strong&gt;&lt;br /&gt;
+Add the smaller array into HashSet so that the space occupied is smaller.&lt;br /&gt;
+Time Complexity: &lt;strong&gt;O(n + m)&lt;/strong&gt;&lt;br /&gt;
+Space Complexity: &lt;strong&gt;O(n)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 2: sort + binary search&lt;/strong&gt;&lt;br /&gt;
+sort the smaller array and use binary search in it to find each element of the larger array.&lt;br /&gt;
+Better than approach 1 if array is too big to fit in memory
+Time Complexity: &lt;strong&gt;O(nlogn + mlogn)&lt;/strong&gt;&lt;br /&gt;
+Space Complexity: &lt;strong&gt;O(1)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach 3: sort + merge sorted arrays&lt;/strong&gt;&lt;br /&gt;
+Time Complexity: &lt;strong&gt;O(nlogn + mlogm)&lt;/strong&gt;&lt;br /&gt;
+Space Complexity: &lt;strong&gt;O(1)&lt;/strong&gt;&lt;br /&gt;
+Not as good as approach 2.&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;h3 id=&quot;88-merge-sorted-array&quot;&gt;88. Merge Sorted Array&lt;/h3&gt;
@@ -784,6 +498,351 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Encapsulate and Reuse Query Logic</title>
+   <link href="http://localhost:4000/database/reuse-query/"/>
+   <updated>2019-01-20T00:00:00-05:00</updated>
+   <id>http://localhost:4000/database/reuse-query</id>
+   <content type="html">&lt;h3 id=&quot;1-views&quot;&gt;1. Views&lt;/h3&gt;
+&lt;h3 id=&quot;2-user-defined-function&quot;&gt;2. User Defined Function&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Scalar Function&lt;/li&gt;
+  &lt;li&gt;Inline Table Valued Function
+Parameterized views.&lt;/li&gt;
+  &lt;li&gt;Multi-statement Table Valued Function&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;3-temporary-tables&quot;&gt;3. Temporary Tables&lt;/h3&gt;
+&lt;h3 id=&quot;4-table-variables&quot;&gt;4. Table Variables&lt;/h3&gt;
+
+&lt;h3 id=&quot;resource&quot;&gt;Resource:&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.quora.com/What-is-difference-between-inline-table-valued-and-multi-statement-functions-in-SQL&quot;&gt;https://www.quora.com/What-is-difference-between-inline-table-valued-and-multi-statement-functions-in-SQL&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Real Time HTTP Strategies</title>
+   <link href="http://localhost:4000/web%20applications/real-time-http/"/>
+   <updated>2019-01-18T00:00:00-05:00</updated>
+   <id>http://localhost:4000/web%20applications/real-time-http</id>
+   <content type="html">&lt;p&gt;Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.&lt;/p&gt;
+
+&lt;p&gt;Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-polling&quot;&gt;1. Polling&lt;/h3&gt;
+&lt;p&gt;Client polls server for new information once in a while.&lt;/p&gt;
+
+&lt;p&gt;Pros:&lt;br /&gt;
+Easy to program server.&lt;/p&gt;
+
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;it might be too frequent causing unnecessary network traffic&lt;/li&gt;
+  &lt;li&gt;it might be too infrequent causing missing information&lt;/li&gt;
+  &lt;li&gt;requests and responses contain exactly same header data causing unnecessary data transmission&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Application:&lt;br /&gt;
+Small applications&lt;/p&gt;
+
+&lt;h3 id=&quot;2-long-polling&quot;&gt;2. Long polling&lt;/h3&gt;
+&lt;p&gt;When client polls server requesting new information, the server holds the request open until new data is available. Once available, the server responds and sends the new information. When the client receives the new information, it immediately sends another request, and the operation is repeated. This effectively emulates a server push feature.&lt;/p&gt;
+
+&lt;p&gt;Pros:&lt;br /&gt;
+Reduces a large amount of useless pollings when new information are infrequent.&lt;/p&gt;
+
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Hard to program&lt;/li&gt;
+  &lt;li&gt;Connections are hold by server when no new information causing resources waste.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Application:&lt;br /&gt;
+WebQQ, Facebook IM&lt;/p&gt;
+
+&lt;h3 id=&quot;3-streaming&quot;&gt;3. Streaming&lt;/h3&gt;
+&lt;p&gt;Browser only sends one request.
+Drawbacks:
+Proxy servers buffer long responses likely causing missing information.&lt;/p&gt;
+
+&lt;h3 id=&quot;sources&quot;&gt;Sources:&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.pubnub.com/blog/2014-12-01-http-long-polling/&quot;&gt;https://www.pubnub.com/blog/2014-12-01-http-long-polling/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Common Linux Command</title>
+   <link href="http://localhost:4000/computer%20systems/linux-command/"/>
+   <updated>2019-01-06T00:00:00-05:00</updated>
+   <id>http://localhost:4000/computer%20systems/linux-command</id>
+   <content type="html">&lt;h3 id=&quot;1-check-what-processes-are-using-a-certain-port-number&quot;&gt;1. Check what processes are using a certain port number&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-check-what-port-number-is-being-used-by-a-process&quot;&gt;2. Check what port number is being used by a process&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Get pid
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ps -aux | grep &amp;lt;process name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Get port number using pid
+&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;pid&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;3-nohup&quot;&gt;3. nohup&lt;/h2&gt;
+&lt;p&gt;a POSIX command to ignore the HUP (hangup) signal.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nohup command &amp;amp;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-ls&quot;&gt;4. ls&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -a&lt;/code&gt; list files including hidden ones starting with ‘.’ &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -l&lt;/code&gt; list files with long format including permission, owner, size, date updated &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -lh&lt;/code&gt; like the previous one but with readable size in B, K, M, ..&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Consistent Hashing</title>
+   <link href="http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing/"/>
+   <updated>2019-01-06T00:00:00-05:00</updated>
+   <id>http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing</id>
+   <content type="html">&lt;h2 id=&quot;problem-of-using-hash&quot;&gt;Problem of using hash&lt;/h2&gt;
+&lt;p&gt;In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate &lt;code class=&quot;highlighter-rouge&quot;&gt;hash(key) % node_number&lt;/code&gt;, so that we don’t iterate through all nodes to the find the key.&lt;br /&gt;
+But what if the node_number change, say adding a new node or remove an old node? Now every cache object needs to move, and in that period of data transfering, application can’t get data from cache. Here comes in the consistent hashing.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-consistent-hashing-works&quot;&gt;How consistent hashing works?&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;assume hash value is an unsigned 32-bit integer, i.e. hash value is between 0 and 2^31 - 1. Imagine this circle starts from 0 to 2^31 - 1 and then comes back to 0.&lt;/li&gt;
+  &lt;li&gt;hash each server (or node), either using its IP or name, now we know each node’s position on the circle.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/i6.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;hash the key of data, so that we get the position of each data object.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/i7.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now if we add a new node, only part of data on node C is moved to node X, other nodes unaffected.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/i8.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;problem-of-consistent-hashing&quot;&gt;Problem of consistent hashing&lt;/h2&gt;
+&lt;p&gt;If nodes are few, it’s easy to form this situation where imbalance occurs between nodes. Large amount of data are on node A while very few are on B.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/i9.jpg&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Virtual nodes solve the problem. For each node, we calculate multiple hash values by for example appending numbers to IP, to generate virtual nodes. Data objects that are mapped to the virtual nodes are mapped to the corresponding real nodes. By increasing node number, nodes are more evenly distributed on the circle. 
+&lt;img src=&quot;/assets/images/i10.jpg&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;source&quot;&gt;Source:&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/34985026&quot;&gt;https://zhuanlan.zhihu.com/p/34985026&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Scaling Static Web Content&#58; Content Delivery Networks</title>
+   <link href="http://localhost:4000/web%20applications/CDN/"/>
+   <updated>2019-01-06T00:00:00-05:00</updated>
+   <id>http://localhost:4000/web%20applications/CDN</id>
+   <content type="html">&lt;p&gt;Actively distribute static content to edge servers throughout the Internet.&lt;br /&gt;
+–  e.g. Akamai.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/i4.png&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;How Akamai request routing with DNS: &lt;br /&gt;
+&lt;img src=&quot;/assets/images/i5.png&quot; width=&quot;600&quot; /&gt;
+In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global load balancer, and then:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;user send request to the global CDN load balancer&lt;/li&gt;
+  &lt;li&gt;Global CDN load balancer selects a local load balancer that’s near the user’s area according to user’s IP&lt;/li&gt;
+  &lt;li&gt;Local load balancer selects a CDN cache server according to 1) user’s IP, 2) which server stores the content requested, 3) load of the server&lt;/li&gt;
+  &lt;li&gt;Local load balancer sends the IP of cache server back to global load balancer&lt;/li&gt;
+  &lt;li&gt;Global load balancer sends the IP to client&lt;/li&gt;
+  &lt;li&gt;User sends request to that cache server&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Why 31 is chosen as multiplier in hashCode()</title>
+   <link href="http://localhost:4000/java/why-31/"/>
+   <updated>2018-12-25T00:00:00-05:00</updated>
+   <id>http://localhost:4000/java/why-31</id>
+   <content type="html">&lt;ol&gt;
+  &lt;li&gt;It’s a prime number. Prime number reduces collision. Even number causes information loss, as multiplication by 2 is equivalent to shifting.&lt;/li&gt;
+  &lt;li&gt;31 can be optimized by JVM: 31 * i = (i « 5) - i&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Index</title>
+   <link href="http://localhost:4000/database/index/"/>
+   <updated>2018-12-23T00:00:00-05:00</updated>
+   <id>http://localhost:4000/database/index</id>
+   <content type="html">&lt;h2 id=&quot;1-composite-index&quot;&gt;1. Composite index&lt;/h2&gt;
+&lt;p&gt;MySQL can only use one index in one query. If multiple columns appear in the search condition, MySQL will pick the most strict index, that is, the one that will retrive the least records. &lt;br /&gt;
+We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;
+&lt;strong&gt;Leftmost prefix rule&lt;/strong&gt;: a composite index on columns (a, b, c) is like three indexes on (a, b, c), (a, b) and (a). If we search based on (a, c), only the index on a in the composite will be used. For OR clause between conditions on a, b, c, composite index will not be used.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-range-query&quot;&gt;2. Range query&lt;/h2&gt;
+&lt;p&gt;For composite index (A, B):&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;where A &amp;gt; xx;   useful&lt;/li&gt;
+  &lt;li&gt;where A = xx and B &amp;gt; yy;   useful&lt;/li&gt;
+  &lt;li&gt;where A &amp;gt; xx and B = yy;   partially useful on A&lt;/li&gt;
+  &lt;li&gt;where A &amp;gt; xx and B &amp;gt; yy;   partially useful on A&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;When the query looks like 4 where two columns are all range search, it’s better to only add index on A.&lt;/p&gt;
+&lt;h2 id=&quot;3-when-to-use-index&quot;&gt;3. When to use index?&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Indexes speed up where, order by, group by, so add index on columns that will frequently appear in these clauses.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;4-when-not-to-use-index&quot;&gt;4. When not to use index?&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Indexes slow down inserts and updates, so you want to use them carefully on columns that are FREQUENTLY updated.&lt;/li&gt;
+  &lt;li&gt;Tables with only few records, as database will search index table first and then data table.&lt;/li&gt;
+  &lt;li&gt;Columns with lots of common data which distribute evenly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;5-how-to-make-use-of-index&quot;&gt;5. How to make use of index?&lt;/h2&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Camparable and Comparator</title>
+   <link href="http://localhost:4000/java/Comparable-and-Comparator/"/>
+   <updated>2018-12-08T00:00:00-05:00</updated>
+   <id>http://localhost:4000/java/Comparable-and-Comparator</id>
+   <content type="html">&lt;p&gt;To sort an array of &lt;strong&gt;primitives&lt;/strong&gt;, we can simply use Arrays.sort method.&lt;br /&gt;
+To sort an array of &lt;strong&gt;objects&lt;/strong&gt;, the objects have to be &lt;strong&gt;Comparable&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;comparable&quot;&gt;Comparable&lt;/h2&gt;
+&lt;p&gt;Method: &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo()&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getRank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/** 
+    * returns negative if this rank &amp;lt; other's rank
+    * returns 0 if this rank == other's rank
+    * returns positive if this rank &amp;gt; other's rank
+    */&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Note:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo()&lt;/code&gt; should be consistent to &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode()&lt;/code&gt; such that &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;x.equals(y) == true &amp;lt;===&amp;gt; x.compareTo(y) == 0&lt;/code&gt;  &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;===&amp;gt; x.hashCode() == y.hashCode()&lt;/code&gt; &lt;br /&gt;
+Therefore, we need to implement &lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode()&lt;/code&gt; at the same time.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compareTo()&lt;/code&gt; method defines the &lt;strong&gt;NATURAL ORDER&lt;/strong&gt; of the type&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cards&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cards&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;comparator&quot;&gt;Comparator&lt;/h2&gt;
+&lt;p&gt;Method: &lt;code class=&quot;highlighter-rouge&quot;&gt;compare()&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Compare by suit:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CompareBySuit&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Compare by suit first and break the tie by rank:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CompareBySuitRank&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suitResult&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;suitResult&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;suitResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRank&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Note:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare()&lt;/code&gt; method defines different custom orders of the type&lt;/li&gt;
+  &lt;li&gt;How to sort cards using this Comparator instead of its natural ordering (provided by the Comparable interface)?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Card&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cards&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cards&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CompareBySuit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Quick Select</title>
+   <link href="http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select/"/>
+   <updated>2018-11-30T00:00:00-05:00</updated>
+   <id>http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select</id>
+   <content type="html">&lt;p&gt;Average time complexity:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n) + T(n / 2) = O(n) + O(n / 2) + O(n / 4) + ... + O(1)&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Worst case:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n ^ 2)&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Bitwise Operation Tricks</title>
+   <link href="http://localhost:4000/computer%20systems/bitwise-operation/"/>
+   <updated>2018-11-21T00:00:00-05:00</updated>
+   <id>http://localhost:4000/computer%20systems/bitwise-operation</id>
+   <content type="html">&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;For any number n with only one bit of ‘1’ except 0
+&lt;code class=&quot;highlighter-rouge&quot;&gt;n &amp;amp; (n - 1) == 0&lt;/code&gt;&lt;br /&gt;
+Can be used to check if a positive number is a power of 2.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If n is a power of 2, for any integer i: &lt;code class=&quot;highlighter-rouge&quot;&gt;i % n = i &amp;amp; (n - 1)&lt;/code&gt; &lt;br /&gt;
+Therefore, if a number mode a power of 2, it’s just dropping its higher bits.&lt;br /&gt;
+eg. &lt;code class=&quot;highlighter-rouge&quot;&gt;86 % 8 = 6 ==&amp;gt; 86 &amp;amp; (8 - 1) = 6&lt;/code&gt;  &lt;br /&gt;
+    1 0 1 0 1 1 0  (86)  &lt;br /&gt;
+&amp;amp; 0 0 0 0 1 1 1  (7)  &lt;br /&gt;
+————————   &lt;br /&gt;
+    0 0 0 0 1 1 0  &lt;br /&gt;
+That’s why Java HashMap’s underlying array always has a length of a power of 2, that is, to speed up the modulo operation when finding the corresponding index in the array of a hashcode.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 </content>
  </entry>
  

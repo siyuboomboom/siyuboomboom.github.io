@@ -9,7 +9,7 @@ title: About Me
 </div>
 
 
-Thanks for coming to my website!!  
+Thanks for visiting my website!!  
   
 I'm a master student at Carnegie Mellon University, studying information systems. 
 Used to live in Beijing, Shanghai, Adelaide and now Pittsburgh. 
