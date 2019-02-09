@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-01-25T14:33:14-05:00</updated>
+ <updated>2019-02-08T21:51:15-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -53,7 +53,19 @@
    <link href="http://localhost:4000/data%20structures%20and%20algorithms/leetcode/"/>
    <updated>2019-01-22T00:00:00-05:00</updated>
    <id>http://localhost:4000/data%20structures%20and%20algorithms/leetcode</id>
-   <content type="html">&lt;h3 id=&quot;322-coin-change&quot;&gt;322. Coin Change&lt;/h3&gt;
+   <content type="html">&lt;h3 id=&quot;142-linked-list-cycle-ii&quot;&gt;142. Linked List Cycle II&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/i11.png&quot; width=&quot;600&quot; /&gt;
+Slow pointer went through a distance of &lt;code class=&quot;highlighter-rouge&quot;&gt;F + a&lt;/code&gt; while fast pointer went through a distance of &lt;code class=&quot;highlighter-rouge&quot;&gt;F + a + b + a&lt;/code&gt;. Since step size of fast pointer is twice the step size of slow pointer, the distance for fast is also twice that for slow. Hence, &lt;code class=&quot;highlighter-rouge&quot;&gt;F + a + b + a = 2 (F + a)&lt;/code&gt;, which is &lt;code class=&quot;highlighter-rouge&quot;&gt;F = b&lt;/code&gt;. Therefore, once we found the intersection, we can have another two pointers pointing to the intersection and head, and move them at the same speed. Finally they meet at the cycle entrance.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;141-linked-list-cycle&quot;&gt;141. Linked List Cycle&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Approach: Two pointers&lt;/strong&gt;&lt;br /&gt;
+Fast pointer moves two steps and slow moves one steps at a time. If there is a cycle, fast pointer will catch up with slow pointer. Think of a basic case where fast is one step behind slow, and they will end up being one node in the next move. Other cases will end up being this basic case. Two steps behind, moving one time ends up being one step behind. And so forth. As long as there is a cycle, fast pointer can be seen as being some steps behind slow pointer if both pointers are in one cycle.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;322-coin-change&quot;&gt;322. Coin Change&lt;/h3&gt;
 &lt;p&gt;Key is to adopt an auxiliary array count[amount + 1].&lt;br /&gt;
 count[i] denotes the minimum coin count to get target value i.&lt;/p&gt;
 
