@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Information Retrieval Study Notes</title>
+  <title>Siyu Tan - Introduction to Information Retrieval - Reading Summary</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/search%20engines/search-engines-note/" />
+  <link rel="canonical" href="http://localhost:4000/information%20retrieval%20and%20machine%20learning/search-engines-note/" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -90,20 +90,22 @@
   </a>
 </p>
 
-<h1 class="title">Information Retrieval Study Notes</h1>
+<h1 class="title">Introduction to Information Retrieval - Reading Summary</h1>
 
 <div class="post-categories">
   
   Categories: 
   
-  <a href="/categories/#Search Engines">Search Engines</a>
+  <a href="/categories/#Information Retrieval and Machine Learning">Information Retrieval and Machine Learning</a>
   
   
 </div>
 
 <br>
 <div id="post">
-  <h2 id="1-boolean-retrieval">1 Boolean Retrieval</h2>
+  <p>This article is my reading summary and understanding of the book <em>Introduction to Information Retrieval</em></p>
+
+<h2 id="1-boolean-retrieval">1 Boolean Retrieval</h2>
 
 <p>To search for words in a number of documents, a most intuitive way is to scan through the documents and check if the words being searched exist. However, if the number of documents is very big, or if we want to do more flexible search, this is not very efficient.</p>
 
@@ -129,6 +131,18 @@
 
 <p>A combination can be utilized of positioning index and phrase index. Merging two words in a commonly used phrase is expensive since we need to find the intersection of the posting lists of the two words and compare the offset of the positions of the two words in the intersection documents with the offset in the query. If each word in a phrase is highly frequent, this process can be extremely slow since the posting list of each word is quite long. If each single word in a phrase is frequent while the phrase itself is less frequent, like Michael Jackson, it’s more efficient to include the phrase in dictionary. In contrast, it’s less efficient to include a phrase with infrequent single word, like Barack Obama, since the appearance of either Barack or Obama highly likely suggests the appearance of the phrase Barack Obama.</p>
 
+<h2 id="4-term-frequency-and-weighting">4 Term frequency and weighting</h2>
+<p>Score plays an important role in determining whether a document should be selected for a certain query. It’s natural to assign a weight to a query term in a document to measure how important it is to the document and sum up the weight to get the score. A simple way to get the weight is to make it equal to the frequency of the term occurrence in the document. By getting a set of term frequency, we treat the collection as a bag of word without taking care of the order.</p>
+
+<p>But not every term is equally important. If a term appears too often in all documents, it barely suggests relevance between query and document. Therefore, we measure a term’s collection frequency to get a sense about how common a term is. However, it’s more common to use document frequency to avoid the situation where a term appears too often in only a few documents, which generates high collection frequency while still remain meaningful.</p>
+
+<p>Rare terms have high inverse document frequency while frequent term has low idf. By multiplying idf and tf, we get an unbiased weight for query term in each document. Idf-tf prefers those terms with high frequency in few documents. By adding up idf-tf for each query term in one document, we get the score for this document in terms of this query.</p>
+
+<h2 id="5-the-vector-space-model-for-scoring">5 The vector space model for scoring</h2>
+<p>Each document can be represented as a vector with terms and their weights. Hence a collection of documents is a set of vectors, which can be viewed as a term-document matrix. We can use cosine similarity of two vectors to measure the similarity of the two documents. For cosine similarity, by dividing dot product of vectors by their Euclidean lengths, we are able to avoid the bias caused by difference of document length. Cosine similarity is useful in providing more similar content based on user history.</p>
+
+<p>Queries can also be represented as vectors so that we can find cosine similarity between query and document.</p>
+
 <h3 id="sources">Sources:</h3>
 <p><em>Introduction to Information Retrieval</em>, Christopher D. Manning, Prabhakar Raghavan, and Hinrich Schutze, Cambridge University Press. 2008. <a href="https://nlp.stanford.edu/IR-book/">https://nlp.stanford.edu/IR-book/</a></p>
 
@@ -139,15 +153,15 @@
   <ul class="posts">
     
     <li>
+      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/decision-tree/">Decision Tree Algorithm Implementation - Python</a>
+    </li>
+    
+    <li>
+      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/Machine-Learning/">Machine Learning - Study Notes</a>
+    </li>
+    
+    <li>
       <span>22 Jan 2019 &raquo;</span> <a href="/data%20structures%20and%20algorithms/leetcode/">Leetcode</a>
-    </li>
-    
-    <li>
-      <span>20 Jan 2019 &raquo;</span> <a href="/database/reuse-query/">Encapsulate and Reuse Query Logic</a>
-    </li>
-    
-    <li>
-      <span>18 Jan 2019 &raquo;</span> <a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a>
     </li>
     
   </ul>

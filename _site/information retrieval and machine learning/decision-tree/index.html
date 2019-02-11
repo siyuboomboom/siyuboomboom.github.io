@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siyu Tan - Decision Tree Algorithm Implementation - Python</title>
+  <meta name="author" content="Siyu Tan" />
+  <meta name="description" content="The blog of Siyu Tan" />
+  <link rel="canonical" href="http://localhost:4000/information%20retrieval%20and%20machine%20learning/decision-tree/" />
+
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="alternate" type="application/atom+xml" title="Siyu Tan" href="http://localhost:4000/atom.xml" />
+
+  <link rel="stylesheet" href="/assets/css/all.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="four columns sidebar">
+      <nav>
+  <h1>Hi.</h1>
+  <a href="/">
+    
+    <img class="avatar" src="/logo.jpeg" id="logo" alt="Blog logo"/>
+    
+  </a>
+  <h2>I'm <a href="/">Siyu Tan</a>.</h2>
+  <div id="bio">
+    <p>Oops! You found my secret website.. Have fun!!!</p>
+    <p>
+    <a href="/chronological">All Posts</a><br>
+    <a href="/">Categories</a>
+    </p>
+    <p></p>
+    <p><a href="/about">About Me</a></p>
+  </div>
+  
+  <div id="social">
+    Follow me:
+<div id="stalker">
+  
+  <a title="siyuboomboom on Github" href="https://github.com/siyuboomboom">
+    <i class="fa fa-github-square"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a title="Siyu Tan on Facebook" href="https://facebook.com/sherry.tan.92351">
+    <i class="fa fa-facebook-square"></i>
+  </a>
+  
+
+  
+
+  
+  <a title="Siyu Tan on LinkedIn" href="https://www.linkedin.com/in/siyutan">
+    <i class="fa fa-linkedin-square"></i>
+  </a>
+  
+
+  
+
+  
+</div>
+
+  </div>
+</nav>
+
+    </div>
+
+    <div class="eleven columns content">
+      <p class="meta">
+  February 10, 2019 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Decision Tree Algorithm Implementation - Python</h1>
+
+<div class="post-categories">
+  
+  Categories: 
+  
+  <a href="/categories/#Information Retrieval and Machine Learning">Information Retrieval and Machine Learning</a>
+  
+  
+</div>
+
+<br>
+<div id="post">
+  <p>This is a Python implementation of the decision tree algorithm, including <strong>training</strong> on training data points, <strong>predicting</strong> on test data points, and <strong>evaluating</strong> the performance of the tree. Maximum <strong>mutual information</strong> is the criteria to split on a node. It limits the <strong>maximum depth</strong> of the learned tree in order to avoid <strong>overfitting</strong>. This implementation only works on <strong>binary</strong> datasets, i.e., both attributes and labels have at most two values.</p>
+
+<h3 id="datasets">Datasets</h3>
+<p>Data are stored in csv files, the first row is the names for each attributes and label, the last column is the label.<br />
+In this data sample, there are 10 attributes and the label name is grade. The purpose is to predict if the grade is A or not A.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">M1</span><span class="p">,</span><span class="n">M2</span><span class="p">,</span><span class="n">M3</span><span class="p">,</span><span class="n">M4</span><span class="p">,</span><span class="n">M5</span><span class="p">,</span><span class="n">P1</span><span class="p">,</span><span class="n">P2</span><span class="p">,</span><span class="n">P3</span><span class="p">,</span><span class="n">P4</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">grade</span>   
+<span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span>   
+<span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span>   
+<span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span>   
+<span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span>   
+<span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">notA</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span>   
+<span class="o">...</span></code></pre></figure>
+
+<h3 id="data-structure-of-the-tree">Data Structure of the Tree</h3>
+<p>Here I use two different structures for internal nodes and leaf for the convenience of checking if reaching the leaf and store different data.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">left_edge</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
+        <span class="c"># a list of data for this node to split on</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>  
+        <span class="c"># the name of the attribute on which to split the node's data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr</span> <span class="o">=</span> <span class="n">attr</span>  
+        <span class="c"># the value of the attribute that goes to the left child</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_edge</span> <span class="o">=</span> <span class="n">left_edge</span>  
+        <span class="c"># the value of the attribute that goes to the right child</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_edge</span> <span class="o">=</span> <span class="s">""</span>  
+        <span class="c"># current depth of the node, root node has a depth of 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="n">depth</span>  
+        <span class="c"># pointer to left child</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">None</span>  
+        <span class="c"># pointer to right child</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">None</span>   
+        
+<span class="k">class</span> <span class="nc">Leaf</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="c"># a list of data that is partitioned to this leaf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="c"># decision label for this leaf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span></code></pre></figure>
+
+<h3 id="math">Math</h3>
+<p>Calculate <strong>entropy</strong> of a vector based on the formula below.</p>
+
+<p><img src="/assets/images/i12.png" width="300" /></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">entropy</span><span class="p">(</span><span class="n">vector_y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector_y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">vector_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">vector_y</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">prob</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector_y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">prob</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">prob</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">prob</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span>  <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">prob</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">prob</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span></code></pre></figure>
+
+<p>Calculate <strong>mutual information</strong> of two vectors.<br />
+vector_x: vector of one of the attribute.<br />
+vector_y: vector of the label. <br />
+entropy_y: entropy of the label. This argument is to save the repetitive work on calculating entropy of the label.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">mutual_info</span><span class="p">(</span><span class="n">vector_x</span><span class="p">,</span> <span class="n">vector_y</span><span class="p">,</span> <span class="n">entropy_y</span><span class="p">):</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">vector_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">flag_vector_y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">non_flag_vector_y</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector_x</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">vector_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="n">flag_vector_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vector_y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">non_flag_vector_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vector_y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="n">flag_cond_entropy</span> <span class="o">=</span> <span class="n">entropy</span><span class="p">(</span><span class="n">flag_vector_y</span><span class="p">)</span>
+    <span class="n">non_flag_cond_entropy</span> <span class="o">=</span> <span class="n">entropy</span><span class="p">(</span><span class="n">non_flag_vector_y</span><span class="p">)</span>
+
+    <span class="n">flag_prob</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">flag_vector_y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector_y</span><span class="p">)</span>
+    <span class="n">cond_entropy</span> <span class="o">=</span> <span class="n">flag_prob</span> <span class="o">*</span> <span class="n">flag_cond_entropy</span> <span class="o">+</span> \
+                   <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">flag_prob</span><span class="p">)</span> <span class="o">*</span> <span class="n">non_flag_cond_entropy</span>
+    <span class="k">return</span> <span class="n">entropy_y</span> <span class="o">-</span> <span class="n">cond_entropy</span></code></pre></figure>
+
+<h3 id="train">Train</h3>
+<p>To train a tree based on the original training data, I pass the data, current depth and remaining attributes that can be choosed to split on to the train() function. When the depth reaches the maximum depth or mutual information is zero, the tree will stop spliting and return a Leaf. Otherwise, it will call train() function recursively to get its left and right child, and finally return a node based on the argument data.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">remain_attrs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">max_depth</span> <span class="o">==</span> <span class="n">depth</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Leaf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">majority_label</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+    <span class="n">entropy_y</span> <span class="o">=</span> <span class="n">entropy</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">max_mutual_info</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">best_attr</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">remain_attrs</span><span class="p">:</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">mutual_info</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">entropy_y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">info</span> <span class="o">&gt;</span> <span class="n">max_mutual_info</span><span class="p">:</span>
+            <span class="n">max_mutual_info</span> <span class="o">=</span> <span class="n">info</span>
+            <span class="n">best_attr</span> <span class="o">=</span> <span class="n">i</span>
+
+    <span class="k">if</span> <span class="n">max_mutual_info</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Leaf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">majority_label</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    
+    <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">best_attr</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">best_attr</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">left_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">right_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_transpose</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data_transpose</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">best_attr</span><span class="p">]</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">left_edge</span><span class="p">:</span>
+            <span class="n">left_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">right_edge</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">best_attr</span><span class="p">]</span>
+            <span class="n">right_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+    <span class="n">child_remain_attrs</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">remain_attrs</span><span class="p">)</span>
+    <span class="n">child_remain_attrs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">best_attr</span><span class="p">)</span>
+
+    <span class="n">left_node</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">left_data</span><span class="p">)),</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">child_remain_attrs</span><span class="p">)</span>
+    <span class="n">right_node</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">right_data</span><span class="p">)),</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">child_remain_attrs</span><span class="p">)</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left_node</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right_node</span>
+    <span class="k">return</span> <span class="n">node</span></code></pre></figure>
+
+<p>This function returns the majority label value of the data, which is used to decide the decision label of a Leaf when reaching maximum depth or mutual information is zero.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">majority_label</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">non_flag</span> <span class="o">=</span> <span class="n">flag</span>
+    <span class="n">flag_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="n">flag_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">non_flag</span> <span class="o">=</span> <span class="n">y</span>
+    
+    <span class="n">label</span> <span class="o">=</span> <span class="n">non_flag</span>
+    <span class="k">if</span> <span class="n">flag_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">flag</span>
+
+    <span class="k">return</span> <span class="n">label</span></code></pre></figure>
+
+<h3 id="predict">Predict</h3>
+<p>This function takes each data entry, traverses the tree based on the attribute values, and writes the predicted label to the label_file. It also calculates the error rate of the prediction both on training and test data and writes it to metric_file.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">label_file</span><span class="p">,</span> <span class="n">metric_file</span><span class="p">,</span> <span class="n">train_or_test</span><span class="p">):</span>
+    <span class="n">label_f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">label_file</span><span class="p">,</span> <span class="s">'a'</span><span class="p">)</span>
+    <span class="n">metric_f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">metric_file</span><span class="p">,</span> <span class="s">'a'</span><span class="p">)</span>
+
+    <span class="n">error_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">curr</span><span class="p">,</span> <span class="n">Leaf</span><span class="p">):</span>
+            <span class="n">attr_val</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">curr</span><span class="o">.</span><span class="n">attr</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">attr_val</span> <span class="o">==</span> <span class="n">curr</span><span class="o">.</span><span class="n">left_edge</span><span class="p">:</span>
+                <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="o">.</span><span class="n">left</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="o">.</span><span class="n">right</span>
+        
+        <span class="n">label_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">curr</span><span class="o">.</span><span class="n">label</span> <span class="o">+</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">curr</span><span class="o">.</span><span class="n">label</span> <span class="o">!=</span> <span class="n">line</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">error_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">error_rate</span> <span class="o">=</span> <span class="n">error_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">metric_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">"error("</span> <span class="o">+</span> <span class="n">train_or_test</span> <span class="o">+</span> <span class="s">"): "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+    <span class="n">label_f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">metric_f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></figure>
+
+<h3 id="visualization">Visualization</h3>
+<p>Finally, I write a print_tree function to visualize the learned tree alongside the training data contained by each node.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_tree</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="n">num1</span> <span class="o">=</span> <span class="n">count_label1</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">num2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">num1</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"[</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">s /</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">s]"</span> <span class="o">%</span> <span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">label1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">label2</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Leaf</span><span class="p">):</span>
+        <span class="k">return</span>
+    
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">depth</span><span class="p">):</span>
+        <span class="n">prefix</span> <span class="o">+=</span> <span class="s">"| "</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">attrs</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">attr</span><span class="p">]</span> <span class="o">+</span> <span class="s">" = "</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">left_edge</span> <span class="o">+</span> <span class="s">": "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
+    <span class="n">print_tree</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">attrs</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">attr</span><span class="p">]</span> <span class="o">+</span> <span class="s">" = "</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">right_edge</span> <span class="o">+</span> <span class="s">": "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
+    <span class="n">print_tree</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span></code></pre></figure>
+
+<p>This is the print result for the tree to predict whether a politician is a democrat or republican with maximum depth of 3. 
+<img src="/assets/images/i15.png" width="500" /></p>
+
+<h3 id="empirical-analysis">Empirical Analysis</h3>
+<p>The following charts show the relationship between error rates on training and test data and different maximum depth limits.</p>
+<ol>
+  <li>Training error is monotonically decreasing when maximum depth increases, which is obvious since as long as the mutual information is greater than zero, the tree will never make further more error on training data.</li>
+  <li>Test error is greater than training error when maximum depth is large because of overfitting. The tree takes too much noise in the training data into account.</li>
+</ol>
+
+<p><img src="/assets/images/i13.png" width="500" />
+<img src="/assets/images/i14.png" width="500" /></p>
+
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
+    
+    <li>
+      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/Machine-Learning/">Machine Learning - Study Notes</a>
+    </li>
+    
+    <li>
+      <span>25 Jan 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/search-engines-note/">Introduction to Information Retrieval - Reading Summary</a>
+    </li>
+    
+    <li>
+      <span>22 Jan 2019 &raquo;</span> <a href="/data%20structures%20and%20algorithms/leetcode/">Leetcode</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <div class="disclaimer">
+  
+  <p>
+    The postings on this site are my own and don't necessarily represent my 
+    employer’s positions, strategies or opinions.
+  </p>
+  
+
+  <p>
+    © Siyu Tan, 2019 &mdash; built with <a href="http://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/swanson/lagom">Lagom theme</a>
+  </p>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-xxxx-x']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

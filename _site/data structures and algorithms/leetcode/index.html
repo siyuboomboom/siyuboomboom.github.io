@@ -103,9 +103,63 @@
 
 <br>
 <div id="post">
-  <h3 id="142-linked-list-cycle-ii">142. Linked List Cycle II</h3>
+  <h3 id="438-find-all-anagrams-in-a-string">438. Find All Anagrams in a String</h3>
+<p><strong>Brute Force</strong><br />
+Time: <strong>O((|s| - |p|) * |p|)</strong><br />
+Difference between length of s and p multiplied by length of p. <br />
+Worst case: <strong>O(n^2)</strong> (n is length of p or s) when p is half the length of s <br />
+Space: <strong>O(|p|)</strong></p>
+
+<p><strong>Sliding Window</strong><br />
+Time: <strong>O(|s| * 26) = O(n)</strong></p>
+
+<hr />
+
+<h3 id="487-max-consecutive-ones-ii">487. Max Consecutive Ones II</h3>
+<p><strong>Sliding Window</strong></p>
+<ol>
+  <li>Maintain a sliding window between which exists at most 1 zero.</li>
+  <li>Use a pointer to denote the latest flipped zero.</li>
+  <li>If meet another zero, move left pointer to the next element after the flipped zero.</li>
+</ol>
+
+<p>The problem can be extended to flipping at most k zeros. We can keep a count of zeros that right pointer has walked through, once the count exceeds k, increment left and decrement the count if nums[left] is zero, until the count drops below k.</p>
+
+<p>Time Complexity: <strong>O(n)</strong> <br />
+Space Complexity: <strong>O(1)</strong></p>
+
+<hr />
+
+<h3 id="253-meeting-rooms-ii">253. Meeting Rooms II</h3>
+<ol>
+  <li>Sort the intervals by start</li>
+  <li>Store every interval in a min heap sorted by end.</li>
+  <li>Everytime we get a new interval, peek into the min heap to see if the meeting that ends the earliest will end after or before this new meeting’s beginning.</li>
+  <li>If the top meeting in the heap ends later than the new meeting’s start, no meeting will end before the new meeting’s start, and we need a new room.</li>
+  <li>Every meeting in the heap starts earlier than the new meeting since the array is sorted by start time.</li>
+  <li>If the top meeting ends before the new meeting’s start, the new meeting can use the old room occupied by the top meeting.</li>
+  <li>We need to remove this top meeting since the ending time of this room is updated by the new meeting.</li>
+  <li>Every meeting in the heap has its own room. Size of the heap is the meeting room needed.</li>
+</ol>
+
+<p>Time Complexity: <strong>O(nlogn)</strong> <br />
+Space Complexity: <strong>O(n)</strong></p>
+
+<hr />
+
+<h3 id="287-find-the-duplicate-number">287. Find the Duplicate Number</h3>
+<p>Same idea as the next problem. If there is duplicate, jumping using the num as index will end up being jumping in a cycle.<br />
+Time Complexity: <strong>O(n)</strong> <br />
+Space Complexity: <strong>O(1)</strong></p>
+
+<hr />
+
+<h3 id="142-linked-list-cycle-ii">142. Linked List Cycle II</h3>
 <p><img src="/assets/images/i11.png" width="600" />
 Slow pointer went through a distance of <code class="highlighter-rouge">F + a</code> while fast pointer went through a distance of <code class="highlighter-rouge">F + a + b + a</code>. Since step size of fast pointer is twice the step size of slow pointer, the distance for fast is also twice that for slow. Hence, <code class="highlighter-rouge">F + a + b + a = 2 (F + a)</code>, which is <code class="highlighter-rouge">F = b</code>. Therefore, once we found the intersection, we can have another two pointers pointing to the intersection and head, and move them at the same speed. Finally they meet at the cycle entrance.</p>
+
+<p>Time Complexity: <strong>O(n)</strong> <br />
+Space Complexity: <strong>O(1)</strong></p>
 
 <hr />
 
@@ -568,15 +622,15 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
   <ul class="posts">
     
     <li>
-      <span>25 Jan 2019 &raquo;</span> <a href="/search%20engines/search-engines-note/">Information Retrieval Study Notes</a>
+      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/decision-tree/">Decision Tree Algorithm Implementation - Python</a>
     </li>
     
     <li>
-      <span>20 Jan 2019 &raquo;</span> <a href="/database/reuse-query/">Encapsulate and Reuse Query Logic</a>
+      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/Machine-Learning/">Machine Learning - Study Notes</a>
     </li>
     
     <li>
-      <span>18 Jan 2019 &raquo;</span> <a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a>
+      <span>25 Jan 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/search-engines-note/">Introduction to Information Retrieval - Reading Summary</a>
     </li>
     
   </ul>

@@ -1,10 +1,22 @@
 [
 
-{"date": "Fri, 25 Jan 2019 00:00:00 -0500",
-"categories": ["Search Engines"],
+{"date": "Sun, 10 Feb 2019 00:00:00 -0500",
+"categories": ["Information Retrieval and Machine Learning"],
 "tags": [],
-"title": "Information Retrieval Study Notes",
-"url": "/search%20engines/search-engines-note/"},
+"title": "Decision Tree Algorithm Implementation - Python",
+"url": "/information%20retrieval%20and%20machine%20learning/decision-tree/"},
+
+{"date": "Sun, 10 Feb 2019 00:00:00 -0500",
+"categories": ["Information Retrieval and Machine Learning"],
+"tags": [],
+"title": "Machine Learning - Study Notes",
+"url": "/information%20retrieval%20and%20machine%20learning/Machine-Learning/"},
+
+{"date": "Fri, 25 Jan 2019 00:00:00 -0500",
+"categories": ["Information Retrieval and Machine Learning"],
+"tags": [],
+"title": "Introduction to Information Retrieval - Reading Summary",
+"url": "/information%20retrieval%20and%20machine%20learning/search-engines-note/"},
 
 {"date": "Tue, 22 Jan 2019 00:00:00 -0500",
 "categories": ["Data Structures and Algorithms"],
