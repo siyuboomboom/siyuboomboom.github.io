@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>The blog of Siyu Tan</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000"/>
- <updated>2019-02-10T16:27:49-05:00</updated>
- <id>http://localhost:4000</id>
+ <link href="http://www.siyutan.com/atom.xml" rel="self"/>
+ <link href="http://www.siyutan.com"/>
+ <updated>2019-02-10T21:53:52-05:00</updated>
+ <id>http://www.siyutan.com</id>
  <author>
    <name>Siyu Tan</name>
    <email>siyutan@cmu.edu</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Decision Tree Algorithm Implementation - Python</title>
-   <link href="http://localhost:4000/information%20retrieval%20and%20machine%20learning/decision-tree/"/>
+   <link href="http://www.siyutan.com/information%20retrieval%20and%20machine%20learning/decision-tree/"/>
    <updated>2019-02-10T00:00:00-05:00</updated>
-   <id>http://localhost:4000/information%20retrieval%20and%20machine%20learning/decision-tree</id>
+   <id>http://www.siyutan.com/information%20retrieval%20and%20machine%20learning/decision-tree</id>
    <content type="html">&lt;p&gt;This is a Python implementation of the decision tree algorithm, including &lt;strong&gt;training&lt;/strong&gt; on training data points, &lt;strong&gt;predicting&lt;/strong&gt; on test data points, and &lt;strong&gt;evaluating&lt;/strong&gt; the performance of the tree. Maximum &lt;strong&gt;mutual information&lt;/strong&gt; is the criteria to split on a node. It limits the &lt;strong&gt;maximum depth&lt;/strong&gt; of the learned tree in order to avoid &lt;strong&gt;overfitting&lt;/strong&gt;. This implementation only works on &lt;strong&gt;binary&lt;/strong&gt; datasets, i.e., both attributes and labels have at most two values.&lt;/p&gt;
 
 &lt;h3 id=&quot;datasets&quot;&gt;Datasets&lt;/h3&gt;
@@ -225,18 +225,18 @@ entropy_y: entropy of the label. This argument is to save the repetitive work on
  
  <entry>
    <title>Machine Learning - Study Notes</title>
-   <link href="http://localhost:4000/information%20retrieval%20and%20machine%20learning/Machine-Learning/"/>
+   <link href="http://www.siyutan.com/information%20retrieval%20and%20machine%20learning/Machine-Learning/"/>
    <updated>2019-02-10T00:00:00-05:00</updated>
-   <id>http://localhost:4000/information%20retrieval%20and%20machine%20learning/Machine-Learning</id>
+   <id>http://www.siyutan.com/information%20retrieval%20and%20machine%20learning/Machine-Learning</id>
    <content type="html">
 </content>
  </entry>
  
  <entry>
    <title>Introduction to Information Retrieval - Reading Summary</title>
-   <link href="http://localhost:4000/information%20retrieval%20and%20machine%20learning/search-engines-note/"/>
+   <link href="http://www.siyutan.com/information%20retrieval%20and%20machine%20learning/search-engines-note/"/>
    <updated>2019-01-25T00:00:00-05:00</updated>
-   <id>http://localhost:4000/information%20retrieval%20and%20machine%20learning/search-engines-note</id>
+   <id>http://www.siyutan.com/information%20retrieval%20and%20machine%20learning/search-engines-note</id>
    <content type="html">&lt;p&gt;This article is my reading summary and understanding of the book &lt;em&gt;Introduction to Information Retrieval&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1-boolean-retrieval&quot;&gt;1 Boolean Retrieval&lt;/h2&gt;
@@ -284,10 +284,25 @@ entropy_y: entropy of the label. This argument is to save the repetitive work on
  
  <entry>
    <title>Leetcode</title>
-   <link href="http://localhost:4000/data%20structures%20and%20algorithms/leetcode/"/>
+   <link href="http://www.siyutan.com/data%20structures%20and%20algorithms/leetcode/"/>
    <updated>2019-01-22T00:00:00-05:00</updated>
-   <id>http://localhost:4000/data%20structures%20and%20algorithms/leetcode</id>
-   <content type="html">&lt;h3 id=&quot;438-find-all-anagrams-in-a-string&quot;&gt;438. Find All Anagrams in a String&lt;/h3&gt;
+   <id>http://www.siyutan.com/data%20structures%20and%20algorithms/leetcode</id>
+   <content type="html">&lt;h3 id=&quot;378-kth-smallest-element-in-a-sorted-matrix&quot;&gt;378. Kth Smallest Element in a Sorted Matrix&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Min Heap&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Offer first row into heap, now we are sure the smallest element is in.&lt;/li&gt;
+  &lt;li&gt;Poll the smallest element from the heap, now problem is to find the second smallest element, which is either the element to its right or below it&lt;/li&gt;
+  &lt;li&gt;Since the element to its right is already in heap, offer the element in next row and the same column into heap, now we are sure the second smallest element is in.&lt;/li&gt;
+  &lt;li&gt;Repeat step 2 and 3 for k - 1 times, now we already polled the first k - 1 smallest elements out of the heap&lt;/li&gt;
+  &lt;li&gt;Return the smallest element in heap right now
+Time: &lt;strong&gt;O(n)&lt;/strong&gt; &lt;br /&gt;
+Let n be the total number of elements in the matrix, then row is sqrt(n), time spent is sqrt(n) * log(sqrt(n)) + klogk.&lt;br /&gt;
+Space: &lt;strong&gt;O(sqrt(n))&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;438-find-all-anagrams-in-a-string&quot;&gt;438. Find All Anagrams in a String&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Brute Force&lt;/strong&gt;&lt;br /&gt;
 Time: &lt;strong&gt;O((|s| - |p|) * |p|)&lt;/strong&gt;&lt;br /&gt;
 Difference between length of s and p multiplied by length of p. &lt;br /&gt;
@@ -803,9 +818,9 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
  
  <entry>
    <title>Encapsulate and Reuse Query Logic</title>
-   <link href="http://localhost:4000/database/reuse-query/"/>
+   <link href="http://www.siyutan.com/database/reuse-query/"/>
    <updated>2019-01-20T00:00:00-05:00</updated>
-   <id>http://localhost:4000/database/reuse-query</id>
+   <id>http://www.siyutan.com/database/reuse-query</id>
    <content type="html">&lt;h3 id=&quot;1-views&quot;&gt;1. Views&lt;/h3&gt;
 &lt;h3 id=&quot;2-user-defined-function&quot;&gt;2. User Defined Function&lt;/h3&gt;
 &lt;ol&gt;
@@ -825,9 +840,9 @@ Parameterized views.&lt;/li&gt;
  
  <entry>
    <title>Real Time HTTP Strategies</title>
-   <link href="http://localhost:4000/web%20applications/real-time-http/"/>
+   <link href="http://www.siyutan.com/web%20applications/real-time-http/"/>
    <updated>2019-01-18T00:00:00-05:00</updated>
-   <id>http://localhost:4000/web%20applications/real-time-http</id>
+   <id>http://www.siyutan.com/web%20applications/real-time-http</id>
    <content type="html">&lt;p&gt;Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.&lt;/p&gt;
 
 &lt;p&gt;Then how to resolve the situation when real data is needed without client reloading the page? There are 3 strategies to achieve real-time data.&lt;/p&gt;
@@ -877,9 +892,9 @@ Proxy servers buffer long responses likely causing missing information.&lt;/p&gt
  
  <entry>
    <title>Common Linux Command</title>
-   <link href="http://localhost:4000/computer%20systems/linux-command/"/>
+   <link href="http://www.siyutan.com/computer%20systems/linux-command/"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/computer%20systems/linux-command</id>
+   <id>http://www.siyutan.com/computer%20systems/linux-command</id>
    <content type="html">&lt;h3 id=&quot;1-check-what-processes-are-using-a-certain-port-number&quot;&gt;1. Check what processes are using a certain port number&lt;/h3&gt;
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
 
@@ -905,9 +920,9 @@ Proxy servers buffer long responses likely causing missing information.&lt;/p&gt
  
  <entry>
    <title>Consistent Hashing</title>
-   <link href="http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing/"/>
+   <link href="http://www.siyutan.com/distributed%20systems/web%20applications/consistent-hashing/"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/distributed%20systems/web%20applications/consistent-hashing</id>
+   <id>http://www.siyutan.com/distributed%20systems/web%20applications/consistent-hashing</id>
    <content type="html">&lt;h2 id=&quot;problem-of-using-hash&quot;&gt;Problem of using hash&lt;/h2&gt;
 &lt;p&gt;In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate &lt;code class=&quot;highlighter-rouge&quot;&gt;hash(key) % node_number&lt;/code&gt;, so that we don’t iterate through all nodes to the find the key.&lt;br /&gt;
 But what if the node_number change, say adding a new node or remove an old node? Now every cache object needs to move, and in that period of data transfering, application can’t get data from cache. Here comes in the consistent hashing.&lt;/p&gt;
@@ -944,9 +959,9 @@ But what if the node_number change, say adding a new node or remove an old node?
  
  <entry>
    <title>Scaling Static Web Content&#58; Content Delivery Networks</title>
-   <link href="http://localhost:4000/web%20applications/CDN/"/>
+   <link href="http://www.siyutan.com/web%20applications/CDN/"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
-   <id>http://localhost:4000/web%20applications/CDN</id>
+   <id>http://www.siyutan.com/web%20applications/CDN</id>
    <content type="html">&lt;p&gt;Actively distribute static content to edge servers throughout the Internet.&lt;br /&gt;
 –  e.g. Akamai.&lt;br /&gt;
 &lt;img src=&quot;/assets/images/i4.png&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
@@ -967,9 +982,9 @@ In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global 
  
  <entry>
    <title>Why 31 is chosen as multiplier in hashCode()</title>
-   <link href="http://localhost:4000/java/why-31/"/>
+   <link href="http://www.siyutan.com/java/why-31/"/>
    <updated>2018-12-25T00:00:00-05:00</updated>
-   <id>http://localhost:4000/java/why-31</id>
+   <id>http://www.siyutan.com/java/why-31</id>
    <content type="html">&lt;ol&gt;
   &lt;li&gt;It’s a prime number. Prime number reduces collision. Even number causes information loss, as multiplication by 2 is equivalent to shifting.&lt;/li&gt;
   &lt;li&gt;31 can be optimized by JVM: 31 * i = (i « 5) - i&lt;/li&gt;
@@ -980,9 +995,9 @@ In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global 
  
  <entry>
    <title>Index</title>
-   <link href="http://localhost:4000/database/index/"/>
+   <link href="http://www.siyutan.com/database/index/"/>
    <updated>2018-12-23T00:00:00-05:00</updated>
-   <id>http://localhost:4000/database/index</id>
+   <id>http://www.siyutan.com/database/index</id>
    <content type="html">&lt;h2 id=&quot;1-composite-index&quot;&gt;1. Composite index&lt;/h2&gt;
 &lt;p&gt;MySQL can only use one index in one query. If multiple columns appear in the search condition, MySQL will pick the most strict index, that is, the one that will retrive the least records. &lt;br /&gt;
 We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;
@@ -1017,9 +1032,9 @@ We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;
  
  <entry>
    <title>Camparable and Comparator</title>
-   <link href="http://localhost:4000/java/Comparable-and-Comparator/"/>
+   <link href="http://www.siyutan.com/java/Comparable-and-Comparator/"/>
    <updated>2018-12-08T00:00:00-05:00</updated>
-   <id>http://localhost:4000/java/Comparable-and-Comparator</id>
+   <id>http://www.siyutan.com/java/Comparable-and-Comparator</id>
    <content type="html">&lt;p&gt;To sort an array of &lt;strong&gt;primitives&lt;/strong&gt;, we can simply use Arrays.sort method.&lt;br /&gt;
 To sort an array of &lt;strong&gt;objects&lt;/strong&gt;, the objects have to be &lt;strong&gt;Comparable&lt;/strong&gt;.&lt;/p&gt;
 
@@ -1109,9 +1124,9 @@ Therefore, we need to implement &lt;code class=&quot;highlighter-rouge&quot;&gt;
  
  <entry>
    <title>Quick Select</title>
-   <link href="http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select/"/>
+   <link href="http://www.siyutan.com/data%20structures%20and%20algorithms/Quick-Select/"/>
    <updated>2018-11-30T00:00:00-05:00</updated>
-   <id>http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select</id>
+   <id>http://www.siyutan.com/data%20structures%20and%20algorithms/Quick-Select</id>
    <content type="html">&lt;p&gt;Average time complexity:
 &lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n) + T(n / 2) = O(n) + O(n / 2) + O(n / 4) + ... + O(1)&lt;/code&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n)&lt;/code&gt;&lt;/p&gt;
@@ -1123,9 +1138,9 @@ Therefore, we need to implement &lt;code class=&quot;highlighter-rouge&quot;&gt;
  
  <entry>
    <title>Bitwise Operation Tricks</title>
-   <link href="http://localhost:4000/computer%20systems/bitwise-operation/"/>
+   <link href="http://www.siyutan.com/computer%20systems/bitwise-operation/"/>
    <updated>2018-11-21T00:00:00-05:00</updated>
-   <id>http://localhost:4000/computer%20systems/bitwise-operation</id>
+   <id>http://www.siyutan.com/computer%20systems/bitwise-operation</id>
    <content type="html">&lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;For any number n with only one bit of ‘1’ except 0
@@ -1148,9 +1163,9 @@ That’s why Java HashMap’s underlying array always has a length of a power of
  
  <entry>
    <title>Computer Network</title>
-   <link href="http://localhost:4000/computer%20systems/computer-network/"/>
+   <link href="http://www.siyutan.com/computer%20systems/computer-network/"/>
    <updated>2018-11-14T00:00:00-05:00</updated>
-   <id>http://localhost:4000/computer%20systems/computer-network</id>
+   <id>http://www.siyutan.com/computer%20systems/computer-network</id>
    <content type="html">&lt;h2 id=&quot;1-tcp-vs-udp&quot;&gt;1. TCP v.s. UDP&lt;/h2&gt;
 &lt;p&gt;Both send packets to IP address.&lt;br /&gt;
 TCP: Connection oriented. Guarantee order of packets, reliable, not missing or duplicate. Guarantee by sending aknowledgement. Resend if incorrect response.&lt;br /&gt;
@@ -1227,9 +1242,9 @@ Because in 3-way handshake, server can send ACK and SYN at the same time. ACK to
  
  <entry>
    <title>Iterable and Iterator</title>
-   <link href="http://localhost:4000/java/Iterator-and-Iterable/"/>
+   <link href="http://www.siyutan.com/java/Iterator-and-Iterable/"/>
    <updated>2018-11-02T00:00:00-04:00</updated>
-   <id>http://localhost:4000/java/Iterator-and-Iterable</id>
+   <id>http://www.siyutan.com/java/Iterator-and-Iterable</id>
    <content type="html">&lt;h2 id=&quot;iterable&quot;&gt;Iterable&lt;/h2&gt;
 &lt;p&gt;A representation of a group of data that can be iterated.&lt;br /&gt;
 The data structure of this group of data needs to implement the Iterable interface. &lt;br /&gt;
@@ -1312,9 +1327,9 @@ Why do wu use nested classes?&lt;/p&gt;
  
  <entry>
    <title>Arrays</title>
-   <link href="http://localhost:4000/data%20structures%20and%20algorithms/array/"/>
+   <link href="http://www.siyutan.com/data%20structures%20and%20algorithms/array/"/>
    <updated>2018-10-30T00:00:00-04:00</updated>
-   <id>http://localhost:4000/data%20structures%20and%20algorithms/array</id>
+   <id>http://www.siyutan.com/data%20structures%20and%20algorithms/array</id>
    <content type="html">&lt;h2 id=&quot;manipulating-arrays&quot;&gt;Manipulating arrays&lt;/h2&gt;
 
 &lt;h3 id=&quot;1-one-method---clone--one-immutable-field---length&quot;&gt;1. one method - &lt;code class=&quot;highlighter-rouge&quot;&gt;clone()&lt;/code&gt; + one immutable field - &lt;code class=&quot;highlighter-rouge&quot;&gt;length&lt;/code&gt;&lt;/h3&gt;
@@ -1404,9 +1419,9 @@ Why do wu use nested classes?&lt;/p&gt;
  
  <entry>
    <title>Google's Map Reduce Engineer Round Table Discussion</title>
-   <link href="http://localhost:4000/big%20data/MapReduce/"/>
+   <link href="http://www.siyutan.com/big%20data/MapReduce/"/>
    <updated>2018-10-30T00:00:00-04:00</updated>
-   <id>http://localhost:4000/big%20data/MapReduce</id>
+   <id>http://www.siyutan.com/big%20data/MapReduce</id>
    <content type="html">&lt;p&gt;Map: Applicational function to every single item&lt;/p&gt;
 
 &lt;p&gt;Reduce: Aggregation of those results of the applicational function&lt;/p&gt;
