@@ -1,5 +1,11 @@
 [
 
+{"date": "Fri, 22 Feb 2019 00:00:00 -0500",
+"categories": ["Java"],
+"tags": [],
+"title": "Memory Leak in Java",
+"url": "/java/java-memory-leak/"},
+
 {"date": "Sun, 10 Feb 2019 00:00:00 -0500",
 "categories": ["Information Retrieval and Machine Learning"],
 "tags": [],

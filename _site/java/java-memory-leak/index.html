@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siyu Tan - Memory Leak in Java</title>
+  <meta name="author" content="Siyu Tan" />
+  <meta name="description" content="The blog of Siyu Tan" />
+  <link rel="canonical" href="http://localhost:4000/java/java-memory-leak/" />
+
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="alternate" type="application/atom+xml" title="Siyu Tan" href="http://localhost:4000/atom.xml" />
+
+  <link rel="stylesheet" href="/assets/css/all.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="four columns sidebar">
+      <nav>
+  <h1>Hi.</h1>
+  <a href="/">
+    
+    <img class="avatar" src="/logo.jpeg" id="logo" alt="Blog logo"/>
+    
+  </a>
+  <h2>I'm <a href="/">Siyu Tan</a>.</h2>
+  <div id="bio">
+    <p>Oops! You found my secret website.. Have fun!!!</p>
+    <p>
+    <a href="/chronological">Timeline</a><br>
+    <a href="/">Categories</a>
+    </p>
+    <p></p>
+    <p><a href="/about">About Me</a></p>
+  </div>
+  
+  <div id="social">
+    Follow me:
+<div id="stalker">
+  
+  <a title="siyuboomboom on Github" href="https://github.com/siyuboomboom">
+    <i class="fa fa-github-square"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a title="Siyu Tan on Facebook" href="https://facebook.com/sherry.tan.92351">
+    <i class="fa fa-facebook-square"></i>
+  </a>
+  
+
+  
+
+  
+  <a title="Siyu Tan on LinkedIn" href="https://www.linkedin.com/in/siyutan">
+    <i class="fa fa-linkedin-square"></i>
+  </a>
+  
+
+  
+
+  
+</div>
+
+  </div>
+</nav>
+
+    </div>
+
+    <div class="eleven columns content">
+      <p class="meta">
+  February 22, 2019 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
+
+<h1 class="title">Memory Leak in Java</h1>
+
+<div class="post-categories">
+  
+  Categories: 
+  
+  <a href="/categories/#Java">Java</a>
+  
+  
+</div>
+
+<br>
+<div id="post">
+  <p>Memory leak happens when an object is no longer used but garbage collection is not able to remove it from the heap.</p>
+
+<h2 id="symptoms-of-memory-leak">Symptoms of memory leak</h2>
+<ol>
+  <li>Severe performance degradation when the application is continuously running for a long time</li>
+  <li>OutOfMemoryError</li>
+  <li>Spontaneous and strange application crashes</li>
+  <li>The application is occasionally running out of connection objects</li>
+</ol>
+
+<h2 id="causes-of-memory-leak-in-java">Causes of memory leak in Java</h2>
+<h3 id="1-static-variables">1. static variables</h3>
+<p>Static objects remain in heap throughout the whole lifetime of application. We should minimize the use of static field whenever possible.</p>
+<h3 id="2-not-closing-resources">2. not closing resources</h3>
+<p>JVM allocates memory for resources such as database connection and input stream. If we don’t close it after using it, GC can’t remove it from the heap. We should always close resources in finally block or use try-with-resources in Java 7+.</p>
+
+<p>Note: Any object that implements java.lang.AutoCloseable, which includes all objects which implement java.io.Closeable, can be used as a resource.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">(</span><span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span>
+                   <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">path</span><span class="o">)))</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<h3 id="3-non-static-inner-class">3. non-static inner class</h3>
+<p>Non-static inner class holds an implicit reference to its enclosing class. If we use this inner class’ object in our application, then even after our containing class’ object goes out of scope, it will not be garbage collected. If inner class doesn’t need access to enclosing class’s members, we should declare it to be static.</p>
+
+<h3 id="4-finalize">4. finalize()</h3>
+<p>If finalize() method is overriden in a class, it’s called when JVM decided to garbage collect the instance. The main purpose of a finalizer is to release resources used by objects before they’re removed from the memory. A finalizer can work as the primary mechanism for clean-up operations, or as a safety net when other methods fail.</p>
+
+<p>However, using finalize() has several disadvantages:</p>
+<ol>
+  <li>It’s out of our control when the garbage collection happens. Thus, we may run out of memory before the resource is cleaned by GC.</li>
+  <li>GC algorithm is JVM implementation dependent, so a program may run very well on one system while behaving differently at runtime on another.</li>
+  <li>JVM must perform much more operations when constructing and destroying objects containing a non-empty finalizer.</li>
+  <li>If a finalizer throws an exception, the finalization process is canceled, and the exception is ignored, leaving the object in a corrupted state without any notification.</li>
+</ol>
+
+<p>Therefore, we should avoid overriding finalize().</p>
+
+<p>One option is to implement AutoCloseable and override its close() method.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CloseableResource</span> <span class="kd">implements</span> <span class="n">AutoCloseable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">BufferedReader</span> <span class="n">reader</span><span class="o">;</span>
+ 
+    <span class="kd">public</span> <span class="nf">CloseableResource</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span>
+          <span class="o">.</span><span class="na">getClassLoader</span><span class="o">()</span>
+          <span class="o">.</span><span class="na">getResourceAsStream</span><span class="o">(</span><span class="s">"file.txt"</span><span class="o">);</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">input</span><span class="o">));</span>
+    <span class="o">}</span>
+ 
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">readFirstLine</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">reader</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="o">}</span>
+ 
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">close</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// handle exception</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Then we can use try-with-resources to close the resources.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">whenTryWResourcesExits_thenResourceClosed</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">(</span><span class="n">CloseableResource</span> <span class="n">resource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CloseableResource</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">firstLine</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="na">readFirstLine</span><span class="o">();</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="s">"baeldung.com"</span><span class="o">,</span> <span class="n">firstLine</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Source:</p>
+<ol>
+  <li><a href="https://www.baeldung.com/java-memory-leaks">https://www.baeldung.com/java-memory-leaks</a></li>
+  <li><a href="https://www.baeldung.com/java-finalize">https://www.baeldung.com/java-finalize</a></li>
+</ol>
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
+    
+    <li>
+      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/decision-tree/">Decision Tree Algorithm Implementation - Python</a>
+    </li>
+    
+    <li>
+      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/Machine-Learning/">Machine Learning - Study Notes</a>
+    </li>
+    
+    <li>
+      <span>25 Jan 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/search-engines-note/">Introduction to Information Retrieval - Reading Summary</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+
+      <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+*/
+
+var disqus_config = function () {
+    this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = window.location.href; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://siyutan-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <div class="footer">
+        <div class="disclaimer">
+  
+  <p>
+    The postings on this site are my own and don't necessarily represent my 
+    employer’s positions, strategies or opinions.
+  </p>
+  
+
+  <p>
+    © Siyu Tan, 2019 &mdash; built with <a href="http://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/swanson/lagom">Lagom theme</a>
+  </p>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>

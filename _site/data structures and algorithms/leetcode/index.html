@@ -32,7 +32,7 @@
   <div id="bio">
     <p>Oops! You found my secret website.. Have fun!!!</p>
     <p>
-    <a href="/chronological">All Posts</a><br>
+    <a href="/chronological">Timeline</a><br>
     <a href="/">Categories</a>
     </p>
     <p></p>
@@ -103,7 +103,72 @@
 
 <br>
 <div id="post">
-  <h3 id="378-kth-smallest-element-in-a-sorted-matrix">378. Kth Smallest Element in a Sorted Matrix</h3>
+  <h3 id="189-rotate-array">189. Rotate Array</h3>
+<p><strong>Cyclic Replacement</strong> <br />
+Move the first number to the index of k, move the number at index of k to the next position k elements from there, and go on like this until we come back to the starting position. If this doesn’t cover all numbers in the array, coninue this process from the second number until we moved all numbers.</p>
+
+<p>Time: <strong>O(n)</strong> <br />
+Space: <strong>O(1)</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">len</span><span class="o">;</span>
+        
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">len</span><span class="o">,</span> <span class="n">end</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">%</span> <span class="n">len</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
+            
+            <span class="k">while</span> <span class="o">(</span><span class="n">start</span> <span class="o">!=</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">end</span><span class="o">];</span>
+                <span class="n">nums</span><span class="o">[</span><span class="n">end</span><span class="o">]</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
+                <span class="n">first</span> <span class="o">=</span> <span class="n">second</span><span class="o">;</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="o">(</span><span class="n">end</span> <span class="o">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">%</span> <span class="n">len</span><span class="o">;</span>
+                <span class="n">n</span><span class="o">--;</span>
+            <span class="o">}</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">end</span><span class="o">]</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
+            <span class="n">n</span><span class="o">--;</span>
+            
+            <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><strong>Reverse Trick</strong></p>
+<ol>
+  <li>Divide the array to two parts, first part having nums.length - k while second k element. <br />
+<code class="highlighter-rouge">1 2 3 4 | 5 6 7</code></li>
+  <li>Reverse the two parts. <br />
+<code class="highlighter-rouge">4 3 2 1 | 7 6 5</code></li>
+  <li>Reverse the whole array. <br />
+<code class="highlighter-rouge">5 6 7 1 2 3 4</code></li>
+</ol>
+
+<p>Time: <strong>O(n)</strong> <br />
+Space: <strong>O(1)</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="n">reverse</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">reverse</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">k</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">reverse</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">reverse</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">end</span><span class="o">];</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">end</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+            <span class="n">start</span><span class="o">++;</span>
+            <span class="n">end</span><span class="o">--;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<h3 id="378-kth-smallest-element-in-a-sorted-matrix">378. Kth Smallest Element in a Sorted Matrix</h3>
 <p><strong>Min Heap</strong></p>
 <ol>
   <li>Offer first row into heap, now we are sure the smallest element is in.</li>
@@ -637,15 +702,15 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
   <ul class="posts">
     
     <li>
+      <span>22 Feb 2019 &raquo;</span> <a href="/java/java-memory-leak/">Memory Leak in Java</a>
+    </li>
+    
+    <li>
       <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/decision-tree/">Decision Tree Algorithm Implementation - Python</a>
     </li>
     
     <li>
       <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/Machine-Learning/">Machine Learning - Study Notes</a>
-    </li>
-    
-    <li>
-      <span>25 Jan 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/search-engines-note/">Introduction to Information Retrieval - Reading Summary</a>
     </li>
     
   </ul>
