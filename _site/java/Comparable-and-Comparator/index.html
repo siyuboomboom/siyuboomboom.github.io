@@ -187,6 +187,14 @@ Therefore, we need to implement <code class="highlighter-rouge">compareTo()</cod
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span> <span class="n">cards</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">cards</span><span class="o">,</span> <span class="k">new</span> <span class="n">CompareBySuit</span><span class="o">());</span></code></pre></figure>
 
+<p>We can also use anonymous class if we are only going to use the Comparator once. Don’t forget the type parameter <code class="highlighter-rouge">&lt;T&gt;</code> after <code class="highlighter-rouge">new Comparator</code>.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">minHeap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Integer</span> <span class="n">n1</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">n2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">num2freq</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">n1</span><span class="o">)</span> <span class="o">-</span> <span class="n">num2freq</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">n2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span></code></pre></figure>
+
 
 </div>
 

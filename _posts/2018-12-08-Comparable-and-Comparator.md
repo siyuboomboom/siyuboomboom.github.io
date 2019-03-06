@@ -90,3 +90,11 @@ List<Card> cards = new ArrayList<>();
 Collections.sort(cards, new CompareBySuit());
 {% endhighlight %}   
 
+We can also use anonymous class if we are only going to use the Comparator once. Don't forget the type parameter `<T>` after `new Comparator`.   
+{% highlight java %}
+PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>(new Comparator<Integer>() {
+    public int compare(Integer n1, Integer n2) {
+        return map.get(n1) - map.get(n2);
+    }
+});
+{% endhighlight %} 
