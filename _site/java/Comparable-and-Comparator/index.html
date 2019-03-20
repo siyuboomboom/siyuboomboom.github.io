@@ -32,11 +32,11 @@
   <div id="bio">
     <p>Oops! You found my secret website.. Have fun!!!</p>
     <p>
-    <a href="/chronological">Timeline</a><br>
-    <a href="/">Categories</a>
+    <a href="/chronological">Timeline 时间线</a><br>
+    <a href="/">Categories 分类</a>
     </p>
     <p></p>
-    <p><a href="/about">About Me</a></p>
+    <p><a href="/about">About Me 关于我</a></p>
   </div>
   
   <div id="social">
@@ -191,7 +191,7 @@ Therefore, we need to implement <code class="highlighter-rouge">compareTo()</cod
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">minHeap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Integer</span> <span class="n">n1</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">n2</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">num2freq</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">n1</span><span class="o">)</span> <span class="o">-</span> <span class="n">num2freq</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">n2</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">n1</span><span class="o">)</span> <span class="o">-</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">n2</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">});</span></code></pre></figure>
 
