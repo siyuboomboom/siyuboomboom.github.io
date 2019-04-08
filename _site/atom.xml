@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-04-07T23:21:39-04:00</updated>
+ <updated>2019-04-08T16:29:08-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -43,17 +43,27 @@
    <link href="http://localhost:4000/personal/cmu-courses/"/>
    <updated>2019-04-07T00:00:00-04:00</updated>
    <id>http://localhost:4000/personal/cmu-courses</id>
-   <content type="html">&lt;p&gt;离毕业不到一个月时间了，很舍不得，回忆一下在CMU这不同寻常的两年。虽然标题看起来我过得比较惨，但事实上&lt;del&gt;也是挺惨的&lt;/del&gt;是人生中最快乐的两年了。&lt;/p&gt;
+   <content type="html">&lt;h2 id=&quot;流水账&quot;&gt;流水账&lt;/h2&gt;
+
+&lt;p&gt;离毕业不到一个月时间了，很舍不得，回忆一下在CMU这不同寻常的两年。虽然标题看起来我过得比较惨，但事实上&lt;del&gt;也是挺惨的&lt;/del&gt;是人生中最快乐的两年了。&lt;/p&gt;
 
 &lt;p&gt;作为一个商科选手，一开始我连Linux和IDE是什么都不知道，当时申请的也都是金融工程和商业分析的项目，把CMU的MISM也是当成商业分析来申的。当时还拿了芝加哥大学的金融数学和哥大的运筹，纠结了整整一个月，现在想来选CMU是个无比正确的决定，穿着hoodie写码的我比穿business casual画ppt的我要快乐得多。本科四年的金融学得一直很痛苦，毫无兴趣可言，每次上专业课都在质疑这个学科存在的价值，至少它的价值我没有get到吧，我觉得相比之下会计和法律要实际得多。&lt;/p&gt;
 
 &lt;p&gt;刚开学的时候有个java课的免修考试，我暑假好好学了一下就过了，后来发现将近一百人就三个人过了，突然就被大家叫成大佬。每次大家叫我大佬的时候我内心都在咆哮：“你见过连命令行都没用过的大佬吗？”，但我脸上还是保持着大佬的镇定和微笑。第二个学期再没有人叫我大佬了，因为我们开始上Cloud Computing了：）菜鸡的本质暴露无遗。CC真的很不适合我，因为我数据结构、算法、数据库、操作系统、网络全都没学过，literally什么也不会，写过的代码不超过两百行，一上来就整个这么综合应用型和高难度的，真的很暴力了，但没有别的选择，简历上空无一物，也没有时间和途径补基础课，只有这个揠苗助长的方法，以求勉强打造出一个和CS沾边的简历。&lt;/p&gt;
 
-&lt;p&gt;上完CC感觉掉了一层皮，别人大概一周二十几个小时就搞定了，我估计我至少要四十个小时，几乎每两周就要通宵一次，做小组项目的时候几乎就睡在了学校，最悲惨的是，3个phase，每个phase最后的成绩都是零分。这个项目真的很残酷了，就算我们程序能算出正确结果，速度达不到还是零分。我们对于提升效率毫无头绪，慢得不行，服务器还经常莫名崩掉，根本达不到它的高并发要求，要求的最低标准6000的rps我们只有几百。光是处理两个T的数据、写出正确的逻辑、设计合理的数据库、部署好几台服务器就已经花掉我们所有时间了，到最后正确率也没达到100%。这对于当时连RESTful API都不知道的我真的太难了。如果能稍微有些分布式系统和数据库的基础，才能真正学到有趣的东西吧。&lt;/p&gt;
+&lt;p&gt;上完CC感觉掉了一层皮，别人大概一周二十几个小时就搞定了，我估计我至少要四十个小时，几乎每两周就要通宵一次，做小组项目的时候几乎就睡在了学校，最悲惨的是，3个phase，每个phase最后的成绩都是零分。这个项目真的很残酷了，就算我们程序能算出正确结果，速度达不到还是零分。我们对于提升效率毫无头绪，慢得不行，服务器还经常莫名崩掉，根本达不到它的高并发要求，要求的最低标准6000的rps我们只有几百。光是处理两个T的数据、写出正确的逻辑、设计合理的数据库、部署好几台服务器就已经花掉我们所有时间了，到最后正确率也没达到100%。这对于当时连RESTful都不知道的我真的太难了。如果能稍微有些分布式系统和数据库的基础，才能真正学到有趣的东西吧。&lt;/p&gt;
 
-&lt;p&gt;我花了很多很多的时间，可收获一般，很多项目做完了也不知道做了个啥，感觉很可惜，是个很好很有趣的课但不适合我。基础没到位，有很多有趣的点就get不到，如果现在上的话应该能轻松很多也能学到更多吧。但好歹我get了一堆看起来高大上的项目，找工作投简历的时候发现职位要求里的技术我大部分都玩过了，面试的时候面试官对cc的项目都很感兴趣，是个很贴近业界的课了。但学的所有的技术都浅尝辄止，随便一问就能问倒。&lt;/p&gt;
+&lt;p&gt;我花了很多很多的时间，可收获一般，很多项目做完了也不知道做了个啥，感觉很可惜，是个很好很有趣的课但不适合我。基础没到位，有很多有趣的点就get不到，如果现在上的话应该能轻松很多也能学到更多吧。但好歹我get了一堆看起来高大上的项目，找工作投简历的时候发现职位要求里的技术我大部分都玩过了，面试的时候面试官对cc的项目都很感兴趣，是个很贴近业界的课了。但学的所有的技术都浅尝辄止，随便一问就能问倒。所以很多学弟学妹问我要不要选CC，我当然是建议你至少上完分布式系统和数据库再上这门课，但对于转专业MISM选手你没得选，不上你可能实习简历关都过不了。&lt;/p&gt;
 
-&lt;p&gt;在CMU的第二年就开心很多了，到了一个更大的校园，认识了很多其他专业的大佬，课余活动丰富了很多，课程质量高了不知道几个档次（SCS的课和Heinz的课形成鲜明对比）。&lt;/p&gt;
+&lt;p&gt;在CMU的第二年就开心很多了，到了一个更大的校园，认识了很多其他专业的大佬，课余活动丰富了很多，课程质量高了很多（SCS的课和Heinz的课形成鲜明对比）。经历过cc后，同时上三门cs课感觉毫无压力，最主要的是我学会不硬刚了，作业做不完就不做了，考试没准备好也能上，GPA算个啥呢&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;选课&quot;&gt;选课&lt;/h2&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;faq&quot;&gt;FAQ&lt;/h2&gt;
+&lt;p&gt;有很多学弟学妹问我&lt;/p&gt;
 </content>
  </entry>
  
@@ -1170,19 +1180,6 @@ In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global 
  </entry>
  
  <entry>
-   <title>Why 31 is chosen as multiplier in hashCode()</title>
-   <link href="http://localhost:4000/java/why-31/"/>
-   <updated>2018-12-25T00:00:00-05:00</updated>
-   <id>http://localhost:4000/java/why-31</id>
-   <content type="html">&lt;ol&gt;
-  &lt;li&gt;It’s a prime number. Prime number reduces collision. Even number causes information loss, as multiplication by 2 is equivalent to shifting.&lt;/li&gt;
-  &lt;li&gt;31 can be optimized by JVM: 31 * i = (i « 5) - i&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</content>
- </entry>
- 
- <entry>
    <title>Index</title>
    <link href="http://localhost:4000/database/index/"/>
    <updated>2018-12-23T00:00:00-05:00</updated>
@@ -1316,20 +1313,6 @@ Therefore, we need to implement &lt;code class=&quot;highlighter-rouge&quot;&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-</content>
- </entry>
- 
- <entry>
-   <title>Quick Select</title>
-   <link href="http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select/"/>
-   <updated>2018-11-30T00:00:00-05:00</updated>
-   <id>http://localhost:4000/data%20structures%20and%20algorithms/Quick-Select</id>
-   <content type="html">&lt;p&gt;Average time complexity:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n) + T(n / 2) = O(n) + O(n / 2) + O(n / 4) + ... + O(1)&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Worst case:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(n ^ 2)&lt;/code&gt;&lt;/p&gt;
 </content>
  </entry>
  

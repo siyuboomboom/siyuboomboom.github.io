@@ -66,12 +66,6 @@
 "title": "Scaling Static Web Content&#58; Content Delivery Networks",
 "url": "/web%20applications/CDN/"},
 
-{"date": "Tue, 25 Dec 2018 00:00:00 -0500",
-"categories": ["Java"],
-"tags": [],
-"title": "Why 31 is chosen as multiplier in hashCode()",
-"url": "/java/why-31/"},
-
 {"date": "Sun, 23 Dec 2018 00:00:00 -0500",
 "categories": ["Database"],
 "tags": [],
@@ -83,12 +77,6 @@
 "tags": [],
 "title": "Camparable and Comparator",
 "url": "/java/Comparable-and-Comparator/"},
-
-{"date": "Fri, 30 Nov 2018 00:00:00 -0500",
-"categories": ["Data Structures and Algorithms"],
-"tags": [],
-"title": "Quick Select",
-"url": "/data%20structures%20and%20algorithms/Quick-Select/"},
 
 {"date": "Wed, 21 Nov 2018 00:00:00 -0500",
 "categories": ["Computer Systems"],
