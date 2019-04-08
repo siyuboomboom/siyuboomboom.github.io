@@ -7,7 +7,7 @@ categories:
 
 ### Goal
 In the below picture, every image in the same row represents a same letter. The goal is to label these images of handwritten letters by implementing a Neural Network from scratch.
-<img src="/assets/images/i12.png" width="300"/>
+<img src="/assets/images/i16.png" width="300"/>
 
 
 {% highlight python %}
