@@ -1,5 +1,17 @@
 [
 
+{"date": "Sun, 07 Apr 2019 00:00:00 -0400",
+"categories": ["Information Retrieval and Machine Learning"],
+"tags": [],
+"title": "Build a Handwriting Recognition System using Neural Netowrk",
+"url": "/information%20retrieval%20and%20machine%20learning/neural-network/"},
+
+{"date": "Sun, 07 Apr 2019 00:00:00 -0400",
+"categories": ["Personal"],
+"tags": [],
+"title": "鬼知道我在CMU经历了什么",
+"url": "/personal/cmu-courses/"},
+
 {"date": "Fri, 22 Feb 2019 00:00:00 -0500",
 "categories": ["Java"],
 "tags": [],
@@ -11,12 +23,6 @@
 "tags": [],
 "title": "Decision Tree Algorithm Implementation - Python",
 "url": "/information%20retrieval%20and%20machine%20learning/decision-tree/"},
-
-{"date": "Sun, 10 Feb 2019 00:00:00 -0500",
-"categories": ["Information Retrieval and Machine Learning"],
-"tags": [],
-"title": "Machine Learning - Study Notes",
-"url": "/information%20retrieval%20and%20machine%20learning/Machine-Learning/"},
 
 {"date": "Fri, 25 Jan 2019 00:00:00 -0500",
 "categories": ["Information Retrieval and Machine Learning"],
@@ -49,10 +55,10 @@
 "url": "/computer%20systems/linux-command/"},
 
 {"date": "Sun, 06 Jan 2019 00:00:00 -0500",
-"categories": ["Distributed Systems","Web Applications"],
+"categories": ["Web Applications"],
 "tags": [],
 "title": "Consistent Hashing",
-"url": "/distributed%20systems/web%20applications/consistent-hashing/"},
+"url": "/web%20applications/consistent-hashing/"},
 
 {"date": "Sun, 06 Jan 2019 00:00:00 -0500",
 "categories": ["Web Applications"],
@@ -107,11 +113,5 @@
 "tags": [],
 "title": "Arrays",
 "url": "/data%20structures%20and%20algorithms/array/"},
-
-{"date": "Tue, 30 Oct 2018 00:00:00 -0400",
-"categories": ["Big Data"],
-"tags": [],
-"title": "Google's Map Reduce Engineer Round Table Discussion",
-"url": "/big%20data/MapReduce/"},
 
 false]

@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Google's Map Reduce Engineer Round Table Discussion</title>
+  <title>Siyu Tan - Consistent Hashing</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/big%20data/MapReduce/" />
+  <link rel="canonical" href="http://localhost:4000/web%20applications/consistent-hashing/" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -32,8 +32,8 @@
   <div id="bio">
     <p>Oops! You found my secret website.. Have fun!!!</p>
     <p>
-    <a href="/chronological">Timeline 时间线</a><br>
-    <a href="/">Categories 分类</a>
+    <a href="/">Timeline 时间线</a><br>
+    <a href="/categorical">Categories 分类</a>
     </p>
     <p></p>
     <p><a href="/about">About Me 关于我</a></p>
@@ -84,34 +84,58 @@
 
     <div class="eleven columns content">
       <p class="meta">
-  October 30, 2018 
+  January 06, 2019 
   <a href="/">
     <i class="home fa fa-home"></i>
   </a>
 </p>
 
-<h1 class="title">Google's Map Reduce Engineer Round Table Discussion</h1>
+<h1 class="title">Consistent Hashing</h1>
 
+<!-- 
 <div class="post-categories">
   
   Categories: 
   
-  <a href="/categories/#Big Data">Big Data</a>
+  <a href="/categories/#Web Applications">Web Applications</a>
   
   
 </div>
+-->
 
 <br>
 <div id="post">
-  <p>Map: Applicational function to every single item</p>
+  <h2 id="problem-of-using-hash">Problem of using hash</h2>
+<p>In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate <code class="highlighter-rouge">hash(key) % node_number</code>, so that we don’t iterate through all nodes to the find the key.<br />
+But what if the node_number change, say adding a new node or remove an old node? Now every cache object needs to move, and in that period of data transfering, application can’t get data from cache. Here comes in the consistent hashing.</p>
 
-<p>Reduce: Aggregation of those results of the applicational function</p>
+<h2 id="how-consistent-hashing-works">How consistent hashing works?</h2>
+<ol>
+  <li>assume hash value is an unsigned 32-bit integer, i.e. hash value is between 0 and 2^31 - 1. Imagine this circle starts from 0 to 2^31 - 1 and then comes back to 0.</li>
+  <li>hash each server (or node), either using its IP or name, now we know each node’s position on the circle.</li>
+</ol>
 
-<h3 id="main-point-of-implementing-mapreduce-library">Main point of implementing MapReduce library:</h3>
-<p>Most complicated part in parallel computing is failure handling. MapReduce solves this problem and hide the detail in the library.<br />
-Handling failure without MapReduce is like:<br />
-Write checkpoints like load descriptors about how far I’ve got in processing each input and generating output. If there’s a failure, try to find the right checkpoint to restart.</p>
+<p><img src="/assets/images/i6.jpg" width="400" /></p>
 
+<ol>
+  <li>hash the key of data, so that we get the position of each data object.</li>
+</ol>
+
+<p><img src="/assets/images/i7.jpg" width="400" /></p>
+
+<p>Now if we add a new node, only part of data on node C is moved to node X, other nodes unaffected.</p>
+
+<p><img src="/assets/images/i8.jpg" width="400" /></p>
+
+<h2 id="problem-of-consistent-hashing">Problem of consistent hashing</h2>
+<p>If nodes are few, it’s easy to form this situation where imbalance occurs between nodes. Large amount of data are on node A while very few are on B.<br />
+<img src="/assets/images/i9.jpg" width="300" /></p>
+
+<p>Virtual nodes solve the problem. For each node, we calculate multiple hash values by for example appending numbers to IP, to generate virtual nodes. Data objects that are mapped to the virtual nodes are mapped to the corresponding real nodes. By increasing node number, nodes are more evenly distributed on the circle. 
+<img src="/assets/images/i10.jpg" width="400" /></p>
+
+<h3 id="source">Source:</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/34985026">https://zhuanlan.zhihu.com/p/34985026</a></p>
 
 </div>
 
@@ -120,15 +144,15 @@ Write checkpoints like load descriptors about how far I’ve got in processing e
   <ul class="posts">
     
     <li>
+      <span>07 Apr 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/neural-network/">Build a Handwriting Recognition System using Neural Netowrk</a>
+    </li>
+    
+    <li>
+      <span>07 Apr 2019 &raquo;</span> <a href="/personal/cmu-courses/">鬼知道我在CMU经历了什么</a>
+    </li>
+    
+    <li>
       <span>22 Feb 2019 &raquo;</span> <a href="/java/java-memory-leak/">Memory Leak in Java</a>
-    </li>
-    
-    <li>
-      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/decision-tree/">Decision Tree Algorithm Implementation - Python</a>
-    </li>
-    
-    <li>
-      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/Machine-Learning/">Machine Learning - Study Notes</a>
     </li>
     
   </ul>

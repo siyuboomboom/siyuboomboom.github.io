@@ -2,7 +2,6 @@
 layout: post
 title: Consistent Hashing
 categories:
-- Distributed Systems
 - Web Applications
 ---
 
