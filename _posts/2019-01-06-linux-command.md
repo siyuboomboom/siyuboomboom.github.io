@@ -1,12 +1,13 @@
 ---
 layout: post
-title: Common Linux Command
+title: Linux (MacOS) Command
 categories:
 - Computer Systems
 ---
 
-### 1. Check what processes are using a certain port number
-`netstat -nap | grep <port>`
+### 1. Check which process is using a certain port number
+` netstat -vanp tcp | grep <port>`
+Then kill: `sudo kill -9 <pid>`
 
 ### 2. Check what port number is being used by a process
 1. Get pid
