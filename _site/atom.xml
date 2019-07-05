@@ -4,13 +4,117 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-04-10T09:43:31-04:00</updated>
+ <updated>2019-05-14T17:33:34-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
    <email>siyutan@cmu.edu</email>
  </author>
 
+ 
+ <entry>
+   <title>乱七八糟的找工之路</title>
+   <link href="http://localhost:4000/personal/job-search/"/>
+   <updated>2019-04-10T00:00:00-04:00</updated>
+   <id>http://localhost:4000/personal/job-search</id>
+   <content type="html">&lt;p&gt;从去年11月开始包括国内一共投了90家，大部分是小公司，电面10家，onsite两家，offer 3个。基本都是网申，没怎么找内推，投得也很随意，漫无目的地投，导致很多公司都没投，经常是问同学有什么面试了才突然发现哦这个我也没投。主要靠handshake随手一点。到了3月开始着急了，去领英上找内推，感觉CMU学姐学长都很棒，回复率超高，基本上问了就给推了。找工作的这最后一个学期我还是顽固地选了两个cs课，capstone也有一大堆的会，导致自己总有别的事要忙，开学时题都没刷到两百，还要一直刷题，反正挺狼狈的。&lt;/p&gt;
+
+&lt;p&gt;到最后发现，拿到的offer全都不是我主动投的。华为是hr找了我，Facebook是领英上fb的员工问我要不要内推，CTC
+是猎头找到的我，和谈恋爱一样，大家好像对送上门的都不太感冒。找工这个事情还是靠缘分，运气和大环境对于我来说占了大多数的因素。&lt;/p&gt;
+
+&lt;p&gt;分公司讲一下。&lt;/p&gt;
+&lt;h3 id=&quot;chicago-trading-company&quot;&gt;Chicago Trading Company&lt;/h3&gt;
+&lt;p&gt;这是一个高频自营交易公司，在量化金融领域算是顶尖的了吧。如果我当时读金融工程的master，以我的水平应该是申不到这么好公司的quant的，但software engineer就很简单了。hr告诉我公司大概350人，有一半是software engineer。&lt;/p&gt;
+
+&lt;p&gt;CTC是Next Step Systems这个猎头公司帮我联系的，他们在handshake上po了好几个职位，专门做芝加哥的fintech公司的招聘，有帮我投好几家包括two sigma，很好很负责，回复非常及时。待遇很好，base 10万，bonus 2万5，签字费1万，这个水平在芝加哥真的非常高了。而且给我感觉很适合养老，工作会比较闲，onsite的时候hr跟我特别强调了有很多人在公司一待就是十几年，毕竟是买方。至少我感受到的，招聘效率非常低，去年12月我就电面了，到了今年2月底才onsite，我当时都快忘记有这个公司了，到3月底我拿别的offer催了一下才出了个口头offer。&lt;/p&gt;
+
+&lt;p&gt;去onsite体验非常好，办公环境非常高大上而且很酷炫，面试非常准时，七轮，每轮45分钟，把所有和我可能有关的人都见了一遍，所有人都特别友好，我有什么答不上来的时候会一直鼓励安慰我。因为氛围比较轻松随意，聊得比较开心，题也不难，所以七轮下来也不觉得累。题都挺有意思，主要是算法、数据结构、java和多线程、系统设计、behavioral question，每一轮都有充足的问面试官问题的环节，我问了好多好多问题，他们都很耐心地回答了很多，听起来感觉挺好的，挺适合我这种咸鱼。&lt;/p&gt;
+
+&lt;p&gt;所以推荐学弟学妹申一下这家，bar也不高，待遇又好，流程简单，就一轮电面一轮onsite，公司文化应该也是随性包容的吧。&lt;/p&gt;
+
+&lt;p&gt;电面题目：&lt;br /&gt;
+checked vs unchecked exception&lt;br /&gt;
+inheritance vs composition&lt;br /&gt;
+If you want to add an object to hashmap, how to design its equals() and hashCode()&lt;br /&gt;
+memory leak in java&lt;br /&gt;
+what are in Java Collection&lt;br /&gt;
+interface vs abstract class&lt;br /&gt;
+generics in java&lt;br /&gt;
+what will happen if put an invalid type of object in a collection of another type&lt;/p&gt;
+
+&lt;h3 id=&quot;facebook&quot;&gt;Facebook&lt;/h3&gt;
+&lt;p&gt;fb的效率也太高了，一直好奇他们HR是怎么做到的，move fast的公司slogan真不是空口说的。这里是timeline：1.20 已推, 1.24 约电面, 2.15 电面, 2.21 通知onsite, 3.11 onsite, 3.15 offer&lt;/p&gt;
+
+&lt;p&gt;跟谷歌形成鲜明对比，谷歌内推完一个月才收到笔试，笔试完一个月才电面，每个环节都要拖个把月，硬生生拖到全北美招满我都还没走到onsite。&lt;/p&gt;
+
+&lt;p&gt;我为了fb付出了好多，毕竟是我最后一个机会，挂了的话就要去芝加哥这个苦寒之地了。从通过简历开始一个多月几乎全在刷fb高频题，一个月做了一百二十多题，地里所有面经题都快被我翻烂了，也没怎么投别的公司，放弃了search engines的期中考试结果考了40多分，期中C-。找了好几个同学帮我模拟算法面试，找了career service和GCC模拟behavioral questions，甚至在去加州的飞机上都有四个多小时在和邻座的abc模拟bq排查英语问题。&lt;/p&gt;
+
+&lt;p&gt;紧张了好多天，面试前一天飞机晚点，就睡了四五个小时，也没睡好，刚要睡着一想到面试就吓醒，觉得自己这么紧张肯定要凉了。没想到面试的时候，一站到白板前面就一点都不紧张了，甚至觉得十分愉快，肯定是在白板上写过很多次太熟悉了就很放松，就像高考一样，所以模拟面试真的很有用。&lt;/p&gt;
+
+&lt;p&gt;面试官都很友好随性，fb工程师好像都比较内向，最后一轮的欧洲人话特别少，说话的时候也不喜欢眼神接触，但还是很友好的，应该就是太腼腆了。下午panel的时候有两个工程师来给我们new grad做分享，说话的时候还有点抖，哈哈哈真的很可爱。&lt;/p&gt;
+
+&lt;h3 id=&quot;华为&quot;&gt;华为&lt;/h3&gt;
+&lt;p&gt;秋招拿的offer，截止时间太早了，不然可以拿来保个底。面试官都是油腻秃顶大叔，和其他公司都是年轻人的面试官形成鲜明对比，有种国企老干部风。&lt;/p&gt;
+
+&lt;h3 id=&quot;腾讯&quot;&gt;腾讯&lt;/h3&gt;
+&lt;p&gt;C++和Go的后台开发，这俩语言我都不会，不知道是咋走到三面的，前两轮的面试官挺喜欢我的吧，到了第三轮的冷漠脸总监就GG了&lt;br /&gt;
+一面&lt;br /&gt;
+jvm垃圾回收机制&lt;br /&gt;
+java线程间同步的方法 atomic包&lt;br /&gt;
+jvm性能调优&lt;br /&gt;
+tcp滑动窗口&lt;br /&gt;
+tcp为什么握手3次挥手4次&lt;br /&gt;
+（面试官答：挥手4次因为tcp是全双工通道，2个通道要断&lt;br /&gt;
+（面试官答：握手3次因为第一次同步client ISN，第二次同步server ISN，第三次ACK&lt;br /&gt;
+握手第三次失败了怎么办？&lt;br /&gt;
+（面试官答：1s后server重试，不断加大延时重试间隔，60s后放弃&lt;br /&gt;
+浏览器输入域名到加载出网页，什么过程，用了什么协议&lt;br /&gt;
+DNS是应用层协议，用的什么传输层协议？UDP&lt;br /&gt;
+2万条以上的表才需要建index，千万以上要分表，社区版mysql百万以上就要分表了&lt;br /&gt;
+index越多越好吗&lt;br /&gt;
+linux查询性能的指令&lt;br /&gt;
+字符串子串算法&lt;/p&gt;
+
+&lt;p&gt;二面 &lt;br /&gt;
+MySQL事务实现原理&lt;br /&gt;
+MongoDB源代码？MySQL源代码？&lt;br /&gt;
+MongoDB vs MySQL&lt;br /&gt;
+MongoDB vs Redis&lt;br /&gt;
+linux操作命令&lt;br /&gt;
+查看进程占用端口&lt;br /&gt;
+查看系统负载&lt;br /&gt;
+awk分割字符 -F&lt;br /&gt;
+linux进程状态有哪些&lt;br /&gt;
+有哪些分布式系统&lt;/p&gt;
+
+&lt;p&gt;三面&lt;br /&gt;
+状态码304是啥: Modified&lt;br /&gt;
+http vs https&lt;br /&gt;
+https port number是啥: 443&lt;br /&gt;
+nginx用过吗&lt;br /&gt;
+tcp挥手，time_wait出现在哪一端，最长持续时间 c端s端状态机&lt;br /&gt;
+红黑树&lt;br /&gt;
+c++ 多态原理 虚继承&lt;br /&gt;
+strncpy vs strcpy&lt;br /&gt;
+怎么判断一个数是不是 2^n &lt;br /&gt;
+linux 看端口占用&lt;br /&gt;
+linux 抓包&lt;/p&gt;
+
+&lt;h3 id=&quot;今日头条&quot;&gt;今日头条&lt;/h3&gt;
+&lt;p&gt;What are protocol layers? &lt;br /&gt;
+Why do we have layers? &lt;br /&gt;
+Do live streams all use UDP? UDP examples? &lt;br /&gt;
+What does sequence number in TCP header do? &lt;br /&gt;
+In TCP, how to differentiate client and server? &lt;br /&gt;
+How is hash table implemented? What data structure?&lt;br /&gt;
+How to solve collisions in close addressing?  &lt;br /&gt;
+Concurrency in hash table&lt;br /&gt;
+how to rehash? &lt;br /&gt;
+编程题：Sort a singly linked list &lt;br /&gt;
+（挂在了这里，第三学期的时候算法还很烂，排序都写不出来&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>CMU MISM 可爱学姐在线答疑</title>
@@ -72,39 +176,13 @@
  </entry>
  
  <entry>
-   <title>Build a Handwriting Recognition System using Neural Netowrk</title>
-   <link href="http://localhost:4000/information%20retrieval%20and%20machine%20learning/neural-network/"/>
-   <updated>2019-04-07T00:00:00-04:00</updated>
-   <id>http://localhost:4000/information%20retrieval%20and%20machine%20learning/neural-network</id>
-   <content type="html">&lt;h3 id=&quot;goal&quot;&gt;Goal&lt;/h3&gt;
-&lt;p&gt;In the below picture, every image in the same row represents a same letter. The goal is to label these images of handwritten letters by implementing a Neural Network from scratch.
-&lt;img src=&quot;/assets/images/i16.png&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sigmoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sigmoid_forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vectorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sigmoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;otypes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sigmoid_backward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;g_a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z_i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;g_a_i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z_i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z_i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;g_a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g_a_i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g_a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-</content>
- </entry>
- 
- <entry>
    <title>鬼知道我在CMU经历了什么</title>
    <link href="http://localhost:4000/personal/cmu-courses/"/>
    <updated>2019-04-07T00:00:00-04:00</updated>
    <id>http://localhost:4000/personal/cmu-courses</id>
    <content type="html">&lt;h2 id=&quot;流水账&quot;&gt;流水账&lt;/h2&gt;
 
-&lt;p&gt;离毕业不到一个月时间了，很舍不得，回忆一下在CMU这不同寻常的两年。虽然标题看起来我过得比较惨，但事实上&lt;del&gt;也是挺惨的&lt;/del&gt;是人生中最快乐的两年了。&lt;/p&gt;
+&lt;p&gt;离毕业不到一个月时间了，很舍不得，回忆一下在CMU这不同寻常的两年。虽然标题看起来我过得比较惨，但事实上&lt;del&gt;也是挺惨的&lt;/del&gt;是目前为止最快乐的两年了。&lt;/p&gt;
 
 &lt;p&gt;作为一个商科选手，一开始我连Linux和IDE是什么都不知道，当时申请的也都是金融工程和商业分析的项目，把CMU的MISM也是当成商业分析来申的。当时还拿了芝加哥大学的金融数学和哥大的运筹，纠结了整整一个月，现在想来选CMU是个无比正确的决定，穿着hoodie写码的我比穿business casual画ppt的我要快乐得多。&lt;/p&gt;
 
@@ -114,36 +192,10 @@
 
 &lt;p&gt;我花了很多很多的时间，可收获一般，很多项目做完了也不知道做了个啥，感觉很可惜，是个很好很有趣的课但不适合我。基础没到位，有很多有趣的点就get不到，如果现在上的话应该能轻松很多也能学到更多吧。但好歹我get了一堆看起来高大上的项目，找工作投简历的时候发现职位要求里的技术我大部分都玩过了，面试的时候面试官对cc的项目都很感兴趣，是个很贴近业界的课了。但学的所有的技术都浅尝辄止，随便一问就能问倒。所以很多学弟学妹问我要不要选CC，我当然是建议你至少上完分布式系统和数据库再上这门课，但对于转专业MISM选手你没得选，不上你可能实习简历关都过不了。&lt;/p&gt;
 
-&lt;p&gt;在CMU的第二年就开心很多了，到了一个更大的校园，认识了很多其他专业的大佬，课余活动丰富了很多，课程质量高了很多（SCS的课和Heinz的课形成鲜明对比）。经历过cc后，同时上三门cs课感觉毫无压力，最主要是我不硬刚了，作业做不完就不做了，考试没准备好也能上，分数太低了就withdraw，学期开始的时候还能选pass/fail，没有什么是补救不了的，自己开心比较重要。于是不熬夜了的我效率反倒上去了，也快乐很多。而且CMU的课和作业都太有意思了，虽然写作业的时候时刻想哭，但写出来了之后像是重生了一样地开心，然后又充满干劲地跳进下一个作业的坑。&lt;/p&gt;
+&lt;p&gt;在CMU的第二年就开心很多了，到了一个更大的校园，认识了很多其他专业的大佬，课余活动丰富了很多，课程质量高了很多（SCS的课和Heinz的课形成鲜明对比）。经历过cc后，同时上三门cs课感觉毫无压力，更主要的原因是我不硬刚了，作业做不完就不做了，考试没准备好也能上，分数太低了就withdraw，学期开始的时候还能选pass/fail，没有什么是补救不了的，自己开心比较重要。之前做cc的时候每个作业都想拿满分，所有reading都想看完，导致学得非常累，临近deadline压力也很大，现在看来都不是事，看开一点也没什么大不了的。之后不熬夜了效率反倒上去了，也快乐很多。而且CMU的课和作业都太有意思了，虽然写作业的时候时刻想哭，但写出来了之后像是重生了一样地开心，然后又充满干劲地跳进下一个作业的坑。&lt;/p&gt;
 
-&lt;h2 id=&quot;找工&quot;&gt;找工&lt;/h2&gt;
-&lt;p&gt;从去年11月开始包括国内一共投了90家，大部分是小公司，电面10家，onsite两家，offer 3个。基本都是网申，没怎么找内推，投得也很随意，漫无目的地投，导致很多公司都没投，经常是问同学有什么面试了才突然发现哦这个我也没投。主要靠handshake随手一点。到了3月开始着急了，去领英上找内推，感觉CMU学姐学长都很棒，回复率超高，基本上问了就给推了。找工作的这最后一个学期我还是顽固地选了两个cs课，导致自己总有别的事要忙，还要一直刷题，反正挺狼狈的。&lt;/p&gt;
-
-&lt;p&gt;到最后发现，拿到的所有offer都不是我主动投的。华为是hr找了我，Facebook是领英上fb的员工问我要不要内推，CTC
-是猎头找到的我。找工这个事情还是靠缘分，运气和大环境对于我来说占了大多数的因素。&lt;/p&gt;
-
-&lt;p&gt;分公司讲一下。&lt;/p&gt;
-&lt;h3 id=&quot;chicago-trading-company&quot;&gt;Chicago Trading Company&lt;/h3&gt;
-&lt;p&gt;这是一个高频交易公司，在量化金融领域算是顶尖的了吧。如果我当时读金融工程的master，以我的水平应该是申不到这么好公司的quant的，但software engineer就很简单了。&lt;/p&gt;
-
-&lt;p&gt;CTC是Next Step Systems这个猎头公司帮我联系的，他们在handshake上po了好几个职位，专门做芝加哥的fintech公司的招聘，有帮我投好几家包括two sigma，很好很负责，回复非常及时。CTC待遇特别好，base 10万，bonus 2万5，签字费1万，这个水平在芝加哥真的非常高了。而且给我感觉很适合养老，工作会比较闲，onsite的时候hr跟我特别强调了有很多人在公司一待就是十几年。至少招聘效率非常低，去年12月我就电面了，到了今年2月底才onsite，我当时都快忘记有这个公司了，到3月底我拿别的offer催了一下才出了个口头offer。&lt;/p&gt;
-
-&lt;p&gt;去onsite体验非常好，办公环境非常高大上而且很酷炫，面试非常准时，七轮，每轮45分钟，把所有和我可能有关的人都见了一遍，所有人都特别友好，我有什么答不上来的时候会一直鼓励安慰我。因为氛围比较轻松随意，聊得比较开心，题也不难，所以七轮下来也不觉得累。题都挺有意思，主要是算法、数据结构、java和多线程、系统设计、behavioral question，每一轮都有充足的问面试官问题的环节，我问了好多好多问题，他们都很耐心地回答了很多，听起来感觉挺好的，挺适合我这种咸鱼。&lt;/p&gt;
-
-&lt;p&gt;所以推荐学弟学妹申一下这家，bar也不高，待遇又好，流程简单，就一轮电面一轮onsite，公司文化应该也是随性包容的吧。&lt;/p&gt;
-
-&lt;h3 id=&quot;facebook&quot;&gt;Facebook&lt;/h3&gt;
-&lt;p&gt;fb的效率也太高了，一直好奇他们HR是怎么做到的，真正践行了他们move fast的公司slogan。这里是timeline：1.20 已推, 1.24 约电面, 2.15 电面, 2.21 通知onsite, 3.11 onsite, 3.15 offer&lt;/p&gt;
-
-&lt;p&gt;跟谷歌形成鲜明对比，谷歌内推完一个月才收到笔试，笔试完一个月才电面，每个环节都要拖个把月，硬生生拖到全北美招满我都还没走到onsite。&lt;/p&gt;
-
-&lt;p&gt;我为了fb付出了好多，毕竟是我最后一个机会，挂了的话就要去芝加哥这个苦寒之地了。从通过简历开始一个多月几乎全在刷fb高频题，一个月做了一百二十多题，地里所有面经题都快被我翻烂了，也没怎么投别的公司，放弃了search engines的期中考试结果考了40多分（100满分）。找了好几个同学帮我模拟算法面试，找了career service和GCC模拟behavioral questions，甚至在去加州的飞机上都有四个多小时和邻座的abc模拟bq排查英语问题。&lt;/p&gt;
-
-&lt;p&gt;紧张了好多天，面试前一天飞机晚点，就睡了四五个小时，也没睡好，刚要睡着一想到面试就吓醒，觉得自己这么紧张肯定要凉了。没想到面试的时候，一站到白板前面就一点都不紧张了，甚至觉得十分愉快，肯定是在白板上写过很多次太熟悉了就很放松，就像高考一样，所以模拟面试真的很有用。&lt;/p&gt;
-
-&lt;p&gt;面试官都很友好随性，fb工程师好像都比较内向，最后一轮的欧洲人话特别少，说话的时候也不喜欢眼神接触，但还是很友好的，应该就是太腼腆了。下午panel的时候有两个工程师来给我们new grad做分享，说话的时候还有点抖，哈哈哈真的很可爱。&lt;/p&gt;
-
-&lt;p&gt;待续..&lt;/p&gt;
+&lt;p&gt;2019/5/14 更
+刚刚熬过了最后一个final，出乎意料的是这竟是我最难熬的一个final，每天都在崩溃的边缘，写作业写着写着就难以忍受，要跑到厕所哭一会儿。&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1173,12 +1225,13 @@ Proxy servers buffer long responses likely causing missing information.&lt;/p&gt
  </entry>
  
  <entry>
-   <title>Common Linux Command</title>
+   <title>Linux (MacOS) Command</title>
    <link href="http://localhost:4000/computer%20systems/linux-command/"/>
    <updated>2019-01-06T00:00:00-05:00</updated>
    <id>http://localhost:4000/computer%20systems/linux-command</id>
-   <content type="html">&lt;h3 id=&quot;1-check-what-processes-are-using-a-certain-port-number&quot;&gt;1. Check what processes are using a certain port number&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -nap | grep &amp;lt;port&amp;gt;&lt;/code&gt;&lt;/p&gt;
+   <content type="html">&lt;h3 id=&quot;1-check-which-process-is-using-a-certain-port-number&quot;&gt;1. Check which process is using a certain port number&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; netstat -vanp tcp | grep &amp;lt;port&amp;gt;&lt;/code&gt;
+Then kill: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo kill -9 &amp;lt;pid&amp;gt;&lt;/code&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;2-check-what-port-number-is-being-used-by-a-process&quot;&gt;2. Check what port number is being used by a process&lt;/h3&gt;
 &lt;ol&gt;

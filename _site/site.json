@@ -1,16 +1,16 @@
 [
 
+{"date": "Wed, 10 Apr 2019 00:00:00 -0400",
+"categories": ["Personal"],
+"tags": [],
+"title": "乱七八糟的找工之路",
+"url": "/personal/job-search/"},
+
 {"date": "Mon, 08 Apr 2019 00:00:00 -0400",
 "categories": ["Personal"],
 "tags": [],
 "title": "CMU MISM 可爱学姐在线答疑",
 "url": "/personal/faq/"},
-
-{"date": "Sun, 07 Apr 2019 00:00:00 -0400",
-"categories": ["Information Retrieval and Machine Learning"],
-"tags": [],
-"title": "Build a Handwriting Recognition System using Neural Netowrk",
-"url": "/information%20retrieval%20and%20machine%20learning/neural-network/"},
 
 {"date": "Sun, 07 Apr 2019 00:00:00 -0400",
 "categories": ["Personal"],
@@ -57,7 +57,7 @@
 {"date": "Sun, 06 Jan 2019 00:00:00 -0500",
 "categories": ["Computer Systems"],
 "tags": [],
-"title": "Common Linux Command",
+"title": "Linux (MacOS) Command",
 "url": "/computer%20systems/linux-command/"},
 
 {"date": "Sun, 06 Jan 2019 00:00:00 -0500",
