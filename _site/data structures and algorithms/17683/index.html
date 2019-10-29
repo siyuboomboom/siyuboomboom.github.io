@@ -6,10 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Siyu Tan - Blog Posts</title>
+  <title>Siyu Tan - 17683 - Data Structures for Application Programmers</title>
   <meta name="author" content="Siyu Tan" />
   <meta name="description" content="The blog of Siyu Tan" />
-  <link rel="canonical" href="http://localhost:4000/categorical/" />
+  <link rel="canonical" href="http://localhost:4000/data%20structures%20and%20algorithms/17683/" />
 
   <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.png">
@@ -83,101 +83,66 @@
     </div>
 
     <div class="eleven columns content">
-      <div id="home">
-  <h2><i class="fa fa-bookmark"></i> Categories</h2>
+      <p class="meta">
+  July 05, 2019 
+  <a href="/">
+    <i class="home fa fa-home"></i>
+  </a>
+</p>
 
+<h1 class="title">17683 - Data Structures for Application Programmers</h1>
+
+<!-- 
+<div class="post-categories">
   
-    
-    <h3 class="category-head">Personal</h3>
-
-    <ul id="blog-posts" class="posts">
-        
-        <li><span>08 Apr 2019 &raquo;</span><a href="/personal/faq/">CMU MISM 可爱学姐在线答疑</a></li>
-        
-    </ul>
-
+  Categories: 
   
-    
-    <h3 class="category-head">Information Retrieval and Machine Learning</h3>
-
-    <ul id="blog-posts" class="posts">
-        
-        <li><span>10 Feb 2019 &raquo;</span><a href="/information%20retrieval%20and%20machine%20learning/decision-tree/">Decision Tree Algorithm Implementation - Python</a></li>
-        
-        <li><span>25 Jan 2019 &raquo;</span><a href="/information%20retrieval%20and%20machine%20learning/search-engines-note/">Introduction to Information Retrieval - Reading Summary</a></li>
-        
-    </ul>
-
+  <a href="/categories/#Data Structures and Algorithms">Data Structures and Algorithms</a>
   
-    
-    <h3 class="category-head">Web Applications</h3>
-
-    <ul id="blog-posts" class="posts">
-        
-        <li><span>18 Jan 2019 &raquo;</span><a href="/web%20applications/real-time-http/">Real Time HTTP Strategies</a></li>
-        
-        <li><span>06 Jan 2019 &raquo;</span><a href="/web%20applications/consistent-hashing/">Consistent Hashing</a></li>
-        
-        <li><span>06 Jan 2019 &raquo;</span><a href="/web%20applications/CDN/">Scaling Static Web Content&#58; Content Delivery Networks</a></li>
-        
-    </ul>
-
-  
-    
-    <h3 class="category-head">Database</h3>
-
-    <ul id="blog-posts" class="posts">
-        
-        <li><span>20 Jan 2019 &raquo;</span><a href="/database/reuse-query/">Encapsulate and Reuse Query Logic</a></li>
-        
-        <li><span>23 Dec 2018 &raquo;</span><a href="/database/index/">Index</a></li>
-        
-    </ul>
-
-  
-    
-    <h3 class="category-head">Computer Systems</h3>
-
-    <ul id="blog-posts" class="posts">
-        
-        <li><span>06 Jan 2019 &raquo;</span><a href="/computer%20systems/linux-command/">Linux (MacOS) Command</a></li>
-        
-        <li><span>21 Nov 2018 &raquo;</span><a href="/computer%20systems/bitwise-operation/">Bitwise Operation Tricks</a></li>
-        
-        <li><span>14 Nov 2018 &raquo;</span><a href="/computer%20systems/computer-network/">Computer Network</a></li>
-        
-    </ul>
-
-  
-    
-    <h3 class="category-head">Java</h3>
-
-    <ul id="blog-posts" class="posts">
-        
-        <li><span>22 Feb 2019 &raquo;</span><a href="/java/java-memory-leak/">Memory Leak in Java</a></li>
-        
-        <li><span>08 Dec 2018 &raquo;</span><a href="/java/Comparable-and-Comparator/">Camparable and Comparator</a></li>
-        
-        <li><span>02 Nov 2018 &raquo;</span><a href="/java/Iterator-and-Iterable/">Iterable and Iterator</a></li>
-        
-    </ul>
-
-  
-    
-    <h3 class="category-head">Data Structures and Algorithms</h3>
-
-    <ul id="blog-posts" class="posts">
-        
-        <li><span>05 Jul 2019 &raquo;</span><a href="/data%20structures%20and%20algorithms/17683/">17683 - Data Structures for Application Programmers</a></li>
-        
-        <li><span>22 Jan 2019 &raquo;</span><a href="/data%20structures%20and%20algorithms/leetcode/">Leetcode</a></li>
-        
-        <li><span>30 Oct 2018 &raquo;</span><a href="/data%20structures%20and%20algorithms/array/">Arrays</a></li>
-        
-    </ul>
-
   
 </div>
+-->
+
+<br>
+<div id="post">
+  <h2 id="big-o-notation">Big O Notation</h2>
+<p><strong>Definition:</strong><br />
+The process of abstraction to determine the running time in relation to the input size.</p>
+
+<p><code class="highlighter-rouge">T(n) = O(f(n))</code> if and only if there exist <code class="highlighter-rouge">c, n0 &gt; 0</code> such that <code class="highlighter-rouge">T(n) &lt;= c * f(n)</code> for all <code class="highlighter-rouge">n &gt;= n0</code>
+<img src="/assets/images/i18.png" width="200" /></p>
+
+<p><strong>Example:</strong><br />
+Claim: <code class="highlighter-rouge">2 ^ (n + 8) = O(2 ^ n)</code> <br />
+Proof: pick <code class="highlighter-rouge">c, n0 &gt; 0</code> such that <code class="highlighter-rouge">2 ^ (n + 8) &lt;= c * (2 ^ n)</code> for all <code class="highlighter-rouge">n &gt;= n0</code> <br />
+Note: <code class="highlighter-rouge">2 ^ (n + 8) = 2 ^ 8 * 2 ^ n = 256 * 2 ^ n</code>, <code class="highlighter-rouge">c = 256, n0 = 1</code></p>
+
+<p><code class="highlighter-rouge">1000n = O(n)</code>, <code class="highlighter-rouge">c = 1000, n0 = 1</code> <br />
+<code class="highlighter-rouge">n ^ 3 + n ^ 2 + n &lt;= 3 * n ^ 3 = O(n ^ 3)</code>, <code class="highlighter-rouge">c = 3, n0 = 1</code></p>
+
+</div>
+
+<div id="related">
+  <h3>Related Posts</h3>
+  <ul class="posts">
+    
+    <li>
+      <span>08 Apr 2019 &raquo;</span> <a href="/personal/faq/">CMU MISM 可爱学姐在线答疑</a>
+    </li>
+    
+    <li>
+      <span>22 Feb 2019 &raquo;</span> <a href="/java/java-memory-leak/">Memory Leak in Java</a>
+    </li>
+    
+    <li>
+      <span>10 Feb 2019 &raquo;</span> <a href="/information%20retrieval%20and%20machine%20learning/decision-tree/">Decision Tree Algorithm Implementation - Python</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+
       <div id="disqus_thread"></div>
 <script>
 

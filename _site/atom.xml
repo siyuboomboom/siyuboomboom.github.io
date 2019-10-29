@@ -4,7 +4,7 @@
  <title>The blog of Siyu Tan</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000"/>
- <updated>2019-05-14T17:33:34-04:00</updated>
+ <updated>2019-07-05T11:56:43+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Siyu Tan</name>
@@ -13,113 +13,31 @@
 
  
  <entry>
-   <title>乱七八糟的找工之路</title>
-   <link href="http://localhost:4000/personal/job-search/"/>
-   <updated>2019-04-10T00:00:00-04:00</updated>
-   <id>http://localhost:4000/personal/job-search</id>
-   <content type="html">&lt;p&gt;从去年11月开始包括国内一共投了90家，大部分是小公司，电面10家，onsite两家，offer 3个。基本都是网申，没怎么找内推，投得也很随意，漫无目的地投，导致很多公司都没投，经常是问同学有什么面试了才突然发现哦这个我也没投。主要靠handshake随手一点。到了3月开始着急了，去领英上找内推，感觉CMU学姐学长都很棒，回复率超高，基本上问了就给推了。找工作的这最后一个学期我还是顽固地选了两个cs课，capstone也有一大堆的会，导致自己总有别的事要忙，开学时题都没刷到两百，还要一直刷题，反正挺狼狈的。&lt;/p&gt;
+   <title>17683 - Data Structures for Application Programmers</title>
+   <link href="http://localhost:4000/data%20structures%20and%20algorithms/17683/"/>
+   <updated>2019-07-05T00:00:00+08:00</updated>
+   <id>http://localhost:4000/data%20structures%20and%20algorithms/17683</id>
+   <content type="html">&lt;h2 id=&quot;big-o-notation&quot;&gt;Big O Notation&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Definition:&lt;/strong&gt;&lt;br /&gt;
+The process of abstraction to determine the running time in relation to the input size.&lt;/p&gt;
 
-&lt;p&gt;到最后发现，拿到的offer全都不是我主动投的。华为是hr找了我，Facebook是领英上fb的员工问我要不要内推，CTC
-是猎头找到的我，和谈恋爱一样，大家好像对送上门的都不太感冒。找工这个事情还是靠缘分，运气和大环境对于我来说占了大多数的因素。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) = O(f(n))&lt;/code&gt; if and only if there exist &lt;code class=&quot;highlighter-rouge&quot;&gt;c, n0 &amp;gt; 0&lt;/code&gt; such that &lt;code class=&quot;highlighter-rouge&quot;&gt;T(n) &amp;lt;= c * f(n)&lt;/code&gt; for all &lt;code class=&quot;highlighter-rouge&quot;&gt;n &amp;gt;= n0&lt;/code&gt;
+&lt;img src=&quot;/assets/images/i18.png&quot; width=&quot;200&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;分公司讲一下。&lt;/p&gt;
-&lt;h3 id=&quot;chicago-trading-company&quot;&gt;Chicago Trading Company&lt;/h3&gt;
-&lt;p&gt;这是一个高频自营交易公司，在量化金融领域算是顶尖的了吧。如果我当时读金融工程的master，以我的水平应该是申不到这么好公司的quant的，但software engineer就很简单了。hr告诉我公司大概350人，有一半是software engineer。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;br /&gt;
+Claim: &lt;code class=&quot;highlighter-rouge&quot;&gt;2 ^ (n + 8) = O(2 ^ n)&lt;/code&gt; &lt;br /&gt;
+Proof: pick &lt;code class=&quot;highlighter-rouge&quot;&gt;c, n0 &amp;gt; 0&lt;/code&gt; such that &lt;code class=&quot;highlighter-rouge&quot;&gt;2 ^ (n + 8) &amp;lt;= c * (2 ^ n)&lt;/code&gt; for all &lt;code class=&quot;highlighter-rouge&quot;&gt;n &amp;gt;= n0&lt;/code&gt; &lt;br /&gt;
+Note: &lt;code class=&quot;highlighter-rouge&quot;&gt;2 ^ (n + 8) = 2 ^ 8 * 2 ^ n = 256 * 2 ^ n&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;c = 256, n0 = 1&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;CTC是Next Step Systems这个猎头公司帮我联系的，他们在handshake上po了好几个职位，专门做芝加哥的fintech公司的招聘，有帮我投好几家包括two sigma，很好很负责，回复非常及时。待遇很好，base 10万，bonus 2万5，签字费1万，这个水平在芝加哥真的非常高了。而且给我感觉很适合养老，工作会比较闲，onsite的时候hr跟我特别强调了有很多人在公司一待就是十几年，毕竟是买方。至少我感受到的，招聘效率非常低，去年12月我就电面了，到了今年2月底才onsite，我当时都快忘记有这个公司了，到3月底我拿别的offer催了一下才出了个口头offer。&lt;/p&gt;
-
-&lt;p&gt;去onsite体验非常好，办公环境非常高大上而且很酷炫，面试非常准时，七轮，每轮45分钟，把所有和我可能有关的人都见了一遍，所有人都特别友好，我有什么答不上来的时候会一直鼓励安慰我。因为氛围比较轻松随意，聊得比较开心，题也不难，所以七轮下来也不觉得累。题都挺有意思，主要是算法、数据结构、java和多线程、系统设计、behavioral question，每一轮都有充足的问面试官问题的环节，我问了好多好多问题，他们都很耐心地回答了很多，听起来感觉挺好的，挺适合我这种咸鱼。&lt;/p&gt;
-
-&lt;p&gt;所以推荐学弟学妹申一下这家，bar也不高，待遇又好，流程简单，就一轮电面一轮onsite，公司文化应该也是随性包容的吧。&lt;/p&gt;
-
-&lt;p&gt;电面题目：&lt;br /&gt;
-checked vs unchecked exception&lt;br /&gt;
-inheritance vs composition&lt;br /&gt;
-If you want to add an object to hashmap, how to design its equals() and hashCode()&lt;br /&gt;
-memory leak in java&lt;br /&gt;
-what are in Java Collection&lt;br /&gt;
-interface vs abstract class&lt;br /&gt;
-generics in java&lt;br /&gt;
-what will happen if put an invalid type of object in a collection of another type&lt;/p&gt;
-
-&lt;h3 id=&quot;facebook&quot;&gt;Facebook&lt;/h3&gt;
-&lt;p&gt;fb的效率也太高了，一直好奇他们HR是怎么做到的，move fast的公司slogan真不是空口说的。这里是timeline：1.20 已推, 1.24 约电面, 2.15 电面, 2.21 通知onsite, 3.11 onsite, 3.15 offer&lt;/p&gt;
-
-&lt;p&gt;跟谷歌形成鲜明对比，谷歌内推完一个月才收到笔试，笔试完一个月才电面，每个环节都要拖个把月，硬生生拖到全北美招满我都还没走到onsite。&lt;/p&gt;
-
-&lt;p&gt;我为了fb付出了好多，毕竟是我最后一个机会，挂了的话就要去芝加哥这个苦寒之地了。从通过简历开始一个多月几乎全在刷fb高频题，一个月做了一百二十多题，地里所有面经题都快被我翻烂了，也没怎么投别的公司，放弃了search engines的期中考试结果考了40多分，期中C-。找了好几个同学帮我模拟算法面试，找了career service和GCC模拟behavioral questions，甚至在去加州的飞机上都有四个多小时在和邻座的abc模拟bq排查英语问题。&lt;/p&gt;
-
-&lt;p&gt;紧张了好多天，面试前一天飞机晚点，就睡了四五个小时，也没睡好，刚要睡着一想到面试就吓醒，觉得自己这么紧张肯定要凉了。没想到面试的时候，一站到白板前面就一点都不紧张了，甚至觉得十分愉快，肯定是在白板上写过很多次太熟悉了就很放松，就像高考一样，所以模拟面试真的很有用。&lt;/p&gt;
-
-&lt;p&gt;面试官都很友好随性，fb工程师好像都比较内向，最后一轮的欧洲人话特别少，说话的时候也不喜欢眼神接触，但还是很友好的，应该就是太腼腆了。下午panel的时候有两个工程师来给我们new grad做分享，说话的时候还有点抖，哈哈哈真的很可爱。&lt;/p&gt;
-
-&lt;h3 id=&quot;华为&quot;&gt;华为&lt;/h3&gt;
-&lt;p&gt;秋招拿的offer，截止时间太早了，不然可以拿来保个底。面试官都是油腻秃顶大叔，和其他公司都是年轻人的面试官形成鲜明对比，有种国企老干部风。&lt;/p&gt;
-
-&lt;h3 id=&quot;腾讯&quot;&gt;腾讯&lt;/h3&gt;
-&lt;p&gt;C++和Go的后台开发，这俩语言我都不会，不知道是咋走到三面的，前两轮的面试官挺喜欢我的吧，到了第三轮的冷漠脸总监就GG了&lt;br /&gt;
-一面&lt;br /&gt;
-jvm垃圾回收机制&lt;br /&gt;
-java线程间同步的方法 atomic包&lt;br /&gt;
-jvm性能调优&lt;br /&gt;
-tcp滑动窗口&lt;br /&gt;
-tcp为什么握手3次挥手4次&lt;br /&gt;
-（面试官答：挥手4次因为tcp是全双工通道，2个通道要断&lt;br /&gt;
-（面试官答：握手3次因为第一次同步client ISN，第二次同步server ISN，第三次ACK&lt;br /&gt;
-握手第三次失败了怎么办？&lt;br /&gt;
-（面试官答：1s后server重试，不断加大延时重试间隔，60s后放弃&lt;br /&gt;
-浏览器输入域名到加载出网页，什么过程，用了什么协议&lt;br /&gt;
-DNS是应用层协议，用的什么传输层协议？UDP&lt;br /&gt;
-2万条以上的表才需要建index，千万以上要分表，社区版mysql百万以上就要分表了&lt;br /&gt;
-index越多越好吗&lt;br /&gt;
-linux查询性能的指令&lt;br /&gt;
-字符串子串算法&lt;/p&gt;
-
-&lt;p&gt;二面 &lt;br /&gt;
-MySQL事务实现原理&lt;br /&gt;
-MongoDB源代码？MySQL源代码？&lt;br /&gt;
-MongoDB vs MySQL&lt;br /&gt;
-MongoDB vs Redis&lt;br /&gt;
-linux操作命令&lt;br /&gt;
-查看进程占用端口&lt;br /&gt;
-查看系统负载&lt;br /&gt;
-awk分割字符 -F&lt;br /&gt;
-linux进程状态有哪些&lt;br /&gt;
-有哪些分布式系统&lt;/p&gt;
-
-&lt;p&gt;三面&lt;br /&gt;
-状态码304是啥: Modified&lt;br /&gt;
-http vs https&lt;br /&gt;
-https port number是啥: 443&lt;br /&gt;
-nginx用过吗&lt;br /&gt;
-tcp挥手，time_wait出现在哪一端，最长持续时间 c端s端状态机&lt;br /&gt;
-红黑树&lt;br /&gt;
-c++ 多态原理 虚继承&lt;br /&gt;
-strncpy vs strcpy&lt;br /&gt;
-怎么判断一个数是不是 2^n &lt;br /&gt;
-linux 看端口占用&lt;br /&gt;
-linux 抓包&lt;/p&gt;
-
-&lt;h3 id=&quot;今日头条&quot;&gt;今日头条&lt;/h3&gt;
-&lt;p&gt;What are protocol layers? &lt;br /&gt;
-Why do we have layers? &lt;br /&gt;
-Do live streams all use UDP? UDP examples? &lt;br /&gt;
-What does sequence number in TCP header do? &lt;br /&gt;
-In TCP, how to differentiate client and server? &lt;br /&gt;
-How is hash table implemented? What data structure?&lt;br /&gt;
-How to solve collisions in close addressing?  &lt;br /&gt;
-Concurrency in hash table&lt;br /&gt;
-how to rehash? &lt;br /&gt;
-编程题：Sort a singly linked list &lt;br /&gt;
-（挂在了这里，第三学期的时候算法还很烂，排序都写不出来&lt;/p&gt;
-
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;1000n = O(n)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;c = 1000, n0 = 1&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;n ^ 3 + n ^ 2 + n &amp;lt;= 3 * n ^ 3 = O(n ^ 3)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;c = 3, n0 = 1&lt;/code&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>CMU MISM 可爱学姐在线答疑</title>
    <link href="http://localhost:4000/personal/faq/"/>
-   <updated>2019-04-08T00:00:00-04:00</updated>
+   <updated>2019-04-08T00:00:00+08:00</updated>
    <id>http://localhost:4000/personal/faq</id>
    <content type="html">&lt;h2 id=&quot;faq-about-mism-global&quot;&gt;FAQ about MISM Global&lt;/h2&gt;
 &lt;p&gt;有很多学弟学妹问我很多同样的问题，一个个回答效率比较低，搞个FAQ吧。bias肯定是有的，每个人对项目和找工作的看法都不一样，不要看了我这里就觉得情况就是这样，建议还是多和几个学姐学长了解一下比较好。这里的回答主要针对想找SDE的转专业选手。&lt;/p&gt;
@@ -176,36 +94,9 @@ how to rehash? &lt;br /&gt;
  </entry>
  
  <entry>
-   <title>鬼知道我在CMU经历了什么</title>
-   <link href="http://localhost:4000/personal/cmu-courses/"/>
-   <updated>2019-04-07T00:00:00-04:00</updated>
-   <id>http://localhost:4000/personal/cmu-courses</id>
-   <content type="html">&lt;h2 id=&quot;流水账&quot;&gt;流水账&lt;/h2&gt;
-
-&lt;p&gt;离毕业不到一个月时间了，很舍不得，回忆一下在CMU这不同寻常的两年。虽然标题看起来我过得比较惨，但事实上&lt;del&gt;也是挺惨的&lt;/del&gt;是目前为止最快乐的两年了。&lt;/p&gt;
-
-&lt;p&gt;作为一个商科选手，一开始我连Linux和IDE是什么都不知道，当时申请的也都是金融工程和商业分析的项目，把CMU的MISM也是当成商业分析来申的。当时还拿了芝加哥大学的金融数学和哥大的运筹，纠结了整整一个月，现在想来选CMU是个无比正确的决定，穿着hoodie写码的我比穿business casual画ppt的我要快乐得多。&lt;/p&gt;
-
-&lt;p&gt;第一学期水掉了，第二学期上Cloud Computing：）菜鸡的本质暴露无遗。CC真的很不适合我，因为我数据结构、算法、数据库、操作系统、网络全都没学过，literally什么也不会，写过的代码不超过两百行，一上来就整个这么综合应用型和高难度的，真的很暴力了，但没有别的选择，简历上空无一物，也没有时间和途径补基础课，只有这个揠苗助长的方法，以求勉强打造出一个和CS沾边的简历。&lt;/p&gt;
-
-&lt;p&gt;上完CC感觉掉了一层皮，别人大概一周二十几个小时就搞定了，我估计我至少要四十个小时，几乎每两周就要通宵一次，做小组项目的时候几乎就睡在了学校，最悲惨的是，3个phase，每个phase最后的成绩都是零分。这个项目真的很残酷了，就算我们程序能算出正确结果，速度达不到还是零分。我们对于提升效率毫无头绪，慢得不行，服务器还经常莫名崩掉，根本达不到它的高并发要求，要求的最低标准6000的rps我们只有几百。光是处理两个T的数据、写出正确的逻辑、设计合理的数据库、部署好几台服务器就已经花掉我们所有时间了，到最后正确率也没达到100%。这对于当时连RESTful都不知道的我真的太难了。如果能稍微有些分布式系统和数据库的基础，才能真正学到有趣的东西吧。&lt;/p&gt;
-
-&lt;p&gt;我花了很多很多的时间，可收获一般，很多项目做完了也不知道做了个啥，感觉很可惜，是个很好很有趣的课但不适合我。基础没到位，有很多有趣的点就get不到，如果现在上的话应该能轻松很多也能学到更多吧。但好歹我get了一堆看起来高大上的项目，找工作投简历的时候发现职位要求里的技术我大部分都玩过了，面试的时候面试官对cc的项目都很感兴趣，是个很贴近业界的课了。但学的所有的技术都浅尝辄止，随便一问就能问倒。所以很多学弟学妹问我要不要选CC，我当然是建议你至少上完分布式系统和数据库再上这门课，但对于转专业MISM选手你没得选，不上你可能实习简历关都过不了。&lt;/p&gt;
-
-&lt;p&gt;在CMU的第二年就开心很多了，到了一个更大的校园，认识了很多其他专业的大佬，课余活动丰富了很多，课程质量高了很多（SCS的课和Heinz的课形成鲜明对比）。经历过cc后，同时上三门cs课感觉毫无压力，更主要的原因是我不硬刚了，作业做不完就不做了，考试没准备好也能上，分数太低了就withdraw，学期开始的时候还能选pass/fail，没有什么是补救不了的，自己开心比较重要。之前做cc的时候每个作业都想拿满分，所有reading都想看完，导致学得非常累，临近deadline压力也很大，现在看来都不是事，看开一点也没什么大不了的。之后不熬夜了效率反倒上去了，也快乐很多。而且CMU的课和作业都太有意思了，虽然写作业的时候时刻想哭，但写出来了之后像是重生了一样地开心，然后又充满干劲地跳进下一个作业的坑。&lt;/p&gt;
-
-&lt;p&gt;2019/5/14 更
-刚刚熬过了最后一个final，出乎意料的是这竟是我最难熬的一个final，每天都在崩溃的边缘，写作业写着写着就难以忍受，要跑到厕所哭一会儿。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-</content>
- </entry>
- 
- <entry>
    <title>Memory Leak in Java</title>
    <link href="http://localhost:4000/java/java-memory-leak/"/>
-   <updated>2019-02-22T00:00:00-05:00</updated>
+   <updated>2019-02-22T00:00:00+08:00</updated>
    <id>http://localhost:4000/java/java-memory-leak</id>
    <content type="html">&lt;p&gt;Memory leak happens when an object is no longer used but garbage collection is not able to remove it from the heap.&lt;/p&gt;
 
@@ -293,7 +184,7 @@ how to rehash? &lt;br /&gt;
  <entry>
    <title>Decision Tree Algorithm Implementation - Python</title>
    <link href="http://localhost:4000/information%20retrieval%20and%20machine%20learning/decision-tree/"/>
-   <updated>2019-02-10T00:00:00-05:00</updated>
+   <updated>2019-02-10T00:00:00+08:00</updated>
    <id>http://localhost:4000/information%20retrieval%20and%20machine%20learning/decision-tree</id>
    <content type="html">&lt;p&gt;This is a Python implementation of the decision tree algorithm, including &lt;strong&gt;training&lt;/strong&gt; on training data points, &lt;strong&gt;predicting&lt;/strong&gt; on test data points, and &lt;strong&gt;evaluating&lt;/strong&gt; the performance of the tree. Maximum &lt;strong&gt;mutual information&lt;/strong&gt; is the criteria to split on a node. It limits the &lt;strong&gt;maximum depth&lt;/strong&gt; of the learned tree in order to avoid &lt;strong&gt;overfitting&lt;/strong&gt;. This implementation only works on &lt;strong&gt;binary&lt;/strong&gt; datasets, i.e., both attributes and labels have at most two values.&lt;/p&gt;
 
@@ -504,7 +395,7 @@ entropy_y: entropy of the label. This argument is to save the repetitive work on
  <entry>
    <title>Introduction to Information Retrieval - Reading Summary</title>
    <link href="http://localhost:4000/information%20retrieval%20and%20machine%20learning/search-engines-note/"/>
-   <updated>2019-01-25T00:00:00-05:00</updated>
+   <updated>2019-01-25T00:00:00+08:00</updated>
    <id>http://localhost:4000/information%20retrieval%20and%20machine%20learning/search-engines-note</id>
    <content type="html">&lt;p&gt;This article is my reading summary and understanding of the book &lt;em&gt;Introduction to Information Retrieval&lt;/em&gt;&lt;/p&gt;
 
@@ -554,7 +445,7 @@ entropy_y: entropy of the label. This argument is to save the repetitive work on
  <entry>
    <title>Leetcode</title>
    <link href="http://localhost:4000/data%20structures%20and%20algorithms/leetcode/"/>
-   <updated>2019-01-22T00:00:00-05:00</updated>
+   <updated>2019-01-22T00:00:00+08:00</updated>
    <id>http://localhost:4000/data%20structures%20and%20algorithms/leetcode</id>
    <content type="html">&lt;h3 id=&quot;189-rotate-array&quot;&gt;189. Rotate Array&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Cyclic Replacement&lt;/strong&gt; &lt;br /&gt;
@@ -1153,7 +1044,7 @@ O(1). (Not counting the space of the new tree because imagine we edit the origin
  <entry>
    <title>Encapsulate and Reuse Query Logic</title>
    <link href="http://localhost:4000/database/reuse-query/"/>
-   <updated>2019-01-20T00:00:00-05:00</updated>
+   <updated>2019-01-20T00:00:00+08:00</updated>
    <id>http://localhost:4000/database/reuse-query</id>
    <content type="html">&lt;h3 id=&quot;1-views&quot;&gt;1. Views&lt;/h3&gt;
 &lt;h3 id=&quot;2-user-defined-function&quot;&gt;2. User Defined Function&lt;/h3&gt;
@@ -1175,7 +1066,7 @@ Parameterized views.&lt;/li&gt;
  <entry>
    <title>Real Time HTTP Strategies</title>
    <link href="http://localhost:4000/web%20applications/real-time-http/"/>
-   <updated>2019-01-18T00:00:00-05:00</updated>
+   <updated>2019-01-18T00:00:00+08:00</updated>
    <id>http://localhost:4000/web%20applications/real-time-http</id>
    <content type="html">&lt;p&gt;Web applications were originally developed around a client/server model, where the Web client is always the initiator of transactions, requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request.&lt;/p&gt;
 
@@ -1227,7 +1118,7 @@ Proxy servers buffer long responses likely causing missing information.&lt;/p&gt
  <entry>
    <title>Linux (MacOS) Command</title>
    <link href="http://localhost:4000/computer%20systems/linux-command/"/>
-   <updated>2019-01-06T00:00:00-05:00</updated>
+   <updated>2019-01-06T00:00:00+08:00</updated>
    <id>http://localhost:4000/computer%20systems/linux-command</id>
    <content type="html">&lt;h3 id=&quot;1-check-which-process-is-using-a-certain-port-number&quot;&gt;1. Check which process is using a certain port number&lt;/h3&gt;
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; netstat -vanp tcp | grep &amp;lt;port&amp;gt;&lt;/code&gt;
@@ -1256,7 +1147,7 @@ Then kill: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo kill -9 &amp;lt;
  <entry>
    <title>Consistent Hashing</title>
    <link href="http://localhost:4000/web%20applications/consistent-hashing/"/>
-   <updated>2019-01-06T00:00:00-05:00</updated>
+   <updated>2019-01-06T00:00:00+08:00</updated>
    <id>http://localhost:4000/web%20applications/consistent-hashing</id>
    <content type="html">&lt;h2 id=&quot;problem-of-using-hash&quot;&gt;Problem of using hash&lt;/h2&gt;
 &lt;p&gt;In a storage or cache cluster, like Redis, we might use sharding when a single table is too big. Then on which node can we find the value according to our key? Normal way is to calculate &lt;code class=&quot;highlighter-rouge&quot;&gt;hash(key) % node_number&lt;/code&gt;, so that we don’t iterate through all nodes to the find the key.&lt;br /&gt;
@@ -1295,7 +1186,7 @@ But what if the node_number change, say adding a new node or remove an old node?
  <entry>
    <title>Scaling Static Web Content&#58; Content Delivery Networks</title>
    <link href="http://localhost:4000/web%20applications/CDN/"/>
-   <updated>2019-01-06T00:00:00-05:00</updated>
+   <updated>2019-01-06T00:00:00+08:00</updated>
    <id>http://localhost:4000/web%20applications/CDN</id>
    <content type="html">&lt;p&gt;Actively distribute static content to edge servers throughout the Internet.&lt;br /&gt;
 –  e.g. Akamai.&lt;br /&gt;
@@ -1318,7 +1209,7 @@ In more detail, in step 11, DNS server for Akamai returns an IP of a CDN global 
  <entry>
    <title>Index</title>
    <link href="http://localhost:4000/database/index/"/>
-   <updated>2018-12-23T00:00:00-05:00</updated>
+   <updated>2018-12-23T00:00:00+08:00</updated>
    <id>http://localhost:4000/database/index</id>
    <content type="html">&lt;h2 id=&quot;1-composite-index&quot;&gt;1. Composite index&lt;/h2&gt;
 &lt;p&gt;MySQL can only use one index in one query. If multiple columns appear in the search condition, MySQL will pick the most strict index, that is, the one that will retrive the least records. &lt;br /&gt;
@@ -1355,7 +1246,7 @@ We can add EXPLAIN before SELECT to see which index the db choose.&lt;br /&gt;
  <entry>
    <title>Camparable and Comparator</title>
    <link href="http://localhost:4000/java/Comparable-and-Comparator/"/>
-   <updated>2018-12-08T00:00:00-05:00</updated>
+   <updated>2018-12-08T00:00:00+08:00</updated>
    <id>http://localhost:4000/java/Comparable-and-Comparator</id>
    <content type="html">&lt;p&gt;To sort an array of &lt;strong&gt;primitives&lt;/strong&gt;, we can simply use Arrays.sort method.&lt;br /&gt;
 To sort an array of &lt;strong&gt;objects&lt;/strong&gt;, the objects have to be &lt;strong&gt;Comparable&lt;/strong&gt;.&lt;/p&gt;
@@ -1455,7 +1346,7 @@ Therefore, we need to implement &lt;code class=&quot;highlighter-rouge&quot;&gt;
  <entry>
    <title>Bitwise Operation Tricks</title>
    <link href="http://localhost:4000/computer%20systems/bitwise-operation/"/>
-   <updated>2018-11-21T00:00:00-05:00</updated>
+   <updated>2018-11-21T00:00:00+08:00</updated>
    <id>http://localhost:4000/computer%20systems/bitwise-operation</id>
    <content type="html">&lt;ol&gt;
   &lt;li&gt;
@@ -1480,7 +1371,7 @@ That’s why Java HashMap’s underlying array always has a length of a power of
  <entry>
    <title>Computer Network</title>
    <link href="http://localhost:4000/computer%20systems/computer-network/"/>
-   <updated>2018-11-14T00:00:00-05:00</updated>
+   <updated>2018-11-14T00:00:00+08:00</updated>
    <id>http://localhost:4000/computer%20systems/computer-network</id>
    <content type="html">&lt;h2 id=&quot;1-tcp-vs-udp&quot;&gt;1. TCP v.s. UDP&lt;/h2&gt;
 &lt;p&gt;Both send packets to IP address.&lt;br /&gt;
@@ -1559,7 +1450,7 @@ Because in 3-way handshake, server can send ACK and SYN at the same time. ACK to
  <entry>
    <title>Iterable and Iterator</title>
    <link href="http://localhost:4000/java/Iterator-and-Iterable/"/>
-   <updated>2018-11-02T00:00:00-04:00</updated>
+   <updated>2018-11-02T00:00:00+08:00</updated>
    <id>http://localhost:4000/java/Iterator-and-Iterable</id>
    <content type="html">&lt;h2 id=&quot;iterable&quot;&gt;Iterable&lt;/h2&gt;
 &lt;p&gt;A representation of a group of data that can be iterated.&lt;br /&gt;
@@ -1644,7 +1535,7 @@ Why do wu use nested classes?&lt;/p&gt;
  <entry>
    <title>Arrays</title>
    <link href="http://localhost:4000/data%20structures%20and%20algorithms/array/"/>
-   <updated>2018-10-30T00:00:00-04:00</updated>
+   <updated>2018-10-30T00:00:00+08:00</updated>
    <id>http://localhost:4000/data%20structures%20and%20algorithms/array</id>
    <content type="html">&lt;h2 id=&quot;manipulating-arrays&quot;&gt;Manipulating arrays&lt;/h2&gt;
 
